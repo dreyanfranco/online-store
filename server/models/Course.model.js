@@ -25,7 +25,7 @@ const courseSchema = new mongoose.Schema(
         // owner: {
         //     type: Schema.Types.ObjectId,
         //     ref: 'User'
-        // },
+        // }, 
     },
     {
         timestamps: true,

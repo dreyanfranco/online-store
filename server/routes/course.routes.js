@@ -9,9 +9,6 @@ const mongoose = require('mongoose');
 //Status 404: Not Found
 //Status 500: Internal Server Error
 
-//Aqui me da el status 200 y me muestra todos los cursos
-
-
 
 // Obtener todos los cursos
 router.get('/', async (req, res) => {
