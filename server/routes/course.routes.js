@@ -35,7 +35,6 @@ router.get("/:course_id", async (req, res) => {
 
 // Crear un nuevo curso
 router.post("/", verifyToken, async (req, res) => {
-    console.log()
     const course = {
         ...req.body,
         owner: req.userId,
