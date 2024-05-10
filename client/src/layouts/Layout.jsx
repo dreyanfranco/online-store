@@ -1,4 +1,5 @@
 import { Col, Container, Row } from "react-bootstrap"
+import NavBar from "../components/NavBar"
 import Footer from "../components/Footer"
 // eslint-disable-next-line react/prop-types
 const Layout = ({ children }) => {
@@ -10,9 +11,9 @@ const Layout = ({ children }) => {
                 flexDirection: "column",
             }}
         >
-            {/* Header */}
+            <NavBar />
             {/* Hero */}
-            <Container> Search bar? </Container>
+            <Container> </Container>
             <Container fluid className="flex-1 mx-auto">
                 {children}
             </Container>
