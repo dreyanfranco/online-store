@@ -52,7 +52,6 @@ router.post("/login", async (req, res) => {
 
     try {
         const user = await User.findOne({ email })
-        console.log(user)
         if (!user) {
             return res.status(400).json({ message: "Credenciales incorrectas" })
         }
@@ -87,7 +86,7 @@ router.get("/validate-token", verifyToken, (req, res) => {
 })
 
 router.post("/logout", (req, res) => {
-    res.cookie("auth_token", "", {
+    res.cookie("auth_token", {
         expires: new Date(0),
     })
     res.send()
