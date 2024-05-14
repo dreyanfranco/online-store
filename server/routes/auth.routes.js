@@ -24,20 +24,18 @@ router.post("/register", async (req, res) => {
         })
         await user.save()
 
-        const token = jwt.sign(
-            { userId: user.id },
-            process.env.JWT_SECRET_KEY,
-            {
-                expiresIn: "1d",
-            }
-        )
-
-        res.cookie("auth_token", token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            maxAge: 86400000,
-        })
-
+        // const token = jwt.sign(
+        //     { userId: user.id },
+        //     process.env.JWT_SECRET_KEY,
+        //     {
+        //         expiresIn: "1d",
+        //     }
+        // )
+        // res.cookie("auth_token", token, {
+        //     httpOnly: true,
+        //     secure: process.env.NODE_ENV === "production",
+        //     maxAge: 86400000,
+        // })
         return res
             .status(200)
             .send({ message: "Usuario registrado correctamente" })
@@ -61,7 +59,7 @@ router.post("/login", async (req, res) => {
             return res.status(400).json({ message: "Credenciales incorrectas" })
         }
 
-        const token = jwt.sign(
+        const authToken = jwt.sign(
             { userId: user.id },
             process.env.JWT_SECRET_KEY,
             {
@@ -69,12 +67,7 @@ router.post("/login", async (req, res) => {
             }
         )
 
-        res.cookie("auth_token", token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            maxAge: 86400000,
-        })
-        res.status(200).json({ token })
+        res.status(200).json({ authToken })
     } catch (error) {
         console.log(error)
         res.status(500).json({ message: "Algo ha ido mal. Verificar terminal" })
@@ -82,7 +75,7 @@ router.post("/login", async (req, res) => {
 })
 
 router.get("/validate-token", verifyToken, (req, res) => {
-    res.status(200).send({ userId: req.userId })
+    res.status(200).json(req.payload)
 })
 
 router.post("/logout", (req, res) => {

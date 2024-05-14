@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom"
 import "./App.css"
 import Layout from "./layouts/Layout"
 import Home from "./pages/Home"
-import NavBar from "./components/NavBar"
+import LoginPage from "./pages/LoginPage"
 
 function App() {
     return (
@@ -12,6 +12,14 @@ function App() {
                 element={
                     <Layout>
                         <Home />
+                    </Layout>
+                }
+            />
+            <Route
+                path="/login"
+                element={
+                    <Layout>
+                        <LoginPage />
                     </Layout>
                 }
             />

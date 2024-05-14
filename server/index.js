@@ -16,13 +16,8 @@ cloudinary.config({
 const app = express()
 app.use(cookieParser())
 app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(
-    cors({
-        origin: process.env.FRONTEND_URL,
-        credentials: true,
-    })
-)
+app.use(express.urlencoded({ extended: false }))
+app.use(cors())
 
 require("./routes")(app)
 require("./error-handling")(app)

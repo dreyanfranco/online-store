@@ -3,5 +3,5 @@ module.exports = (app) => {
     app.use("/api", courseRoutes)
 
     const authRoutes = require("./auth.routes")
-    app.use("/api", authRoutes)
+    app.use("/api/auth", authRoutes)
 }
