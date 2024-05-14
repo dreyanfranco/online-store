@@ -7,6 +7,7 @@ import Container from "react-bootstrap/Container"
 import Form from "react-bootstrap/Form"
 import Nav from "react-bootstrap/Nav"
 import Navbar from "react-bootstrap/Navbar"
+import './Navegacion.css'
 
 function NavBar() {
     const [isOpen, setIsOpen] = useState(false)
@@ -24,6 +25,7 @@ function NavBar() {
             <Container fluid>
 
                 <Navbar.Brand className='ms-3' href="#">Cursos online</Navbar.Brand>
+                
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
                 <Navbar.Collapse id="responsive-navbar-nav">
@@ -50,7 +52,7 @@ function NavBar() {
 
                     <Dropdown show={isOpen} onMouseEnter={handleMouseEnter}>
                         <div>
-                            <button id='carrito' className='btn btn-outline-success rounded-5'><FontAwesomeIcon icon={faCartShopping} /></button>
+                            <button id='carrito' className='btn btn-outline-success rounded-5 icon__shop'><FontAwesomeIcon icon={faCartShopping} /></button>
                         </div>
 
                         <Dropdown.Menu onMouseLeave={handleMouseLeave}>
