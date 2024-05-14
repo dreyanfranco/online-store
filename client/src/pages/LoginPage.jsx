@@ -11,8 +11,8 @@ const LoginPage = () => {
     const { authenticateUser } = useContext(AuthContext)
     const navigate = useNavigate()
     const [formData, setFormData] = useState({
-        username: undefined,
-        password: undefined,
+        username: "",
+        password: "",
     })
     const [loginError, setLoginError] = useState(null)
 
@@ -26,7 +26,7 @@ const LoginPage = () => {
             const { data } = await authService.login(formData)
             localStorage.setItem("authToken", data.authToken)
             authenticateUser()
-            console.log("Loggeado correctamente")
+            // console.log("Loggeado correctamente")
             navigate("/")
         } catch (error) {
             setLoginError("Credenciales incorrectas")
