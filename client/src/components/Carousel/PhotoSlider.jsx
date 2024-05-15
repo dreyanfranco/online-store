@@ -4,13 +4,13 @@ import Photo2 from "../../components/Carousel/Images/Photo2.png";
 import Photo3 from "../../components/Carousel/Images/Photo3.png";
 import Photo4 from "../../components/Carousel/Images/Photo4.png";
 import Photo5 from "../../components/Carousel/Images/Photo5.png";
-import collage from "../../components/Carousel/Images/collage.png";
+import Fondo from "../../components/Carousel/Images/Fondo.jpg";
 
 function PhotoSlider() {
   return (
-    <div className="bg-img" style={{ position: "relative" }}>
+    <div className="col-12 bg-img" style={{ position: "relative" }}>
       <img
-        src={collage}
+        src={Fondo}
         style={{
           position: "absolute",
           top: 0,
@@ -18,13 +18,14 @@ function PhotoSlider() {
           width: "100%",
           height: "100%",
           objectFit: "cover",
-          opacity: 0.5,
+          opacity: 0.9,
+          filter: "grayscale(70%)"
         
         }}
       />
       <div
-        className="container-sm d-flex justify-content-center align-items-center "
-        style={{ maxWidth: "45%" }}>
+        className="container d-flex justify-content-center align-items-center "
+        style={{ maxWidth: "50%" , padding:"50px 0"}}>
         <Carousel className="">
           <Carousel.Item>
             <img

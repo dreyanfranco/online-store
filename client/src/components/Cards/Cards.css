@@ -15,11 +15,13 @@
     transition: 0.5s ease-in-out ;
     border-radius: 10px !important;
     overflow: hidden;
-    
+    z-index: 1;
 }
 
 .card:hover{
     transform: translateY(20px);
+    z-index: 2;
+  
 }
 
 .card::before{
@@ -38,6 +40,7 @@
 
 .card:hover:before{
     opacity: 1;
+    z-index: 1;
 }
 
 .card img{
@@ -73,7 +76,7 @@
 
 
 
-.btn{
+.botonc{
     text-decoration: none;
     padding: 0.5rem 1rem;
     color: #ffffff;
@@ -85,7 +88,7 @@
     border: none;
 }
 
-.footer{
+.footerC{
     border-top: 1px solid white;
     margin-top: 4rem;
 }
@@ -94,7 +97,7 @@
     text-align: right;
 }
 
-.card .Text .btn:hover{
+.card .Text .botonc:hover{
     box-shadow: 0px 7px 10px rgba(182, 225, 249, 0.5);
 
 }
