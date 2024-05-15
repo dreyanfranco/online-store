@@ -98,7 +98,11 @@ function NavBar() {
                                 Entrar
                             </Button>
                         </Link>
-                        <Button variant="outline-success">Registrate</Button>
+                        <Link to="/register">
+                            <Button variant="outline-success">
+                                Registrate
+                            </Button>
+                        </Link>
                     </div>
                 </Navbar.Collapse>
             </Container>
