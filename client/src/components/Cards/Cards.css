@@ -15,11 +15,13 @@
     transition: 0.5s ease-in-out ;
     border-radius: 10px !important;
     overflow: hidden;
-    
+    z-index: 1;
 }
 
 .card:hover{
     transform: translateY(20px);
+    z-index: 2;
+  
 }
 
 .card::before{
@@ -38,6 +40,7 @@
 
 .card:hover:before{
     opacity: 1;
+    z-index: 1;
 }
 
 .card img{
@@ -85,7 +88,7 @@
     border: none;
 }
 
-.footer{
+.footerC{
     border-top: 1px solid white;
     margin-top: 4rem;
 }
