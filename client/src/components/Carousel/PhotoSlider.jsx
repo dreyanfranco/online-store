@@ -8,7 +8,7 @@ import Fondo from "../../components/Carousel/Images/Fondo.jpg";
 
 function PhotoSlider() {
   return (
-    <div className="container-fluid bg-img" style={{ position: "relative" }}>
+    <div className="col-12 bg-img" style={{ position: "relative" }}>
       <img
         src={Fondo}
         style={{
@@ -19,12 +19,13 @@ function PhotoSlider() {
           height: "100%",
           objectFit: "cover",
           opacity: 0.9,
+          filter: "grayscale(70%)"
         
         }}
       />
       <div
         className="container d-flex justify-content-center align-items-center "
-        style={{ maxWidth: "45%" }}>
+        style={{ maxWidth: "50%" , padding:"50px 0"}}>
         <Carousel className="">
           <Carousel.Item>
             <img

@@ -15,13 +15,13 @@ function Cards() {
         <CardGroup className="gap-5 container-sm mt-3">
         <Card className="container-sm" >
           <Card.Img  src={code2} />
-          <Card.Body className="Title Text btn">
+          <Card.Body className="Title Text botonc">
             <Card.Title className="Title">Titulo 1</Card.Title>
             <Card.Text className="Text">
               This is a wider card with supporting text below as a natural lead-in
               to additional content. This content is a little bit longer.
                     </Card.Text>
-                    <Button className="btn" style={{backgroundColor:"#45b8ac"}}>Comprar</Button>
+                    <Button className="botonc" style={{backgroundColor:"#45b8ac"}}>Comprar</Button>
                   <Card.Footer className="footerC">
             <div className="footer-price" style={{color:"white"}}>000€</div>
                     </Card.Footer>
@@ -30,13 +30,13 @@ function Cards() {
             
             <Card className="">
           <Card.Img variant="top" src={code2} />
-          <Card.Body className="Title Text btn">
+          <Card.Body className="Title Text botonc">
             <Card.Title className="Title">Titulo 1</Card.Title>
             <Card.Text className="Text">
               This is a wider card with supporting text below as a natural lead-in
               to additional content. This content is a little bit longer.
                     </Card.Text>
-                    <Button className="btn" style={{backgroundColor:"#45b8ac"}}>Comprar</Button>
+                    <Button className="botonc" style={{backgroundColor:"#45b8ac"}}>Comprar</Button>
                   <Card.Footer className="footerC">
             <div className="footer-price" style={{color:"white"}}>000€</div>
                     </Card.Footer>
@@ -45,13 +45,13 @@ function Cards() {
             
             <Card className="">
           <Card.Img variant="top" src={code2} />
-          <Card.Body className="Title Text btn">
+          <Card.Body className="Title Text botonc">
             <Card.Title className="Title">Titulo 2</Card.Title>
             <Card.Text className="Text">
               This is a wider card with supporting text below as a natural lead-in
               to additional content. This content is a little bit longer.
                     </Card.Text>
-                    <Button className="btn" style={{backgroundColor:"#45b8ac"}}>Comprar</Button>
+                    <Button className="botonc" style={{backgroundColor:"#45b8ac"}}>Comprar</Button>
                   <Card.Footer className="footerC">
             <div className="footer-price" style={{color:"white"}}>000€</div>
                     </Card.Footer>

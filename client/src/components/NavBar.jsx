@@ -7,6 +7,7 @@ import Container from "react-bootstrap/Container"
 import Form from "react-bootstrap/Form"
 import Nav from "react-bootstrap/Nav"
 import Navbar from "react-bootstrap/Navbar"
+import Logo from "./Cards/ImagesCards/Logo.png"
 
 function NavBar() {
     const [isOpen, setIsOpen] = useState(false)
@@ -19,11 +20,13 @@ function NavBar() {
         setIsOpen(false)
     }
     return (
-        <Navbar expand="lg" className="bg-body-tertiary">
+        <Navbar expand="lg" className="bg-info">
 
             <Container fluid>
 
-                <Navbar.Brand className='ms-3' href="#">Cursos online</Navbar.Brand>
+                <Navbar.Brand className='ms-3' href="#">
+                    <img src={Logo} className="mx-2" height="50" />
+                </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
                 <Navbar.Collapse id="responsive-navbar-nav">
