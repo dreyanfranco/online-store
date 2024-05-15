@@ -2,7 +2,8 @@ import { Route, Routes } from "react-router-dom"
 import "./App.css"
 import Layout from "./layouts/Layout"
 import Home from "./pages/Home"
-import LoginPage from "./pages/LoginPage"
+import Login from "./pages/Login"
+import Register from "./pages/Register"
 
 function App() {
     return (
@@ -19,7 +20,15 @@ function App() {
                 path="/login"
                 element={
                     <Layout>
-                        <LoginPage />
+                        <Login />
+                    </Layout>
+                }
+            />
+            <Route
+                path="/register"
+                element={
+                    <Layout>
+                        <Register />
                     </Layout>
                 }
             />

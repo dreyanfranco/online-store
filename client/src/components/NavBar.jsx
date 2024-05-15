@@ -25,7 +25,7 @@ function NavBar() {
     return (
         <Navbar expand="lg" className="bg-body-tertiary">
             <Container fluid>
-                <Navbar.Brand className="ms-3" href="#">
+                <Navbar.Brand className="ms-3" href="/">
                     Cursos online
                 </Navbar.Brand>
 
