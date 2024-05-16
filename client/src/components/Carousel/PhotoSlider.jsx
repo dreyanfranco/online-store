@@ -18,14 +18,15 @@ function PhotoSlider() {
           width: "100%",
           height: "100%",
           objectFit: "cover",
-          opacity: 0.5,
+          opacity: 0.7,
+          backgroundRepeat: "repeat"
         
         }}
       />
       <div
         className="container-sm d-flex justify-content-center align-items-center "
-        style={{ maxWidth: "45%" }}>
-        <Carousel className="">
+        style={{ maxWidth: "50%" , padding: "50px 0"}}>
+        <Carousel>
           <Carousel.Item>
             <img
               className="img-fluid"

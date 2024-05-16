@@ -49,7 +49,7 @@ function NavBar() {
                             className="me-2"
                             aria-label="Search"
                         />
-                        <Button variant="outline-success">Buscar</Button>
+                        <Button variant="outline-info">Buscar</Button>
                     </Form>
 
                     <Nav className="ms-3">
@@ -69,17 +69,16 @@ function NavBar() {
                         </Nav.Link>
                     </Nav>
 
-                    <Dropdown show={isOpen} onMouseEnter={handleMouseEnter}>
+                    <Dropdown show={isOpen} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                         <div>
                             <button
                                 id="carrito"
-                                className="btn btn-outline-success rounded-5 icon__shop"
-                            >
+                                className="btn btn-outline-info rounded-5 icon__shop">
                                 <FontAwesomeIcon icon={faCartShopping} />
                             </button>
                         </div>
 
-                        <Dropdown.Menu onMouseLeave={handleMouseLeave}>
+                        <Dropdown.Menu >
                             <Dropdown.Item href="#/action-1">
                                 JavaScript
                             </Dropdown.Item>
@@ -94,11 +93,11 @@ function NavBar() {
 
                     <div className="mx-3">
                         <Link to="/login">
-                            <Button className="me-2" variant="outline-success">
+                            <Button className="me-2" variant="outline-info">
                                 Entrar
                             </Button>
                         </Link>
-                        <Button variant="outline-success">Registrate</Button>
+                        <Button variant="outline-info">Registrate</Button>
                     </div>
                 </Navbar.Collapse>
             </Container>
