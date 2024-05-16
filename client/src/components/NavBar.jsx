@@ -20,7 +20,7 @@ function NavBar() {
         setIsOpen(false)
     }
     return (
-        <Navbar expand="lg" className="bg-info">
+        <Navbar expand="lg" className="" style={{backgroundColor:"#A6C4C1"}}>
 
             <Container fluid>
 
