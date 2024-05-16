@@ -8,6 +8,7 @@ import Form from "react-bootstrap/Form"
 import Nav from "react-bootstrap/Nav"
 import Navbar from "react-bootstrap/Navbar"
 import Logo from "./Cards/ImagesCards/Logo.png"
+import { Link } from "react-router-dom"
 
 function NavBar() {
     // const { user } = useAuth()
