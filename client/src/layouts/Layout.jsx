@@ -1,7 +1,6 @@
-import { Col, Container, Row } from "react-bootstrap"
-import NavBar from "../components/NavBar"
+import { Container } from "react-bootstrap"
 import Footer from "../components/Footer"
-import PhotoSlider from "../components/Carousel/PhotoSlider";
+import NavBar from "../components/NavBar"
 // eslint-disable-next-line react/prop-types
 const Layout = ({ children }) => {
     return (
@@ -15,10 +14,10 @@ const Layout = ({ children }) => {
             <NavBar />
             {/* Hero */}
             <Container> </Container>
-            <Container fluid className="flex-1 mx-auto">
+            <Container fluid className="mx-auto">
                 {children}
             </Container>
-            <Footer/>
+            <Footer className="" />
         </div>
     )
 }

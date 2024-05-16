@@ -7,9 +7,8 @@ import Container from "react-bootstrap/Container"
 import Form from "react-bootstrap/Form"
 import Nav from "react-bootstrap/Nav"
 import Navbar from "react-bootstrap/Navbar"
+import Logo from "./Cards/ImagesCards/Logo.png"
 import { Link } from "react-router-dom"
-// import { useAuth } from "../context/auth.context"
-import "./Navegacion.css"
 
 function NavBar() {
     // const { user } = useAuth()
@@ -23,12 +22,16 @@ function NavBar() {
         setIsOpen(false)
     }
     return (
-        <Navbar expand="lg" className="bg-body-tertiary">
+        <Navbar expand="lg" className="" style={{backgroundColor:"#A6C4C1"}}>
+
             <Container fluid>
-                <Navbar.Brand className="ms-3" href="#">
+                <Navbar.Brand className="ms-3" href="/">
                     Cursos online
                 </Navbar.Brand>
 
+                <Navbar.Brand className='ms-3' href="#">
+                    <img src={Logo} className="mx-2" height="50" />
+                </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
                 <Navbar.Collapse id="responsive-navbar-nav">
@@ -97,7 +100,11 @@ function NavBar() {
                                 Entrar
                             </Button>
                         </Link>
-                        <Button variant="outline-info">Registrate</Button>
+                        <Link to="/register">
+                            <Button variant="outline-success">
+                                Registrate
+                            </Button>
+                        </Link>
                     </div>
                 </Navbar.Collapse>
             </Container>
