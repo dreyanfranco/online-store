@@ -1,6 +1,6 @@
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { Dropdown } from "react-bootstrap"
 import Button from "react-bootstrap/Button"
 import Container from "react-bootstrap/Container"
@@ -8,13 +8,13 @@ import Form from "react-bootstrap/Form"
 import Nav from "react-bootstrap/Nav"
 import Navbar from "react-bootstrap/Navbar"
 import { Link } from "react-router-dom"
-// import { useAuth } from "../context/auth.context"
+import { AuthContext } from "../context/auth.context"
 import "./Navegacion.css"
 
 function NavBar() {
-    // const { user } = useAuth()
+    const { user, logout } = useContext(AuthContext)
     const [isOpen, setIsOpen] = useState(false)
-
+    console.log(user)
     const handleMouseEnter = () => {
         setIsOpen(true)
     }
@@ -22,6 +22,7 @@ function NavBar() {
     const handleMouseLeave = () => {
         setIsOpen(false)
     }
+
     return (
         <Navbar expand="lg" className="bg-body-tertiary">
             <Container fluid>
@@ -93,12 +94,34 @@ function NavBar() {
                     </Dropdown>
 
                     <div className="mx-3">
-                        <Link to="/login">
-                            <Button className="me-2" variant="outline-success">
-                                Entrar
-                            </Button>
-                        </Link>
-                        <Button variant="outline-success">Registrate</Button>
+                        {user ? (
+                            <>
+                                <span className="me-2">{user.username}</span>
+                                <Button
+                                    className="me-2"
+                                    variant="outline-danger"
+                                    onClick={logout}
+                                >
+                                    Cierra sesión
+                                </Button>
+                            </>
+                        ) : (
+                            <>
+                                <Link to="/login">
+                                    <Button
+                                        className="me-2"
+                                        variant="outline-success"
+                                    >
+                                        Entrar
+                                    </Button>
+                                </Link>
+                                <Link to="/register">
+                                    <Button variant="outline-success">
+                                        Registrate
+                                    </Button>
+                                </Link>
+                            </>
+                        )}
                     </div>
                 </Navbar.Collapse>
             </Container>
