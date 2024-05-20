@@ -1,11 +1,11 @@
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useContext, useState } from "react"
-import { Dropdown } from "react-bootstrap"
+import { Dropdown, NavDropdown } from "react-bootstrap"
+import { DropdownSubmenu, NavDropdownMenu } from "react-bootstrap-submenu"
 import Button from "react-bootstrap/Button"
 import Container from "react-bootstrap/Container"
 import Form from "react-bootstrap/Form"
-import Nav from "react-bootstrap/Nav"
 import Navbar from "react-bootstrap/Navbar"
 import { Link } from "react-router-dom"
 import { AuthContext } from "../context/auth.context"
@@ -15,7 +15,6 @@ import "./Navegacion.css"
 function NavBar() {
     const { user, logout } = useContext(AuthContext)
     const [isOpen, setIsOpen] = useState(false)
-    console.log(user)
     const handleMouseEnter = () => {
         setIsOpen(true)
     }
@@ -24,40 +23,59 @@ function NavBar() {
         setIsOpen(false)
     }
     return (
-        <Navbar expand="lg" className="" style={{backgroundColor:"#134c8f"}}>
+        <Navbar expand="lg" className="" style={{ backgroundColor: "#134c8f" }}>
             <Container fluid>
-                   <Navbar.Brand className='ms-3' href="/">
+                <Navbar.Brand className="ms-3" href="/">
                     <img src={Logo} className="mx-2" height="50" />
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
-                    
-                  
-                <NavDropdownMenu title="Categorías" id="collasible-nav-dropdown " className="text-white me-4" >
-                        
-                        <DropdownSubmenu  href="#"  title="Desarrolo Web" className="dropdown-submenu ">
-                            <NavDropdown.Item  href="#" className=""> JavaScript </NavDropdown.Item>
-                            <NavDropdown.Item href="#">React JS</NavDropdown.Item>
-                            <NavDropdown.Item href="#"> Angular</NavDropdown.Item>
+                    <NavDropdownMenu
+                        title="Categorías"
+                        id="collasible-nav-dropdown "
+                        className="text-white me-4"
+                    >
+                        <DropdownSubmenu
+                            href="#"
+                            title="Desarrolo Web"
+                            className="dropdown-submenu "
+                        >
+                            <NavDropdown.Item href="#" className="">
+                                {" "}
+                                JavaScript{" "}
+                            </NavDropdown.Item>
+                            <NavDropdown.Item href="#">
+                                React JS
+                            </NavDropdown.Item>
+                            <NavDropdown.Item href="#">
+                                {" "}
+                                Angular
+                            </NavDropdown.Item>
                             <NavDropdown.Item href="#"> CSS </NavDropdown.Item>
                         </DropdownSubmenu>
-                        <DropdownSubmenu href="#action/3.7" title="Lenguajes de programación" className="dropdown-submenu">
-                            <NavDropdown.Item href="#action/3.2"> Python </NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Java</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.4"> C# </NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.4"> C++ </NavDropdown.Item>
-                        
+                        <DropdownSubmenu
+                            href="#action/3.7"
+                            title="Lenguajes de programación"
+                            className="dropdown-submenu"
+                        >
+                            <NavDropdown.Item href="#action/3.2">
+                                {" "}
+                                Python{" "}
+                            </NavDropdown.Item>
+                            <NavDropdown.Item href="#action/3.3">
+                                Java
+                            </NavDropdown.Item>
+                            <NavDropdown.Item href="#action/3.4">
+                                {" "}
+                                C#{" "}
+                            </NavDropdown.Item>
+                            <NavDropdown.Item href="#action/3.4">
+                                {" "}
+                                C++{" "}
+                            </NavDropdown.Item>
                         </DropdownSubmenu>
                     </NavDropdownMenu>
-                       
 
-                 
-                            
-         
-                    
-                
-               
-               
                     <Form className="d-flex flex-grow-1">
                         <Form.Control
                             type="search"
@@ -65,14 +83,11 @@ function NavBar() {
                             className="me-3"
                             aria-label="Search"
                         />
-                        <Button variant="outline-light" className="me-4">Buscar</Button>
-
-                       
-
-                   
-                        
+                        <Button variant="outline-light" className="me-4">
+                            Buscar
+                        </Button>
                     </Form>
-                    
+
                     <Dropdown show={isOpen} onMouseEnter={handleMouseEnter}>
                         <div>
                             <button
@@ -99,7 +114,17 @@ function NavBar() {
                     <div className="mx-3">
                         {user ? (
                             <>
-                                <span className="me-2">{user.username}</span>
+                                <Link
+                                    to="/profile"
+                                    style={{
+                                        textDecoration: "none",
+                                        color: "white",
+                                    }}
+                                >
+                                    <span className="me-5">
+                                        {user.username}
+                                    </span>
+                                </Link>
                                 <Button
                                     className="me-2"
                                     variant="outline-danger"
@@ -134,8 +159,8 @@ function NavBar() {
 
 export default NavBar
 
-
-                   {/* <Nav className="ms-3">
+{
+    /* <Nav className="ms-3">
                         <Nav.Link
                             href="#action2"
                             className="text-wrap"
@@ -150,8 +175,5 @@ export default NavBar
                         >
                             Enseña en Universae
                         </Nav.Link>
-                    </Nav>*/}
-
-                  
-
-                  
+                    </Nav>*/
+}
