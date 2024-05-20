@@ -2,7 +2,7 @@ const express = require("express")
 const router = express.Router()
 const Course = require("../models/Course.model")
 const mongoose = require("mongoose")
-const verifyToken = require("../middleware/jwt.middleware")
+const { isAuthenticated } = require("../middleware/jwt.middleware")
 
 //Status 200: OK
 //Status 201: Created
@@ -34,12 +34,11 @@ router.get("/:course_id", async (req, res) => {
 })
 
 // Crear un nuevo curso
-router.post("/", verifyToken, async (req, res) => {
+router.post("/", isAuthenticated, async (req, res) => {
     const course = {
         ...req.body,
-        owner: req.userId,
+        owner: req.payload._id,
     }
-
     try {
         const newCourse = await Course.create(course)
         return res.status(201).json(newCourse)

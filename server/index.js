@@ -1,9 +1,7 @@
 const express = require("express")
-const logger = require("morgan")
 const cookieParser = require("cookie-parser")
 const cors = require("cors")
 require("dotenv").config()
-
 require("./db/mongodb")
 const cloudinary = require("cloudinary").v2
 

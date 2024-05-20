@@ -9,7 +9,7 @@ const LoginForm = () => {
     const { authenticateUser } = useContext(AuthContext)
     const navigate = useNavigate()
     const [formData, setFormData] = useState({
-        username: "",
+        email: "",
         password: "",
     })
     const [loginError, setLoginError] = useState(null)

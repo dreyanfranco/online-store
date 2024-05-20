@@ -15,6 +15,7 @@ const AuthProviderWrapper = (props) => {
             authService
                 .validateToken(token)
                 .then(({ data }) => {
+                    console.log({ data })
                     setUser(data)
                     setLoadUser(true)
                 })
