@@ -19,6 +19,7 @@
     "mdb-react-ui-kit": "^8.0.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.2",
+    "react-bootstrap-submenu": "^3.0.3",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.23.0"
   },
