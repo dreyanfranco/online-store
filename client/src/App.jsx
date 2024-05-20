@@ -5,6 +5,7 @@ import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Profile from "./pages/Profile"
 import Register from "./pages/Register"
+import CourseForm from "./forms/CourseForm"
 
 function App() {
     return (
@@ -38,6 +39,14 @@ function App() {
                 element={
                     <Layout>
                         <Profile />
+                    </Layout>
+                }
+            />
+            <Route
+                path="/profile/course/newcourse"
+                element={
+                    <Layout>
+                        <CourseForm />
                     </Layout>
                 }
             />
