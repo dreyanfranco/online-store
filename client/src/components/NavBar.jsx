@@ -1,7 +1,7 @@
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useContext, useState } from "react"
-import { Dropdown } from "react-bootstrap"
+import { Dropdown, NavDropdown} from "react-bootstrap"
 import Button from "react-bootstrap/Button"
 import Container from "react-bootstrap/Container"
 import Form from "react-bootstrap/Form"
@@ -11,6 +11,7 @@ import { Link } from "react-router-dom"
 import { AuthContext } from "../context/auth.context"
 import Logo from "./Cards/ImagesCards/Logo.png"
 import "./Navegacion.css"
+import { DropdownSubmenu, NavDropdownMenu } from "react-bootstrap-submenu";
 
 function NavBar() {
     const { user, logout } = useContext(AuthContext)
