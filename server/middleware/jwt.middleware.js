@@ -1,19 +1,24 @@
-const jwt = require("jsonwebtoken")
+const { expressjwt } = require("express-jwt")
 
-const verifyToken = (req, res, next) => {
-    const authHeader = req.headers["authorization"]
-    const token = authHeader && authHeader.split(" ")[1]
+const isAuthenticated = expressjwt({
+    secret: process.env.JWT_SECRET_KEY,
+    algorithms: ["HS256"],
+    requestProperty: "payload",
+    getToken: getTokenFromHeaders,
+})
 
-    if (!token) {
-        return res.status(401).json({ message: "Sin permisos" })
+function getTokenFromHeaders(req) {
+    if (
+        req.headers.authorization &&
+        req.headers.authorization.split(" ")[0] === "Bearer"
+    ) {
+        const token = req.headers.authorization.split(" ")[1]
+        return req.headers.authorization.split(" ")[1]
     }
-    try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY)
-        req.userId = decoded.userId
-        next()
-    } catch (error) {
-        return res.status(401).json({ message: "Sin permisos" })
-    }
+
+    return null
 }
 
-module.exports = verifyToken
+module.exports = {
+    isAuthenticated,
+}
