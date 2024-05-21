@@ -1,39 +1,41 @@
 import { Carousel, Container } from "react-bootstrap";
-import Photo1 from "../../components/Carousel/Images/Photo1.png";
-import Photo2 from "../../components/Carousel/Images/Photo2.png";
-import Photo3 from "../../components/Carousel/Images/Photo3.png";
-import Photo4 from "../../components/Carousel/Images/Photo4.png";
-import Photo5 from "../../components/Carousel/Images/Photo5.png";
+import Foto1 from "../../components/Carousel/Images/Foto1.jpg";
+import Foto2 from "../../components/Carousel/Images/Foto2.jpg";
+import Foto3 from "../../components/Carousel/Images/Foto3.jpg";
 import Fondo from "../../components/Carousel/Images/Fondo.jpg";
 import "./Carousel.css"
 
 function PhotoSlider() {
   return (
 
-    <div className="p-3" style={{backgroundColor:"#b6e1f9"}}>
+    <div className="rounded" style={{background: 'linear-gradient(180deg, rgba(15,56,111,1) 0%, rgba(2,27,70,1) 50%, rgba(2,27,70,1) 100%)'
+    }}>
 
     <div style={{ maxWidth: '50rem', margin: '0 auto' }}>
       <Carousel>
           <Carousel.Item>
           <img 
               className="d-block w-100"
-              src={Photo1}
+              src={Foto1}
             alt="Image 1"
-         
-             />
+            />
+             <Carousel.Caption>
+          <h3>Variedad de cursos</h3>
+          <p>Más de 30 cursos disponibles para llevar tu programación al siguiente nivel.</p>
+              </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
          
             <img
             
               className="d-block w-100"
-              src={Photo2}
+              src={Foto2}
               alt="Image 2"
              /* style={{ objectFit: "cover", width: "100%" }}*/
             />
              <Carousel.Caption>
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          <h3>Ahorra en grande</h3>
+          <p>Aprovecha nuestros descuentos exclusivos en ciertos días del mes.</p>
               </Carousel.Caption>
           
           </Carousel.Item>
@@ -41,33 +43,18 @@ function PhotoSlider() {
             <img
              
               className="d-block w-100"
-              src={Photo3}
+              src={Foto3}
               alt="Image 3"
             /*  style={{ objectFit: "cover", width: "100%" }}*/
             />
+       
               <Carousel.Caption>
           <h3>First slide label</h3>
           <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-        </Carousel.Caption>
+              </Carousel.Caption>
+       
           </Carousel.Item>
-          <Carousel.Item>
-            <img
-            
-              className="d-block w-100"
-              src={Photo4}
-              alt="Image 4"
-            /*  style={{ objectFit: "cover", width: "100%" }}*/
-            />
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
           
-              className="d-block w-100"
-              src={Photo5}
-              alt="Image 5"
-            /*  style={{ objectFit: "cover", width: "100%" }}*/
-            />
-          </Carousel.Item>
       </Carousel>
        </div>
   
