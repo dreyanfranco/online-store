@@ -4,7 +4,7 @@
     background: #134c8f;
     align-items: flex-end;
     box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
-    transition: 0.5s ease-in-out ;
+    transition: 0.5s ease-in-out;
     overflow: hidden;
     z-index: 1;
      
@@ -20,10 +20,10 @@
 .card:hover{
     transform: translateY(20px);
     z-index: 2;
-  
+
 }
 
-.card::before{
+.card::before {
     content: "";
     position: absolute;
     top: 0;
@@ -31,18 +31,18 @@
     display: block;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(14,77,144,0.5), rgb(13, 36, 77));
+    background: linear-gradient(to bottom, rgba(14, 77, 144, 0.5), rgb(13, 36, 77));
     z-index: 2;
     transition: 0.5s all;
     opacity: 0;
 }
 
-.card:hover:before{
+.card:hover:before {
     opacity: 1;
     z-index: 1;
 }
 
-.card img{
+.card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -51,7 +51,7 @@
     left: 0;
 }
 
-.card  .Text{
+.card .Text {
     position: relative;
     z-index: 3;
     color: #ffff;
@@ -59,14 +59,15 @@
     transform: translateY(30px);
     transition: 0.5s all;
 }
-.card:hover .Text{
+
+.card:hover .Text {
     opacity: 1;
     transform: translateY(0px);
 }
 
 
 
-.card .Text{
+.card .Text {
     letter-spacing: 0.1rem;
     font-size: 15px;
     margin-top: 1rem;
@@ -75,7 +76,7 @@
 
 
 
-.botonc{
+.botonc {
     text-decoration: none;
     padding: 0.5rem 1rem;
     color: #ffffff;
@@ -83,21 +84,21 @@
     font-weight: bold;
     cursor: pointer;
     transition: 0.4s ease-in-out;
-   
+
 
 }
 
-.footerC{
+.footerC {
     border-top: 1px solid white;
     margin-top: 3rem;
 }
 
-.footer-price{
+.footer-price {
     text-align: right;
 
 }
 
-.card .Text .botonc:hover{
+.card .Text .botonc:hover {
     box-shadow: 0px 7px 10px rgba(182, 225, 249, 0.5);
 
 }
