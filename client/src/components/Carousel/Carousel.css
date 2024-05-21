@@ -1,5 +1,16 @@
-.carousel-indicators [data-bs-target] {
-    border-radius: 100%;
-    width: 10px;
-    height: 10px;
+.carousel-caption {
+  margin-bottom: 6rem;
+ 
 }
+
+.carousel-caption h3 {
+  color: black;
+ margin-right: 15rem;
+}
+
+.carousel-caption p {
+       color: black;
+    font-size: 1.3rem;
+   margin-top: 3rem;
+   max-width: 50%;
+  }
