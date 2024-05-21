@@ -6,7 +6,8 @@ const Home = () => {
     return (
       <div>
         <PhotoSlider />
-      <Cards/>
+         <Cards />
+     
       </div>
     );     
     
