@@ -9,10 +9,10 @@ import Row from 'react-bootstrap/Row';
 
 function Cards() {
     return (
-        <Row xs={1} md={1} lg={2} xl={3} className="g-5 mx-auto p-5">
+        <Row xs={1} md={2} xl={3} className="gy-5 mx-auto p-5">
         {Array.from({ length: 9 }).map((_, idx) => (
-          <Col key={idx} >
-        <Card>
+          <Col key={idx}>
+        <Card className="">
           <Card.Img  src={code2} />
           <Card.Body className="Title Text botonc">
             <Card.Title>Titulo 1</Card.Title>

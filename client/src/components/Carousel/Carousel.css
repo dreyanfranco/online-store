@@ -1,16 +1,10 @@
 .carousel-caption {
   margin-bottom: 6rem;
- 
-}
-
-.carousel-caption h3 {
   color: black;
- margin-right: 15rem;
-}
-
-.carousel-caption p {
-       color: black;
-    font-size: 1.3rem;
-   margin-top: 3rem;
+  margin-right: 15rem;
+   font-size: 1.3rem;
    max-width: 50%;
+   transform: translateY(40%);
   }
+
+  

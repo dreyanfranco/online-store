@@ -138,13 +138,13 @@ function NavBar() {
                                 <Link to="/login">
                                     <Button
                                         className="me-2"
-                                        variant="outline-success"
+                                        variant="outline-light"
                                     >
                                         Entrar
                                     </Button>
                                 </Link>
                                 <Link to="/register">
-                                    <Button variant="outline-success">
+                                    <Button variant="outline-light">
                                         Registrate
                                     </Button>
                                 </Link>

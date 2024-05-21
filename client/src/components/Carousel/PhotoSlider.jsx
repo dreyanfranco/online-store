@@ -8,7 +8,7 @@ import "./Carousel.css"
 function PhotoSlider() {
   return (
 
-    <div className="p-3" style={{background: 'linear-gradient(180deg, rgba(15,56,111,1) 0%, rgba(2,27,70,1) 50%, rgba(2,27,70,1) 100%)'
+    <div className="rounded" style={{background: 'linear-gradient(180deg, rgba(15,56,111,1) 0%, rgba(2,27,70,1) 50%, rgba(2,27,70,1) 100%)'
     }}>
 
     <div style={{ maxWidth: '50rem', margin: '0 auto' }}>

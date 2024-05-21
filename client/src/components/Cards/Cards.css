@@ -1,22 +1,20 @@
-.wrapper{
-    width: 70%;
-    justify-content: space-around;
-}
-
 .card{
-    width: 28rem;
-    height: 24rem;
-    padding: 2rem 1rem;
+    width: 24rem;
+    height: 20rem;
     background: #134c8f;
-    position: relative;
-    display: flex;
     align-items: flex-end;
     box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
     transition: 0.5s ease-in-out ;
     overflow: hidden;
     z-index: 1;
-   
+     
       
+}
+
+.col{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .card:hover{
@@ -91,11 +89,12 @@
 
 .footerC{
     border-top: 1px solid white;
-    margin-top: 4rem;
+    margin-top: 3rem;
 }
 
 .footer-price{
     text-align: right;
+
 }
 
 .card .Text .botonc:hover{
