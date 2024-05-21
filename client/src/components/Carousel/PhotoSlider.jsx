@@ -8,7 +8,7 @@ import Fondo from "../../components/Carousel/Images/Fondo.jpg";
 
 function PhotoSlider() {
   return (
-    <div className="col-12 bg-img" style={{ position: "relative" }}>
+    <div className="w-100 bg-img" style={{ position: "relative" }}>
       <img
         src={Fondo}
         style={{

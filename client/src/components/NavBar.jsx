@@ -25,11 +25,8 @@ function NavBar() {
         <Navbar expand="lg" className="" style={{backgroundColor:"#A6C4C1"}}>
 
             <Container fluid>
-                <Navbar.Brand className="ms-3" href="/">
-                    Cursos online
-                </Navbar.Brand>
 
-                <Navbar.Brand className='ms-3' href="#">
+                <Navbar.Brand href="#">
                     <img src={Logo} className="mx-2" height="50" />
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />

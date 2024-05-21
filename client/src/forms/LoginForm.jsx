@@ -32,7 +32,8 @@ const LoginForm = () => {
         }
     }
     return (
-        <Form onSubmit={handleSubmit}>
+        <div className="d-flex flex-column justify-content-center" style={{ minHeight: '67vh' }}>
+            <Form onSubmit={handleSubmit} className="mx-auto" style={{ width: '100%', maxWidth: '400px' }}>
             <h2 className="text-center">Login</h2>
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email</Form.Label>
@@ -70,6 +71,7 @@ const LoginForm = () => {
                 </p>
             </div>
         </Form>
+        </div>
     )
 }
 

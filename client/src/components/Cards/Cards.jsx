@@ -28,7 +28,7 @@ function Cards() {
                 </Card.Body>
             </Card>
             
-            <Card className="">
+            <Card className="container-sm">
           <Card.Img variant="top" src={code2} />
           <Card.Body className="Title Text botonc">
             <Card.Title className="Title">Titulo 1</Card.Title>
@@ -43,7 +43,7 @@ function Cards() {
                 </Card.Body>
             </Card>
             
-            <Card className="">
+            <Card className="container-sm">
           <Card.Img variant="top" src={code2} />
           <Card.Body className="Title Text botonc">
             <Card.Title className="Title">Titulo 2</Card.Title>
