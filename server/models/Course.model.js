@@ -11,14 +11,14 @@ const courseSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        // category: {
-        //     type: String,
-        //     enum: ["FrontEnd", "BackEnd", "FullStack"],
-        // },
+        category: {
+            type: String,
+            enum: ["FrontEnd", "BackEnd", "FullStack"],
+        },
 
-        // language: {
-        //     type: [String],
-        // },
+        language: {
+            type: [String],
+        },
 
         price: {
             type: Number,
