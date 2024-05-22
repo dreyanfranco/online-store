@@ -9,13 +9,29 @@ const CourseForm = () => {
         description: '',
         price: '',
         duration: '',
+        language: [],
+        category: '',
     });
 
     const handleChange = (event) => {
-        setCourse({
-            ...course,
-            [event.target.name]: event.target.value,
-        });
+        if (event.target.type === 'checkbox') {
+            if (event.target.checked) {
+                setCourse({
+                    ...course,
+                    language: [...course.language, event.target.value],
+                });
+            } else {
+                setCourse({
+                    ...course,
+                    language: course.language.filter((language) => language !== event.target.value),
+                });
+            }
+        } else {
+            setCourse({
+                ...course,
+                [event.target.name]: event.target.value,
+            });
+        }
     };
 
     const handleSubmit = async (event) => {
@@ -51,9 +67,50 @@ const CourseForm = () => {
                     <Form.Control name="duration" type="number" value={course.duration} onChange={handleChange} placeholder="Duración" />
                 </Form.Group>
             </Row>
+
+            <Form.Group className="mb-3" controlId="formGridCategory">
+                <Form.Label>Categoría</Form.Label>
+                <Form.Select name="category" value={course.category} onChange={handleChange}>
+                    <option value="">Selecciona una categoría</option>
+                    <option value="FrontEnd">FrontEnd</option>
+                    <option value="BackEnd">BackEnd</option>
+                    <option value="FullStack">FullStack</option>
+                </Form.Select>
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formGridLanguage">
+                <Form.Check
+                    type="checkbox"
+                    label="JavaScript"
+                    name="language"
+                    value="JavaScript"
+                    checked={course.language.includes("JavaScript")}
+                    onChange={handleChange}
+                />
+
+                <Form.Check
+                    type="checkbox"
+                    label="Python"
+                    name="language"
+                    value="Python"
+                    checked={course.language.includes("Python")}
+                    onChange={handleChange}
+                />
+                <Form.Check
+                    type="checkbox"
+                    label="Java"
+                    name="language"
+                    value="Java"
+                    checked={course.language.includes("Java")}
+                    onChange={handleChange}
+                />
+            </Form.Group>
             <Button variant="primary" type="submit">
                 Crear curso
             </Button>
+
+
+
         </Form>
     );
 }
