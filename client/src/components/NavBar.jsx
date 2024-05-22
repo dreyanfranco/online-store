@@ -23,13 +23,13 @@ function NavBar() {
         setIsOpen(false)
     }
     return (
-        <Navbar expand="lg" className="" style={{ backgroundColor: "#134c8f" }}>
+        <Navbar expand="lg" className="" style={{ backgroundColor: "#042751" }}>
             <Container fluid>
                 <Navbar.Brand className="ms-3" href="/">
                     <img src={Logo} className="mx-2" height="50" />
                 </Navbar.Brand>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                <Navbar.Collapse id="responsive-navbar-nav">
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" className="" />
+                <Navbar.Collapse className="" id="responsive-navbar-nav">
                     <NavDropdownMenu
                         title="Categorías"
                         id="collasible-nav-dropdown "

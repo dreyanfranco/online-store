@@ -20,7 +20,7 @@ function Cards() {
               This is a wider card with supporting text below as a natural lead-in
               to additional content. This content is a little bit longer.
                     </Card.Text>
-                    <Button className="botonc"  style={{backgroundColor:"#45b8ac"}}>Comprar</Button>
+                    <Button className="botonc border-0"  style={{backgroundColor:"#45b8ac"}}>Comprar</Button>
                   <Card.Footer className="footerC">
             <div className="footer-price" style={{color:"white"}}>000€</div>
                     </Card.Footer>

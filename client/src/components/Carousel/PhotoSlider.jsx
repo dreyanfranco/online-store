@@ -25,9 +25,7 @@ function PhotoSlider() {
               </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-         
-            <img
-            
+            <img            
               className="d-block w-100"
               src={Foto2}
               alt="Image 2"
@@ -37,7 +35,6 @@ function PhotoSlider() {
           <h3>Ahorra en grande</h3>
           <p>Aprovecha nuestros descuentos exclusivos en ciertos días del mes.</p>
               </Carousel.Caption>
-          
           </Carousel.Item>
           <Carousel.Item>
             <img

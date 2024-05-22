@@ -1,5 +1,5 @@
 import { useContext, useState } from "react"
-import { Button } from "react-bootstrap"
+import { Button, Col, Row } from "react-bootstrap"
 import Form from "react-bootstrap/Form"
 import { Link, useNavigate } from "react-router-dom"
 import { AuthContext } from "../context/auth.context"
@@ -32,7 +32,8 @@ const LoginForm = () => {
         }
     }
     return (
-        <Form onSubmit={handleSubmit}>
+
+               <Form onSubmit={handleSubmit}>
             <h2 className="text-center">Login</h2>
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email</Form.Label>
@@ -69,7 +70,8 @@ const LoginForm = () => {
                     </Link>
                 </p>
             </div>
-        </Form>
+            </Form>
+           
     )
 }
 

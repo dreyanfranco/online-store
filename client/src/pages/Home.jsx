@@ -1,11 +1,15 @@
+import Botones from "../components/Botones/Botones";
 import Cards from "../components/Cards/Cards";
 import PhotoSlider from "../components/Carousel/PhotoSlider";
+import Section from "../components/Section/Section";
 
 
 const Home = () => {
     return (
       <div>
-        <PhotoSlider />
+        <Section/>
+        {/*<PhotoSlider />*/}
+        <Botones/>
          <Cards />
      
       </div>
