@@ -1,46 +1,70 @@
+import { useEffect, useState } from "react"
+import { Button, Card, Col, Container, Row } from "react-bootstrap"
+import { Link } from "react-router-dom"
+import code2 from "../../components/Cards/ImagesCards/code2.jpg"
+import { getCourses } from "../../services/courses.service"
+import { formatCurrency } from "../../utilities/formatCurrency"
 import "./Cards.css"
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
-import code2 from "../../components/Cards/ImagesCards/code2.jpg";
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-
 
 function Cards() {
+    const [courses, setCourses] = useState([])
+
+    // const sortedCourses = courses
+    //     .slice()
+    //     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+
+    useEffect(() => {
+        getCourses()
+            .then(({ data }) => setCourses(data))
+            .catch((error) => console.error(error))
+    }, [])
+
+    if (!courses) {
+        return <h1>Loading...</h1>
+    }
+
     return (
-        <Row xs={1} md={2} xl={3} className="gy-5 mx-auto p-5">
-        {Array.from({ length: 9 }).map((_, idx) => (
-          <Col key={idx}>
-        <Card className="">
-          <Card.Img  src={code2} />
-          <Card.Body className="Title Text botonc">
-            <Card.Title>Titulo 1</Card.Title>
-            <Card.Text className="Text">
-              This is a wider card with supporting text below as a natural lead-in
-              to additional content. This content is a little bit longer.
-                    </Card.Text>
-                    <Button className="botonc"  style={{backgroundColor:"#45b8ac"}}>Comprar</Button>
-                  <Card.Footer className="footerC">
-            <div className="footer-price" style={{color:"white"}}>000€</div>
-                    </Card.Footer>
-                </Card.Body>
-         
-                
-          </Card>
-         </Col>
-      ))}
-    </Row>
-        
-         )
+        <Container>
+            <Row className="gy-5">
+                {courses.length > 0 &&
+                    courses.map((course) => (
+                        <Col key={course._id} lg={3}>
+                            <Link
+                                to={`/${course._id}`}
+                                style={{ textDecoration: "none" }}
+                            >
+                                <Card className="">
+                                    <Card.Img src={code2} />
+                                    <Card.Body className="Title Text botonc">
+                                        <Card.Title>{course.title}</Card.Title>
+                                        <Card.Text className="Text">
+                                            {course.description}
+                                        </Card.Text>
+                                        <Button
+                                            className="botonc"
+                                            style={{
+                                                backgroundColor: "#45b8ac",
+                                            }}
+                                        >
+                                            Añadir al carrito
+                                        </Button>
+                                        <Card.Footer className="footerC">
+                                            <div className="footer-price">
+                                                {formatCurrency(course.price)}
+                                            </div>
+                                        </Card.Footer>
+                                    </Card.Body>
+                                </Card>
+                            </Link>
+                        </Col>
+                    ))}
+            </Row>
+        </Container>
+    )
 }
-export default Cards;
-       
+export default Cards
 
-
-
-
-        /*<div className="">
+/*<div className="">
             <div className="wrapper overflow-hidden text-center">
                 <div className="row gap-5">
                            
@@ -112,4 +136,3 @@ export default Cards;
                    
                 </div>
             </div>*/
-       
