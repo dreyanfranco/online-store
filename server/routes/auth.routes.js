@@ -65,15 +65,7 @@ router.post("/login", async (req, res) => {
 })
 
 router.get("/validate-token", isAuthenticated, (req, res) => {
-    // console.log(req.payload)
     res.json(req.payload)
 })
-
-// router.post("/logout", (req, res) => {
-//     res.cookie("auth_token", {
-//         expires: new Date(0),
-//     })
-//     res.send()
-// })
 
 module.exports = router

@@ -1,7 +1,5 @@
 const { Schema, model } = require("mongoose")
-const ObjectId = Schema.Types.ObjectId;
-
-
+const ObjectId = Schema.Types.ObjectId
 
 const userSchema = new Schema(
     {
@@ -21,15 +19,15 @@ const userSchema = new Schema(
         },
         wishlist: [
             {
-                type: ObjectId,
-                ref: 'Course',
+                type: Schema.Types.ObjectId,
+                ref: "Course",
             },
         ],
     },
     {
         timestamps: true,
     }
-);
+)
 
 const User = model("User", userSchema)
 
