@@ -9,7 +9,7 @@ import Image from 'react-bootstrap/Image';
 const Section = () => {
     return (
 
-        <Container className="" >
+        <Container  className="" >
             <Row className="">
                 <Col md={6} lg={6}  className="p-5">
                 <h1 className="fw-bold text-white mb-3">

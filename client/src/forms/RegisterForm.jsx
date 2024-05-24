@@ -28,11 +28,12 @@ const RegisterForm = () => {
         }
     }
     return (
+        
         <Form onSubmit={handleSubmit}>
-            <h2 className="text-center">Registro</h2>
+            <h2 className="text-center font-monospace" style={{ color: "#45B8AC" }}>Registro</h2>
             <Form.Group className="mb-3" controlId="formBasicUsername">
-                <Form.Label>Username</Form.Label>
-                <Form.Control
+                <Form.Label className="text-white"> Username</Form.Label>
+                <Form.Control 
                     name="username"
                     type="username"
                     value={formData.username}
@@ -41,7 +42,7 @@ const RegisterForm = () => {
                 />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Email</Form.Label>
+                <Form.Label className="text-white">Email</Form.Label>
                 <Form.Control
                     name="email"
                     type="email"
@@ -51,7 +52,7 @@ const RegisterForm = () => {
                 />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
+                <Form.Label className="text-white">Password</Form.Label>
                 <Form.Control
                     name="password"
                     type="password"
@@ -62,11 +63,11 @@ const RegisterForm = () => {
             </Form.Group>
             {loginError && <div className="text-danger my-2">{loginError}</div>}
             <div className="text-center mt-4">
-                <Button className="w-100" type="submit">
+                <Button className="w-100" type="submit" >
                     Registro
                 </Button>
             </div>
-            <div className="text-center mt-3">
+            <div className="text-center mt-3 text-white">
                 <p>
                     Ya tienes cuenta?{" "}
                     <Link to="/login" style={{ color: "grey" }}>

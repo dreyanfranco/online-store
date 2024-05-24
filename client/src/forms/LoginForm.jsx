@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { AuthContext } from "../context/auth.context"
 import authService from "../services/auth.service"
 
+
 const LoginForm = () => {
     const { authenticateUser } = useContext(AuthContext)
     const navigate = useNavigate()
@@ -34,9 +35,9 @@ const LoginForm = () => {
     return (
 
                <Form onSubmit={handleSubmit}>
-            <h2 className="text-center">Login</h2>
+            <h2 className="text-center font-monospace" style={{ color: "#45B8AC" }}>Login</h2>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Email</Form.Label>
+                <Form.Label className="text-white">Email</Form.Label>
                 <Form.Control
                     name="email"
                     type="email"
@@ -46,7 +47,7 @@ const LoginForm = () => {
                 />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
+                <Form.Label className="text-white">Password</Form.Label>
                 <Form.Control
                     name="password"
                     type="password"
@@ -61,9 +62,9 @@ const LoginForm = () => {
                     Login
                 </Button>
             </div>
-            <div className="text-center mt-3">
+            <div className="text-center mt-3 text-white">
                 <p>
-                    No tienes cuenta?{" "}
+                    ¿No tienes cuenta?{" "}
                     <Link to="/register" style={{ color: "grey" }}>
                         {" "}
                         Regístrate
