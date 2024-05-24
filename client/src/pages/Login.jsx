@@ -12,7 +12,7 @@ const Login = () => {
                
             </Col> 
             <Col md={4}>
-                <Image src={robotlog1}  />
+                <Image src={robotlog1} fluid  />
             </Col>
         </Row>
     )
