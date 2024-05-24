@@ -65,7 +65,7 @@ router.delete("/:course_id", async (req, res) => {
 
 // Actualizar un curso
 
-router.patch("/:course_id", async (req, res) => {
+router.patch("/:course_id", isAuthenticated, async (req, res) => {
     try {
         const course = await Course.findById(req.params.course_id)
         if (!course) {
@@ -75,9 +75,8 @@ router.patch("/:course_id", async (req, res) => {
         const updatedCourse = await Course.findByIdAndUpdate(
             req.params.course_id,
             req.body,
-            { new: true }
+            // { new: true }
         )
-        res.json(updatedCourse)
         return res.status(200).json(updatedCourse)
     } catch (err) {
         return res.status(500).json({ message: err.message })

@@ -20,9 +20,14 @@ export const newCourse = (courseData) => {
     return axiosInstance.post("/", courseData)
 }
 
+export const updatedCourse = (course_id, courseData) => {
+    return axiosInstance.patch(`/${course_id}`, courseData)
+}
+
 const coursesService = {
     getCourses,
     newCourse,
+    updatedCourse,
 }
 
 export default coursesService

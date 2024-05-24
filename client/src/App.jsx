@@ -6,6 +6,7 @@ import Login from "./pages/Login"
 import Profile from "./pages/Profile"
 import Register from "./pages/Register"
 import CourseForm from "./forms/CourseForm"
+import EditCourse from "./forms/EditCourse"
 
 function App() {
     return (
@@ -43,10 +44,18 @@ function App() {
                 }
             />
             <Route
-                path="/profile/course/newcourse"
+                path="/profile/newcourse"
                 element={
                     <Layout>
                         <CourseForm />
+                    </Layout>
+                }
+            />
+            <Route
+                path="/profile/editcourse/:course_id"
+                element={
+                    <Layout>
+                        <EditCourse />
                     </Layout>
                 }
             />
