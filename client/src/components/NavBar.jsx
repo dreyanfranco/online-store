@@ -28,7 +28,7 @@ function NavBar() {
                 <Navbar.Brand className="ms-3" href="/">
                     <img src={Logo} className="mx-2" height="50" />
                 </Navbar.Brand>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav" className="" />
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" className="" style={{ backgroundColor: "#45B8AC" }} />
                 <Navbar.Collapse className="" id="responsive-navbar-nav">
                     <NavDropdownMenu
                         title="Categorías"
@@ -111,7 +111,7 @@ function NavBar() {
                         </Dropdown.Menu>
                     </Dropdown>
 
-                    <div className="mx-3">
+                    <div className="mx-lg-3 mt-3 mt-lg-0">
                         {user ? (
                             <>
                                 <Link
@@ -137,7 +137,7 @@ function NavBar() {
                             <>
                                 <Link to="/login">
                                     <Button
-                                        className="me-2"
+                                        className="me-2 "
                                         variant="outline-light"
                                     >
                                         Entrar
