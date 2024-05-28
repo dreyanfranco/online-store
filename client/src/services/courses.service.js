@@ -20,9 +20,29 @@ export const newCourse = (courseData) => {
     return axiosInstance.post("/", courseData)
 }
 
+export const updatedCourse = (course_id, courseData) => {
+    return axiosInstance.patch(`/${course_id}`, courseData)
+}
+
+export const getCart = () => {
+    return axiosInstance.get('/user/cart');
+};
+
+export const newCart = (courseId) => {
+    return axiosInstance.post("/user/cart", { courseId })
+}
+
+export const deleteCourseCart = (courseId) => {
+    return axiosInstance.delete(`${courseId}/cart`, { courseId })
+}
+
 const coursesService = {
     getCourses,
     newCourse,
+    updatedCourse,
+    getCart,
+    newCart,
+    deleteCourseCart,
 }
 
 export default coursesService

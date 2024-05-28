@@ -9,9 +9,30 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import { CartContext } from "../../context/cart.context"
 
 function Cards() {
-  const [courses, setCourses] = useState([]);
+    const [courses, setCourses] = useState([]);
+    const cart = useContext(CartContext);
+    // const [isInCart, setIsInCart] = useState(false);
+
+    // const handleToggleButtonCart = () => {
+    //     setIsInCart(!isInCart)
+    // }
+
+    if (!courses) {
+        return <h1>Loading...</h1>
+    }
+    
+    const handleAddCourseToCart = async (courseData) => {
+        try {
+            const { data } = await coursesService.newCart(courseData._id);
+            cart.addOneCourseToCart(courseData);
+        } catch (error) {
+            console.error("No se ha podido agregar al carrito", error)
+        }
+    }
+
 
   // const sortedCourses = courses
   //     .slice()
