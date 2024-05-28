@@ -6,6 +6,7 @@ import Login from "./pages/Login"
 import Profile from "./pages/Profile"
 import Register from "./pages/Register"
 import CourseForm from "./forms/CourseForm"
+import Cart from "./pages/Cart"
 
 function App() {
     return (
@@ -47,6 +48,14 @@ function App() {
                 element={
                     <Layout>
                         <CourseForm />
+                    </Layout>
+                }
+            />
+            <Route
+                path="/cart"
+                element={
+                    <Layout>
+                        <Cart />
                     </Layout>
                 }
             />

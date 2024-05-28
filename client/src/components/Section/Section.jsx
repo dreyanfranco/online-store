@@ -16,7 +16,7 @@ const Section = () => {
                     Lleva tu programación 
                     </h1>
                     <h1 className=" font-monospace d-inline-block text-truncate mb-3" style={{ color: "#45B8AC" }}> Al siguiente nivel</h1> 
-                    <blockquote class="blockquote">
+                    <blockquote className="blockquote">
                     <p className="text-white"> Más de 30 cursos disponibles. Aprende desde los conceptos básicos hasta técnicas avanzadas en desarrollo de juegos.
             Únete a nuestra comunidad de desarrolladores y lleva tus habilidades al próximo nivel.
                     </p>

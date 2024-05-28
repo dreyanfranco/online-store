@@ -1,17 +1,33 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Button, Card, Col, Container, Row } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import code2 from "../../components/Cards/ImagesCards/code2.jpg"
-import { getCourses } from "../../services/courses.service"
+import coursesService, { getCourses } from "../../services/courses.service"
 import { formatCurrency } from "../../utilities/formatCurrency"
 import "./Cards.css"
+import { CartContext } from "../../context/cart.context"
 
 function Cards() {
-    const [courses, setCourses] = useState([])
+    const [courses, setCourses] = useState([]);
+    const cart = useContext(CartContext);
+    // const [isInCart, setIsInCart] = useState(false);
 
-    // const sortedCourses = courses
-    //     .slice()
-    //     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    // const handleToggleButtonCart = () => {
+    //     setIsInCart(!isInCart)
+    // }
+
+    if (!courses) {
+        return <h1>Loading...</h1>
+    }
+    
+    const handleAddCourseToCart = async (courseData) => {
+        try {
+            const { data } = await coursesService.newCart(courseData._id);
+            cart.addOneCourseToCart(courseData);
+        } catch (error) {
+            console.error("No se ha podido agregar al carrito", error)
+        }
+    }
 
     useEffect(() => {
         getCourses()
@@ -19,43 +35,39 @@ function Cards() {
             .catch((error) => console.error(error))
     }, [])
 
-    if (!courses) {
-        return <h1>Loading...</h1>
-    }
-
     return (
         <Container>
             <Row className="gy-5">
                 {courses.length > 0 &&
                     courses.map((course) => (
                         <Col key={course._id} lg={3}>
-                            <Link
-                                to={`/${course._id}`}
-                                style={{ textDecoration: "none" }}
-                            >
-                                <Card className="">
-                                    <Card.Img src={code2} />
-                                    <Card.Body className="Title Text botonc">
+                            <Card className="">
+                                <Card.Body className="Title Text botonc">
+                                    <Link to={`/${course._id}`}
+                                        style={{ textDecoration: "none" }}>
+                                        <Card.Img src={code2} />
                                         <Card.Title>{course.title}</Card.Title>
                                         <Card.Text className="Text">
                                             {course.description}
                                         </Card.Text>
-                                        <Button
-                                            className="botonc"
-                                            style={{
-                                                backgroundColor: "#45b8ac",
-                                            }}
-                                        >
-                                            Añadir al carrito
-                                        </Button>
-                                        <Card.Footer className="footerC">
-                                            <div className="footer-price">
-                                                {formatCurrency(course.price)}
-                                            </div>
-                                        </Card.Footer>
-                                    </Card.Body>
-                                </Card>
-                            </Link>
+                                    </Link>
+                                    <Button
+                                        onClick={() => handleAddCourseToCart(course)}
+                                        className="botonc"
+                                        style={{
+                                            backgroundColor: "#45b8ac",
+                                        }}
+                                    >
+                                        Añadir al carrito
+                                    </Button>
+
+                                    <Card.Footer className="footerC">
+                                        <div className="footer-price">
+                                            {formatCurrency(course.price)}
+                                        </div>
+                                    </Card.Footer>
+                                </Card.Body>
+                            </Card>
                         </Col>
                     ))}
             </Row>

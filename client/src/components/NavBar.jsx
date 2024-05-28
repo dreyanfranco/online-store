@@ -1,6 +1,6 @@
-import { faCartShopping } from "@fortawesome/free-solid-svg-icons"
+import { faCartShopping, faTrashCan } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Dropdown, NavDropdown } from "react-bootstrap"
 import { DropdownSubmenu, NavDropdownMenu } from "react-bootstrap-submenu"
 import Button from "react-bootstrap/Button"
@@ -11,10 +11,15 @@ import { Link } from "react-router-dom"
 import { AuthContext } from "../context/auth.context"
 import Logo from "./Cards/ImagesCards/Logo.png"
 import "./Navegacion.css"
+import coursesService, { getCart } from "../services/courses.service"
+import { CartContext } from "../context/cart.context"
 
 function NavBar() {
     const { user, logout } = useContext(AuthContext)
     const [isOpen, setIsOpen] = useState(false)
+    const [coursesInCart, setCoursesInCart] = useState([]);
+    const cart = useContext(CartContext);
+
     const handleMouseEnter = () => {
         setIsOpen(true)
     }
@@ -22,6 +27,26 @@ function NavBar() {
     const handleMouseLeave = () => {
         setIsOpen(false)
     }
+
+    const handleDelCourseFromCart = async (courseId) => {
+        try {
+            const { data } = await coursesService.deleteCourseCart(courseId);
+            cart.deleteCourseFromCart(courseId);
+        } catch (error) {
+            console.error("No se ha podido eliminar al carrito", error)
+        }
+    }
+
+    useEffect(() => {
+        setCoursesInCart(cart.cartCourses)
+    }, [cart.cartCourses]);
+
+    useEffect(() => {
+        getCart()
+            .then(({ data }) => setCoursesInCart(data))
+            .catch((error) => console.error(error));
+    }, []);
+
     return (
         <Navbar expand="lg" className="" style={{ backgroundColor: "#042751" }}>
             <Container fluid>
@@ -92,22 +117,32 @@ function NavBar() {
                         <div>
                             <button
                                 id="carrito"
-                                className="btn btn-outline-light rounded-5 icon__shop me-4"
+                                className="btn btn-outline-light rounded-5 icon__shop me-4 position-relative"
                             >
                                 <FontAwesomeIcon icon={faCartShopping} />
+                                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    {coursesInCart.length}
+                                </span>
                             </button>
                         </div>
 
                         <Dropdown.Menu onMouseLeave={handleMouseLeave}>
-                            <Dropdown.Item href="#/action-1">
-                                JavaScript
+                            {
+                                coursesInCart.map(course => (
+                                    <div key={course._id} className="d-flex justify-content-between align-items-center">
+                                        <Dropdown.Item key={course._id} href={`/${course._id}`}>
+                                            {course.title}
+                                        </Dropdown.Item>
+                                        <Button onClick={() => handleDelCourseFromCart(course._id)} className="bg-danger ">
+                                            <FontAwesomeIcon icon={faTrashCan} />
+                                        </Button>
+                                    </div>
+                                ))
+                            }
+                            <Dropdown.Item className="bg-info" href="/cart">
+                                Ir al carrito
                             </Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">
-                                MongoDB
-                            </Dropdown.Item>
-                            <Dropdown.Item href="#/action-3">
-                                Phyton
-                            </Dropdown.Item>
+
                         </Dropdown.Menu>
                     </Dropdown>
 

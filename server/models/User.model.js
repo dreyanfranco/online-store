@@ -23,6 +23,12 @@ const userSchema = new Schema(
                 ref: "Course",
             },
         ],
+        cart: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "Course",
+            },
+        ],
     },
     {
         timestamps: true,
