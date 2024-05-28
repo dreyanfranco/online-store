@@ -42,16 +42,7 @@ const Profile = () => {
                 <Col xxl={12}>
                     <h2 className='text-center'>Cursos creados</h2>
                     <ProfileNav />
-                    {userCourses.length > 0 && userCourses.map(course => (
-                        <div key={course._id}>
-                            <CardUsuario course={course} />
-                        </div>
-                    ))}
                     <CardUsuario />
-
-
-
-
                 </Col>
             </Row>
 
