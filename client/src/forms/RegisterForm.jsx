@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form"
 import { Link, useNavigate } from "react-router-dom"
 import authService from "../services/auth.service"
 
+
 const RegisterForm = () => {
     const navigate = useNavigate()
     const [formData, setFormData] = useState({
@@ -39,6 +40,7 @@ const RegisterForm = () => {
                     value={formData.username}
                     onChange={handleChange}
                     placeholder="Ingresa username"
+                
                 />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicEmail">

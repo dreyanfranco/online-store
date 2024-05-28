@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import { useContext, useState, useEffect } from 'react'
 import { AuthContext } from '../context/auth.context'
 import { getCourses } from '../services/courses.service'
+import CardUsuario from '../components/Cards/CardUsuario'
+import CardCarrito from '../components/Cards/CardCarrito'
 
 
 const Profile = () => {
@@ -22,6 +24,8 @@ const Profile = () => {
 
     return (
         <>
+            <CardUsuario />
+           
             <div>Profile</div>
             <div>{courses.length > 0 && courses.map(course => (
                 <div key={course._id}>

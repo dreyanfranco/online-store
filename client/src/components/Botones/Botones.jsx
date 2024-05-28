@@ -4,7 +4,7 @@ import "./Botones.css"
 
 const Botones = () => {
   return (
-    <div className="container-fluid d-flex justify-content-evenly">
+    <div className="container-fluid d-flex justify-content-evenly mb-5">
     <Button className='button '>Recientes</Button> {''}
     <Button className='button'>Más buscados</Button>{''}
     <Button className='button'>En oferta</Button>{' '}
