@@ -135,4 +135,68 @@ router.get("/user/wishlists", isAuthenticated, async (req, res) => {
     }
 })
 
+// Obtener todos los cursos del carrito
+router.get('/user/cart', isAuthenticated, async (req, res) => {
+    try {
+        const userId = req.payload._id;
+        const user = await User.findById(userId).populate('cart');
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        if (!user.cart || user.cart.length === 0) {
+            return res.status(404).json({ message: "User's cart is empty" })
+        }
+        return res.status(200).json(user.cart);
+    } catch (err) {
+        return res.status(500).json({ message: err.message });
+    }
+});
+
+// Añadir curso al carrito
+router.post("/user/cart", isAuthenticated, async (req, res) => {
+    const userId = req.payload._id;
+    const { courseId } = req.body;
+
+    try {
+        const course = await Course.findById(courseId);
+        if (!course) {
+            return res.status(404).json({ message: "Course not found" });
+        }
+
+        const user = await User.findByIdAndUpdate(
+            userId,
+            { $addToSet: { cart: course._id } },
+            { new: true }
+        ).populate("cart");
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        return res.status(200).json(user.cart);
+    } catch (err) {
+        return res.status(500).json({ message: err.message });
+    }
+});
+
+// Eliminar curso del carrito
+router.delete("/:course_id/cart", isAuthenticated, async (req, res) => {
+    try {
+        const userId = req.payload._id;
+        const courseId = req.params.course_id;
+
+        const user = await User.findByIdAndUpdate(userId, {
+            $pull: { cart: courseId },
+        })
+        if (!user) {
+            return res.status(404).json({ message: "User not found" })
+        }
+
+        return res.status(200).json({ message: "Course removed from cart" })
+    } catch (err) {
+        return res.status(500).json({ message: err.message })
+    }
+})
+
+
 module.exports = router
