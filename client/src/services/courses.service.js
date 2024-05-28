@@ -24,6 +24,10 @@ export const updatedCourse = (course_id, courseData) => {
     return axiosInstance.patch(`/${course_id}`, courseData)
 }
 
+export const deleteCourse = (course_id) => {
+    return axiosInstance.delete(`/${course_id}`)
+};
+
 export const getCart = () => {
     return axiosInstance.get('/user/cart');
 };
@@ -43,6 +47,8 @@ const coursesService = {
     getCart,
     newCart,
     deleteCourseCart,
+    deleteCourse
+
 }
 
 export default coursesService

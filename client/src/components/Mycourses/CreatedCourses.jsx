@@ -1,16 +1,12 @@
-import { Link } from 'react-router-dom'
-import { useContext, useState, useEffect } from 'react'
-import { getCourses } from '../services/courses.service'
-import { Row, Col, Container } from 'react-bootstrap'; // Asegúrate de importar Row y Col
-import ProfileCard from '../components/Cards/ProfileCard'
-import { AuthContext } from '../context/auth.context'
-import ProfileNav from '../components/Mycourses/ProfileNav';
+import React from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { Row, Col } from 'react-bootstrap'
+import { AuthContext } from '../../context/auth.context'
+import { getCourses } from '../../services/courses.service'
+import ProfileNav from './ProfileNav'
 
 
-
-
-const Profile = () => {
-
+const CreatedCourses = () => {
     const { user } = useContext(AuthContext)
     const [courses, setCourses] = useState([])
     const [userCourses, setUserCourses] = useState([]);
@@ -37,11 +33,11 @@ const Profile = () => {
                 <h1 className='text-white text-center'>Bienvenido {user?.username}</h1>
             </div>
 
+
             <ProfileNav />
 
 
-
-            <Row className='text-white gy-5'>
+            <Row className='text-white'>
                 <Col>
                     <h2 className='text-center'>Todos los cursos</h2>
                     {courses.length > 0 && courses.map(course => (
@@ -57,19 +53,15 @@ const Profile = () => {
                             <Link to={`/profile/editcourse/${course._id}`}>
                                 <button className='d-flex justify-content-center'>Editar curso</button>
                             </Link>
-
                         </div>
                     ))}
 
                 </Col>
             </Row>
-
-
-
-
-
         </>
+
     )
 }
 
-export default Profile
+
+export default CreatedCourses
