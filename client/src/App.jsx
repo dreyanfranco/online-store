@@ -7,6 +7,7 @@ import Profile from "./pages/Profile"
 import Register from "./pages/Register"
 import CourseForm from "./forms/CourseForm"
 import EditCourse from "./forms/EditCourse"
+import Cart from "./pages/Cart"
 
 function App() {
     return (
@@ -56,6 +57,14 @@ function App() {
                 element={
                     <Layout>
                         <EditCourse />
+                    </Layout>
+                }
+            />
+            <Route
+                path="/cart"
+                element={
+                    <Layout>
+                        <Cart />
                     </Layout>
                 }
             />
