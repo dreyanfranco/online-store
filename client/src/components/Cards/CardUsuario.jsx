@@ -81,18 +81,21 @@ function CardUsuario() {
                 <div className="d-flex justify-content-between">
                   <Button className="btndelete">
                     <DeleteIcon />
-                  </Button>
-                  <Button class="btnedit">
-                    Editar
-                    <i class="edit bi bi-pencil-fill"></i>
-                  </Button>
+                              </Button>
+                              <Link to={`/profile/editcourse/${course._id}`} style={{ textDecoration: "none" }}> 
+                  <Button className="btneditar" >
+                            Editar      
+                                  
+                    <i className="edit bi bi-pencil-fill"></i>
+                                  </Button>
+                              </Link>
                 </div>
               </Card.Body>
               <Card.Footer>
                 <div className="d-flex justify-content-between">
                   <div>
                     {" "}
-                    <i className="bi bi-clock"></i> 7.5 hrs{" "}
+                                  <i className="bi bi-clock"></i> {course.duration }hrs {" "}
                   </div>
                   <p className="fs-4 text" style={{ color: "#1ECAB8" }}>
                   {formatCurrency(course.price)}

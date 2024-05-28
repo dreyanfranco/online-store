@@ -169,7 +169,7 @@
 }
 
 /*Boton Editar*/
-.btnedit {
+.btneditar {
   position: relative;
   display: flex;
   align-items: center;
@@ -195,12 +195,13 @@
   transition-duration: .3s;
 }
 
-.btnedit:hover {
+.btneditar:hover {
   color: transparent;
+  background-color: #45B8AC;
  }
  
 
-.btnedit:hover .edit {
+.btneditar:hover .edit {
   right: 43%;
   margin: 0;
   padding: 0;
@@ -209,8 +210,10 @@
   color: black;
 }
 
-.btnedit:active {
+.btneditar:active {
   transform: translate(3px , 3px);
   transition-duration: .3s;
   box-shadow: 2px 2px 0px #45B8AC;
+  color: transparent !important;
+  background-color: #45B8AC !important;
 }
