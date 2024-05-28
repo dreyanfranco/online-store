@@ -65,7 +65,7 @@ router.delete("/:course_id", async (req, res) => {
 
 // Actualizar un curso
 
-router.patch("/:course_id", async (req, res) => {
+router.patch("/:course_id", isAuthenticated, async (req, res) => {
     try {
         const course = await Course.findById(req.params.course_id)
         if (!course) {
@@ -74,10 +74,10 @@ router.patch("/:course_id", async (req, res) => {
 
         const updatedCourse = await Course.findByIdAndUpdate(
             req.params.course_id,
-            req.body,
-            { new: true }
+            req.body
+            // { new: true }
         )
-        res.json(updatedCourse)
+        // res.json(updatedCourse)
         return res.status(200).json(updatedCourse)
     } catch (err) {
         return res.status(500).json({ message: err.message })
@@ -107,7 +107,7 @@ router.delete("/:course_id/wishlist", isAuthenticated, async (req, res) => {
         const courseId = req.params.course_id
 
         const user = await User.findByIdAndUpdate(userId, {
-            $pull: { favorites: courseId },
+            $pull: { wishlist: courseId },
         })
         if (!user) {
             return res.status(404).json({ message: "User not found" })
@@ -119,7 +119,7 @@ router.delete("/:course_id/wishlist", isAuthenticated, async (req, res) => {
     }
 })
 
-router.get("/user/wishlists", isAuthenticated, async (req, res) => {
+router.get("/user/wishlist", isAuthenticated, async (req, res) => {
     try {
         const userId = req.payload._id
 

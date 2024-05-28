@@ -20,6 +20,18 @@ export const newCourse = (courseData) => {
     return axiosInstance.post("/", courseData)
 }
 
+export const addCourseToWishlist = (course_id) => {
+    return axiosInstance.post(`/${course_id}/wishlist`)
+}
+
+export const getCoursesFromWishlist = () => {
+    return axiosInstance.get("/user/wishlist")
+}
+
+export const deleteCourseFromWishlist = (course_id) => {
+    return axiosInstance.delete(`/${course_id}/wishlist`)
+}
+
 const coursesService = {
     getCourses,
     newCourse,
