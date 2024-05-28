@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useContext, useState, useEffect } from 'react'
 import { AuthContext } from '../context/auth.context'
 import { getCourses } from '../services/courses.service'
-import { Row, Col } from 'react-bootstrap'; // Asegúrate de importar Row y Col
+import { Row, Col, Container } from 'react-bootstrap'; // Asegúrate de importar Row y Col
 
 
 const Profile = () => {
@@ -26,38 +26,61 @@ const Profile = () => {
 
     return (
         <>
+            <button onClick={() => window.scrollTo(0, 0)} style={{ position: 'fixed', bottom: '20px', right: '20px' }}>
+                Volver arriba
+            </button>
+
             <div>
                 <h1 className='text-white text-center'>Bienvenido {user?.username}</h1> {/* Aquí deberías mostrar el nombre del usuario */}
             </div>
             <Row className='text-white'>
-                <Col>
+                <Col className=''>
                     <h2 className='text-center'>Cursos creados</h2>
-                    {userCourses.length > 0 && userCourses.map(course => (
-                        <div key={course._id}>
-                            <h3>{course.title}</h3>
-                            <p>{course.description}</p>
-                        </div>
-                    ))}
+                    <Container>
+                        {userCourses.length > 0 && userCourses.map(course => (
+                            <div key={course._id}>
+                                <h3 className='d-flex justify-content-center'> Título: {course.title}</h3>
+                                <p className='d-flex justify-content-center'>Descripción: {course.description}</p>
+                                <div className='d-flex flex-column text-center column-gap-3 '>
+                                    <p>Categoría: {course.category}</p>
+                                    <br />
+                                    <p>Lenguajes utilizados: <div className='row-gap-3'>{course.language}</div></p>
+
+                                </div>
+                                <Link to={`/profile/editcourse/${course._id}`}>
+                                    <button className='d-flex justify-content-center'>Editar curso</button>
+                                </Link>
+
+                            </div>
+
+                        ))}
+                        <Link to="/profile/newcourse" className=''>
+                            <button className='' >Crear curso</button>
+                        </Link>
+                    </Container>
                 </Col>
                 <Col>
                     <h2 className='text-center'>Todos los cursos</h2>
                     {courses.length > 0 && courses.map(course => (
                         <div key={course._id}>
-                            <h3>{course.title}</h3>
-                            <p>{course.description}</p>
-                            <Link to={`/profile/editcourse/${course._id}`}>
-                                <button className=''>Editar curso</button>
-                            </Link>
+                            <h3 className='d-flex justify-content-center'>Título: {course.title}</h3>
+                            <p className='d-flex justify-content-center'>Descripción: {course.description}</p>
+                            <div className='d-flex flex-column text-center column-gap-3 '>
+                                <p>Categoría: {course.category}</p>
+                                <br />
+                                <p>Lenguajes utilizados: <div className='d-flex justify-content-around'>{course.language}</div></p>
+
+                            </div>
+
                         </div>
                     ))}
+
                 </Col>
             </Row>
 
-            <Row className='d-flex justify-content-center'>
-                <Link to="/profile/newcourse">
-                    <button >New Course</button>
-                </Link>
-            </Row>
+
+
+
 
         </>
     )
