@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import { Button, Card, Col, Container, Row } from "react-bootstrap"
 import { Link } from "react-router-dom"
-import code2 from "../../components/Cards/ImagesCards/code2.jpg"
 import robotcourse from "../../components/Cards/ImagesCards/robotcourse.jpg"
 import { AuthContext } from "../../context/auth.context"
 import { CartContext } from "../../context/cart.context"
@@ -159,4 +158,5 @@ function Cards() {
         </Container>
     )
 }
+
 export default Cards

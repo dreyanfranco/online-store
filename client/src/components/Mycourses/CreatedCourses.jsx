@@ -4,19 +4,21 @@ import { Row, Col } from 'react-bootstrap'
 import { AuthContext } from '../../context/auth.context'
 import { getCourses } from '../../services/courses.service'
 import ProfileNav from './ProfileNav'
+import { Link } from 'react-router-dom'
 
 
 const CreatedCourses = () => {
     const { user } = useContext(AuthContext)
     const [courses, setCourses] = useState([])
-    const [userCourses, setUserCourses] = useState([]);
+    const [otherCourses, setOtherCourses] = useState([]);
 
     useEffect(() => {
         if (user) {
             getCourses()
                 .then(({ data }) => {
-                    const userCourses = data.filter(course => course.owner === user._id)
-                    setUserCourses(userCourses);
+                    const otherCourses = data.filter(course => course.owner !== user._id)
+
+                    setOtherCourses(otherCourses);
                     setCourses(data);
                 })
                 .catch(error => console.log('Error fetching user courses', error))
@@ -39,7 +41,7 @@ const CreatedCourses = () => {
 
             <Row className='text-white'>
                 <Col>
-                    <h2 className='text-center'>Todos los cursos</h2>
+                    <h2 className='text-center'>Cursos creados por mi</h2>
                     {courses.length > 0 && courses.map(course => (
                         <div key={course._id} className='mb-20'>
                             <h3 className='d-flex justify-content-center'>Título: {course.title}</h3>
