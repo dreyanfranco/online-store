@@ -47,10 +47,7 @@ const Profile = () => {
                 <Col xxl={12}>
 
                     <ProfileNav />
-<<<<<<< HEAD
-=======
                     <h2 className='text-center'>Todos mis cursos</h2>
->>>>>>> develop
                     <CardUsuario />
                 </Col>
             </Row>
