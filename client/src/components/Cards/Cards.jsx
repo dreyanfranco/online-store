@@ -86,7 +86,7 @@ function Cards() {
                 </Card.Body>
                 <Card.Footer>
                   <div className="d-flex justify-content-between">
-                    <div> <i className="bi bi-clock"></i> 7.5 hrs </div>
+                    <div> <i className="bi bi-clock"></i> {(course.duration)}hrs </div>
                     <span className="fs-4 text" style={{ color: "#1ECAB8" }} > {formatCurrency(course.price)}</span>
                   </div>
                 </Card.Footer>
@@ -99,75 +99,3 @@ function Cards() {
 }
 export default Cards;
 
-/*<div className="">
-            <div className="wrapper overflow-hidden text-center">
-                <div className="row gap-5">
-                           
-            <div className="card">
-                <img src={Img1} />
-                <div className="info">
-                    <h1>Título 1</h1>
-                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam justo diam, mollis eget lectus et, ultrices pretium eros. Sed gravida vel nunc sit amet volutpat. </p>
-                    
-                    <h1 className="price">000€</h1>
-                    <a href="" className="btn"> Comprar</a>
-                            
-                </div>
-            </div>
-
-            <div className="card ">
-                <img src={Img2} />
-                <div className="info">
-                    <h1>Título 2</h1>
-                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam justo diam, mollis eget lectus et, ultrices pretium eros. Sed gravida vel nunc sit amet volutpat. </p>
-                    <a href="" className="btn"> Comprar</a>
-                </div>
-            </div>
-
-            <div className="card ">
-                <img src={Img3} />
-                <div className="info">
-                    <h1>Título 3</h1>
-                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam justo diam, mollis eget lectus et, ultrices pretium eros. Sed gravida vel nunc sit amet volutpat. </p>
-                    <a href="" className="btn"> Comprar</a>
-                </div>
-                        </div>
-                    
-                        
-        
-            <div className="card  ">
-                <img src={Img4} />
-                <div className="info">
-                    <h1>Título 4</h1>
-                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam justo diam, mollis eget lectus et, ultrices pretium eros. Sed gravida vel nunc sit amet volutpat. </p>
-                    <a href="" className="btn"> Comprar</a>
-                </div>
-            </div>
-
-            <div className="card ">
-                <img src={Img5} />
-                <div className="info">
-                    <h1>Título 5</h1>
-                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam justo diam, mollis eget lectus et, ultrices pretium eros. Sed gravida vel nunc sit amet volutpat. </p>
-                    <a href="" className="btn"> Comprar</a>
-                </div>
-            </div>
-
-            <div className="card ">
-                <img src={Img6} />
-                <div className="info">
-                    <h1>Título 6</h1>
-                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam justo diam, mollis eget lectus et, ultrices pretium eros. Sed gravida vel nunc sit amet volutpat. </p>
-                    <a href="" className="btn"> Comprar</a>
-                </div>
-                </div>
-            </div>
-
-      
-            
-
-
-
-                   
-                </div>
-            </div>*/
