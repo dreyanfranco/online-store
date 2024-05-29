@@ -26,11 +26,11 @@ export const updatedCourse = (course_id, courseData) => {
 
 export const deleteCourse = (course_id) => {
     return axiosInstance.delete(`/${course_id}`)
-};
+}
 
 export const getCart = () => {
-    return axiosInstance.get('/user/cart');
-};
+    return axiosInstance.get("/user/cart")
+}
 
 export const newCart = (courseId) => {
     return axiosInstance.post("/user/cart", { courseId })
@@ -40,6 +40,18 @@ export const deleteCourseCart = (courseId) => {
     return axiosInstance.delete(`${courseId}/cart`, { courseId })
 }
 
+export const addCourseToWishlist = (course_id) => {
+    return axiosInstance.post(`/${course_id}/wishlist`)
+}
+
+export const getCoursesFromWishlist = () => {
+    return axiosInstance.get("/user/wishlist")
+}
+
+export const deleteCourseFromWishlist = (course_id) => {
+    return axiosInstance.delete(`/${course_id}/wishlist`)
+}
+
 const coursesService = {
     getCourses,
     newCourse,
@@ -47,8 +59,7 @@ const coursesService = {
     getCart,
     newCart,
     deleteCourseCart,
-    deleteCourse
-
+    deleteCourse,
 }
 
 export default coursesService
