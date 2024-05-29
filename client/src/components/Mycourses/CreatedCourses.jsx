@@ -1,29 +1,33 @@
 import React from 'react'
 import { useContext, useEffect, useState } from 'react'
-import { Row, Col } from 'react-bootstrap'
+import { Row, Col, Card } from 'react-bootstrap'
 import { AuthContext } from '../../context/auth.context'
 import { getCourses } from '../../services/courses.service'
 import ProfileNav from './ProfileNav'
 import { Link } from 'react-router-dom'
+import CardUsuario from '../Cards/CardUsuario'
+import robotcourse from '../Cards/ImagesCards/robotcourse.jpg'
+import { Button } from 'react-bootstrap'
+import DeleteIcon from '../Cards/DeleteIcon'
+import { formatCurrency } from '../../utilities/formatCurrency'
+import { Container } from 'react-bootstrap'
+
 
 
 const CreatedCourses = () => {
     const { user } = useContext(AuthContext)
     const [courses, setCourses] = useState([])
-    const [otherCourses, setOtherCourses] = useState([]);
 
     useEffect(() => {
-        if (user) {
-            getCourses()
-                .then(({ data }) => {
-                    const otherCourses = data.filter(course => course.owner !== user._id)
-
-                    setOtherCourses(otherCourses);
-                    setCourses(data);
-                })
-                .catch(error => console.log('Error fetching user courses', error))
+        const fetchCourses = async () => {
+            const owner = user?._id
+            const { data } = await getCourses()
+            setCourses(data.filter(course => course.owner === owner))
         }
-    }, [user])
+        fetchCourses()
+    }
+        , [user])
+
 
     return (
         <>
@@ -42,22 +46,59 @@ const CreatedCourses = () => {
             <Row className='text-white'>
                 <Col>
                     <h2 className='text-center'>Cursos creados por mi</h2>
-                    {courses.length > 0 && courses.map(course => (
-                        <div key={course._id} className='mb-20'>
-                            <h3 className='d-flex justify-content-center'>Título: {course.title}</h3>
-                            <p className='d-flex justify-content-center'>Descripción: {course.description}</p>
-                            <div className='d-flex flex-column text-center column-gap-3 '>
-                                <p>Categoría: {course.category}</p>
-                                <br />
-                                <p>Lenguajes utilizados: <div className='d-flex justify-content-around'>{course.language}</div></p>
+                    <Container className="my-5">
+                        <Row sm={1} md={2} lg={3} xl={3} xxl={4} className="g-5">
+                            {courses.length > 0 &&
+                                courses.map((course) => (
+                                    <Col key={course.owner}>
+                                        <Card className="" style={{ width: "18rem" }}>
+                                            <Card.Img
+                                                style={{ height: "10rem", objectFit: "cover" }}
+                                                src={robotcourse}
+                                            />
+                                            <Card.Body>
+                                                <Link
+                                                    to={`/${course._id}`}
+                                                    style={{ textDecoration: "none" }}>
+                                                    <div className="text-wrap" style={{ height: "5rem" }}>
+                                                        <Card.Title className="text-reset link-offset-2 link-underline link-underline-opacity-0">
+                                                            {course.title}
+                                                        </Card.Title>
+                                                    </div>
 
-                            </div>
-                            <Link to={`/profile/editcourse/${course._id}`}>
-                                <button className='d-flex justify-content-center'>Editar curso</button>
-                            </Link>
-                        </div>
-                    ))}
+                                                    <div className="text-wrap" style={{ height: "8rem" }}>
+                                                        <Card.Text>{course.description}</Card.Text>
+                                                    </div>
+                                                </Link>
 
+                                                <div className="d-flex justify-content-between">
+                                                    <Button className="btndelete">
+                                                        <DeleteIcon />
+                                                    </Button>
+                                                    <Link to={`/profile/editcourse/${course._id}`} style={{ textDecoration: "none" }}>
+                                                        <Button className="btneditar" >
+                                                            Editar
+                                                            <i className="edit bi bi-pencil-fill"></i>
+                                                        </Button>
+                                                    </Link>
+                                                </div>
+                                            </Card.Body>
+                                            <Card.Footer>
+                                                <div className="d-flex justify-content-between">
+                                                    <div>
+                                                        {" "}
+                                                        <i className="bi bi-clock"></i> {course.duration}hrs {" "}
+                                                    </div>
+                                                    <p className="fs-4 text" style={{ color: "#1ECAB8" }}>
+                                                        {formatCurrency(course.price)}
+                                                    </p>
+                                                </div>
+                                            </Card.Footer>
+                                        </Card>
+                                    </Col>
+                                ))}
+                        </Row>
+                    </Container>
                 </Col>
             </Row>
         </>
