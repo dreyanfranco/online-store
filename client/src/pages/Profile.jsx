@@ -16,13 +16,18 @@ const Profile = () => {
     const { user } = useContext(AuthContext)
     const [courses, setCourses] = useState([])
     const [userCourses, setUserCourses] = useState([]);
+    const [otherCourses, setOtherCourses] = useState([]);
+
 
     useEffect(() => {
         if (user) {
             getCourses()
                 .then(({ data }) => {
                     const userCourses = data.filter(course => course.owner === user._id)
+                    const otherCourses = data.filter(course => course.owner !== user._id)
+
                     setUserCourses(userCourses);
+                    setOtherCourses(otherCourses);
                     setCourses(data);
                 })
                 .catch(error => console.log('Error fetching user courses', error))
@@ -40,13 +45,9 @@ const Profile = () => {
             </div>
             <Row className='text-white'>
                 <Col xxl={12}>
-                    <h2 className='text-center'>Cursos creados</h2>
+
                     <ProfileNav />
-                    {userCourses.length > 0 && userCourses.map(course => (
-                        <div key={course._id}>
-                            <CardUsuario course={course} />
-                        </div>
-                    ))}
+                    <h2 className='text-center'>Todos mis cursos</h2>
                     <CardUsuario />
 
 
@@ -54,11 +55,6 @@ const Profile = () => {
 
                 </Col>
             </Row>
-
-
-
-
-
         </>
 
     )
