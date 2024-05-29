@@ -8,6 +8,8 @@ import Register from "./pages/Register"
 import CourseForm from "./forms/CourseForm"
 import EditCourse from "./forms/EditCourse"
 import Cart from "./pages/Cart"
+import DeleteCourse from "./forms/DeleteCourse"
+import CreatedCourses from "./components/Mycourses/CreatedCourses"
 
 function App() {
     return (
@@ -57,6 +59,22 @@ function App() {
                 element={
                     <Layout>
                         <EditCourse />
+                    </Layout>
+                }
+            />
+            <Route
+                path="/profile/deletecourse/:course_id"
+                element={
+                    <Layout>
+                        <DeleteCourse />
+                    </Layout>
+                }
+            />
+            <Route
+                path="/profile/createdCourses"
+                element={
+                    <Layout>
+                        <CreatedCourses />
                     </Layout>
                 }
             />

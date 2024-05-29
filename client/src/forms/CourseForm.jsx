@@ -45,7 +45,7 @@ const CourseForm = () => {
     };
 
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} className="text-white">
             <Form.Group className="mb-3" controlId="formGridTitle">
                 <Form.Label>Título</Form.Label>
                 <Form.Control name="title" value={course.title} onChange={handleChange} placeholder="Título" />
