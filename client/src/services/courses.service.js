@@ -57,6 +57,10 @@ export const addCoursePurchase = (courseIds) => {
     return axiosInstance.post("/user/purchase", { courseIds })
 }
 
+export const getCoursesPurchase = () => {
+    return axiosInstance.get("/user/purchase")
+}
+
 const coursesService = {
     getCourses,
     newCourse,
@@ -65,6 +69,7 @@ const coursesService = {
     newCart,
     deleteCourseCart,
     deleteCourse,
+    getCoursesPurchase
 }
 
 export default coursesService

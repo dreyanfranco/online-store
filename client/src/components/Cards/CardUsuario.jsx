@@ -8,7 +8,7 @@ import { Container } from "react-bootstrap";
 import DeleteIcon from "./DeleteIcon";
 import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { getCourses } from "../../services/courses.service";
+import { getCourses, getCoursesPurchase } from "../../services/courses.service";
 import { formatCurrency } from "../../utilities/formatCurrency";
 import { CartContext } from "../../context/cart.context"
 import coursesService from "../../services/courses.service";
@@ -45,7 +45,7 @@ function CardUsuario() {
   //     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
 
   useEffect(() => {
-    getCourses()
+    getCoursesPurchase()
       .then(({ data }) => setCourses(data))
       .catch((error) => console.error(error));
   }, []);
