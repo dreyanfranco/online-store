@@ -80,7 +80,7 @@ function Cards() {
                       <p className="add">Añadir al carrito</p>
                     </Button>
                     <a className="btnheart ">
-                      <i className="iconn bi bi-heart-fill fa-2x text-danger"></i>
+                      <i className="iconn bi bi-suit-heart fa-2x text-danger"></i>
                     </a>
                   </div>
                 </Card.Body>
