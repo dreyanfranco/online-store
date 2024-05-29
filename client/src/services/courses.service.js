@@ -40,6 +40,11 @@ export const deleteCourseCart = (courseId) => {
     return axiosInstance.delete(`${courseId}/cart`, { courseId })
 }
 
+export const addCoursePurchase = (courseIds) => {
+    console.log(courseIds);
+    return axiosInstance.post("/user/purchase", { courseIds });
+}
+
 const coursesService = {
     getCourses,
     newCourse,
@@ -47,8 +52,8 @@ const coursesService = {
     getCart,
     newCart,
     deleteCourseCart,
-    deleteCourse
-
+    deleteCourse,
+    addCoursePurchase,
 }
 
 export default coursesService

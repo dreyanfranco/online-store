@@ -1,10 +1,11 @@
 import { useEffect, useState, useContext } from "react";
-import coursesService, { getCart } from "../services/courses.service";
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import coursesService, { addCoursePurchase, getCart } from "../services/courses.service";
+import { Button, Card, Col, Container } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { formatCurrency } from "../utilities/formatCurrency";
 import { CartContext } from "../context/cart.context";
+import Swal from "sweetalert2";
 
 const Cart = () => {
     const [coursesInCart, setCoursesInCart] = useState([]);
@@ -19,6 +20,21 @@ const Cart = () => {
             return totalCoast;
         }
         return 0;
+    }
+
+    function handlePurchaseCourses() {
+        Swal.fire({
+            title: "OK",
+            text: "Cursos comprados satisfactoriamente",
+            icon: "success"
+          });
+        addCoursePurchase(coursesInCart.map(course => course._id))
+            .then(response => {
+                console.log('Cursos comprados', response.data);
+            })
+            .catch(error => {
+                console.error('Error al comprar los cursos:', error);
+            });
     }
 
     const handleDelCourseFromCart = async (courseId) => {
@@ -62,7 +78,7 @@ const Cart = () => {
             <Card className="col-md-4 p-2 justify-content-between" style={{ height: "200px" }}>
                 <h2>Resumen</h2>
                 <span>Total: {formatCurrency(handleTotalCoast())}</span>
-                <Button className="bg-success">Comprar curso/s</Button>
+                <Button onClick={()=> handlePurchaseCourses()} className="bg-success">Comprar curso/s</Button>
             </Card>
         </Container>
     )

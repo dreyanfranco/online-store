@@ -198,5 +198,33 @@ router.delete("/:course_id/cart", isAuthenticated, async (req, res) => {
     }
 })
 
+// Añadir cursos a los cursos comprados
+router.post("/user/purchase", isAuthenticated, async (req, res) => {
+    const userId = req.payload._id;
+    const courseIds = req.body.courseIds;
+
+    try {
+        const courses = await Course.find({ '_id': { $in: courseIds } });
+        if (courses.length !== courseIds.length) {
+            return res.status(404).json({ message: "One or more courses not found" });
+        }
+
+        const user = await User.findByIdAndUpdate(
+            userId,
+            { $addToSet: { purchases: { $each: courseIds } } }, 
+            { new: true }
+        ).populate("purchases");
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        return res.status(200).json(user.purchases);
+    } catch (err) {
+        return res.status(500).json({ message: err.message });
+    }
+});
+
+
 
 module.exports = router
