@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import robotcourse from "../../components/Cards/ImagesCards/robotcourse.jpg";
-import { getCourses } from "../../services/courses.service";
+import coursesService, { getCourses } from "../../services/courses.service";
 import { formatCurrency } from "../../utilities/formatCurrency";
 import "./CardsControl.css"
 import Col from "react-bootstrap/Col";
@@ -12,26 +12,26 @@ import Button from "react-bootstrap/Button";
 import { CartContext } from "../../context/cart.context"
 
 function Cards() {
-    const [courses, setCourses] = useState([]);
-    const cart = useContext(CartContext);
-    // const [isInCart, setIsInCart] = useState(false);
+  const [courses, setCourses] = useState([]);
+  const cart = useContext(CartContext);
+  // const [isInCart, setIsInCart] = useState(false);
 
-    // const handleToggleButtonCart = () => {
-    //     setIsInCart(!isInCart)
-    // }
+  // const handleToggleButtonCart = () => {
+  //     setIsInCart(!isInCart)
+  // }
 
-    if (!courses) {
-        return <h1>Loading...</h1>
+  if (!courses) {
+    return <h1>Loading...</h1>
+  }
+
+  const handleAddCourseToCart = async (courseData) => {
+    try {
+      const { data } = await coursesService.newCart(courseData._id);
+      cart.addOneCourseToCart(courseData);
+    } catch (error) {
+      console.error("No se ha podido agregar al carrito", error)
     }
-    
-    const handleAddCourseToCart = async (courseData) => {
-        try {
-            const { data } = await coursesService.newCart(courseData._id);
-            cart.addOneCourseToCart(courseData);
-        } catch (error) {
-            console.error("No se ha podido agregar al carrito", error)
-        }
-    }
+  }
 
 
   // const sortedCourses = courses
@@ -55,23 +55,23 @@ function Cards() {
           courses.map((course) => (
             <Col key={course._id}>
               <Card className="h-100" style={{ width: "18rem" }}>
-                <Card.Img  style={{ height: "10rem", objectFit: "cover" }} src={robotcourse} />
+                <Card.Img style={{ height: "10rem", objectFit: "cover" }} src={robotcourse} />
                 <Card.Body>
                   <Link
                     to={`/${course._id}`}
                     style={{ textDecoration: "none" }}>
-                    <div className="text-wrap" style={{height:"5rem"}}>
-                    <Card.Title className="text-reset link-offset-2 link-underline link-underline-opacity-0">
-                      {course.title}
-                    </Card.Title>
+                    <div className="text-wrap" style={{ height: "5rem" }}>
+                      <Card.Title className="text-reset link-offset-2 link-underline link-underline-opacity-0">
+                        {course.title}
+                      </Card.Title>
                     </div>
-                    <div className="text-wrap" style={{height:"8rem"}}>
-                    <Card.Text>{course.description}</Card.Text>
+                    <div className="text-wrap" style={{ height: "8rem" }}>
+                      <Card.Text>{course.description}</Card.Text>
                     </div>
                   </Link>
-                
+
                   <div className="d-flex justify-content-between my-3">
-                         <Button
+                    <Button
                       onClick={() => handleAddCourseToCart(course)}
                       className="btncompra">
                       <span className="IconContainer">
@@ -84,12 +84,12 @@ function Cards() {
                     </a>
                   </div>
                 </Card.Body>
-                    <Card.Footer>
-                      <div className="d-flex justify-content-between">
-                      <div> <i className="bi bi-clock"></i> 7.5 hrs </div>
-                      <span className="fs-4 text" style={{color:"#1ECAB8"}} > {formatCurrency(course.price)}</span>
-                      </div>
-                    </Card.Footer>                               
+                <Card.Footer>
+                  <div className="d-flex justify-content-between">
+                    <div> <i className="bi bi-clock"></i> 7.5 hrs </div>
+                    <span className="fs-4 text" style={{ color: "#1ECAB8" }} > {formatCurrency(course.price)}</span>
+                  </div>
+                </Card.Footer>
               </Card>
             </Col>
           ))}

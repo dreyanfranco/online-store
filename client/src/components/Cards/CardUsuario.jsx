@@ -12,7 +12,11 @@ import { getCourses } from "../../services/courses.service";
 import { formatCurrency } from "../../utilities/formatCurrency";
 import { CartContext } from "../../context/cart.context"
 import coursesService from "../../services/courses.service";
+<<<<<<< HEAD
 import CartProvider from "../../context/cart.context";
+=======
+
+>>>>>>> develop
 
 
 
@@ -89,6 +93,10 @@ function CardUsuario() {
                     <Link to={`/profile/editcourse/${course._id}`} style={{ textDecoration: "none" }}>
                       <Button className="btneditar" >
                         Editar
+<<<<<<< HEAD
+=======
+
+>>>>>>> develop
                         <i className="edit bi bi-pencil-fill"></i>
                       </Button>
                     </Link>
