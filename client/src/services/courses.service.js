@@ -52,6 +52,11 @@ export const deleteCourseFromWishlist = (course_id) => {
     return axiosInstance.delete(`/${course_id}/wishlist`)
 }
 
+export const addCoursePurchase = (courseIds) => {
+    console.log(courseIds)
+    return axiosInstance.post("/user/purchase", { courseIds })
+}
+
 const coursesService = {
     getCourses,
     newCourse,

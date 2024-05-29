@@ -29,6 +29,12 @@ const userSchema = new Schema(
                 ref: "Course",
             },
         ],
+        purchases: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "Course",
+            },
+        ],
     },
     {
         timestamps: true,
