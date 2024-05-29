@@ -36,8 +36,9 @@ const Profile = () => {
 
     return (
         <>
+
             <button onClick={() => window.scrollTo(0, 0)} style={{ position: 'fixed', bottom: '20px', right: '20px' }}>
-                Volver arriba
+                <i class="bi bi-arrow-up-circle"></i>
             </button>
 
             <div>
