@@ -22,7 +22,8 @@ function Cards() {
     // }
 
     const toggleWishlistStatus = (courseId) => {
-        if (wishlist.includes(courseId)) {
+        const isWishlisted = wishlist.some((course) => course._id === courseId)
+        if (isWishlisted) {
             removeFromWishlist(courseId)
         } else {
             addToWishlist(courseId)
@@ -38,9 +39,9 @@ function Cards() {
         }
     }
 
-    // const sortedCourses = courses
-    //     .slice()
-    //     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    const sortedCourses = courses
+        .slice()
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
 
     useEffect(() => {
         getCourses()
@@ -48,15 +49,15 @@ function Cards() {
             .catch((error) => console.error(error))
     }, [])
 
-    if (!courses) {
+    if (!sortedCourses) {
         return <h1>Loading...</h1>
     }
 
     return (
         <Container className="my-5">
             <Row sm={1} md={2} lg={3} xl={3} xxl={4} className="g-5">
-                {courses.length > 0 &&
-                    courses.map((course) => (
+                {sortedCourses.length > 0 &&
+                    sortedCourses.map((course) => (
                         <Col key={course._id}>
                             <Card className="h-100" style={{ width: "18rem" }}>
                                 <Card.Img
@@ -110,7 +111,11 @@ function Cards() {
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill={
                                                 user &&
-                                                wishlist.includes(course._id)
+                                                wishlist.some(
+                                                    (userWishlist) =>
+                                                        userWishlist._id ===
+                                                        course._id
+                                                )
                                                     ? "red"
                                                     : "none"
                                             }

@@ -17,24 +17,24 @@ const WishlistProviderWrapper = (props) => {
         if (user) {
             fetchWishlist()
         } else {
-            setWishlist([[]])
+            setWishlist([])
         }
     }, [user])
 
     const fetchWishlist = async () => {
         try {
             const response = await getCoursesFromWishlist()
-            setWishlist(response.data.map((course) => course._id))
+            setWishlist(response.data)
         } catch (error) {
             console.error(error)
-            // setWishlist([])
+            setWishlist([])
         }
     }
 
     const addToWishlist = async (courseId) => {
         try {
             await addCourseToWishlist(courseId)
-            setWishlist((prevWishlist) => [...prevWishlist, courseId])
+            fetchWishlist()
         } catch (error) {
             console.error(error)
         }
@@ -43,9 +43,7 @@ const WishlistProviderWrapper = (props) => {
     const removeFromWishlist = async (courseId) => {
         try {
             await deleteCourseFromWishlist(courseId)
-            setWishlist((prevWishlist) =>
-                prevWishlist.filter((id) => id !== courseId)
-            )
+            fetchWishlist()
         } catch (error) {
             console.error(error)
         }

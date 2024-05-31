@@ -1,5 +1,6 @@
 import PropTypes from "prop-types"
 import { createContext, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import authService from "../services/auth.service"
 
 const AuthContext = createContext()
@@ -7,7 +8,6 @@ const AuthContext = createContext()
 const AuthProviderWrapper = (props) => {
     const [user, setUser] = useState(null)
     const [loadUser, setLoadUser] = useState(false)
-
     const authenticateUser = () => {
         const token = localStorage.getItem("authToken")
 

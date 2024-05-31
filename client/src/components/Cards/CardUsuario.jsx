@@ -1,116 +1,123 @@
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
-import robotcourse from "../../components/Cards/ImagesCards/robotcourse.jpg";
-import "./CardsControl.css";
-import { Container } from "react-bootstrap";
-import DeleteIcon from "./DeleteIcon";
-import { useEffect, useState, useContext } from "react";
-import { Link } from "react-router-dom";
-import { getCourses } from "../../services/courses.service";
-import { formatCurrency } from "../../utilities/formatCurrency";
+import { useContext, useEffect, useState } from "react"
+import { Container } from "react-bootstrap"
+import Button from "react-bootstrap/Button"
+import Card from "react-bootstrap/Card"
+import Col from "react-bootstrap/Col"
+import Row from "react-bootstrap/Row"
+import { Link } from "react-router-dom"
+import robotcourse from "../../components/Cards/ImagesCards/robotcourse.jpg"
 import { CartContext } from "../../context/cart.context"
-import coursesService from "../../services/courses.service";
-import CartProvider from "../../context/cart.context";
-
-
+import coursesService, { getCourses } from "../../services/courses.service"
+import { formatCurrency } from "../../utilities/formatCurrency"
+import "./CardsControl.css"
+import DeleteIcon from "./DeleteIcon"
 
 function CardUsuario() {
+    const [courses, setCourses] = useState([])
+    const cart = useContext(CartContext)
+    // const [isInCart, setIsInCart] = useState(false);
 
-  const [courses, setCourses] = useState([]);
-  const cart = useContext(CartContext);
-  // const [isInCart, setIsInCart] = useState(false);
+    // const handleToggleButtonCart = () => {
+    //     setIsInCart(!isInCart)
+    // }
 
-  // const handleToggleButtonCart = () => {
-  //     setIsInCart(!isInCart)
-  // }
-
-  if (!courses) {
-    return <h1>Loading...</h1>
-  }
-
-  const handleAddCourseToCart = async (courseData) => {
-    try {
-      const { data } = await coursesService.newCart(courseData._id);
-      cart.addOneCourseToCart(courseData);
-    } catch (error) {
-      console.error("No se ha podido agregar al carrito", error)
+    const handleAddCourseToCart = async (courseData) => {
+        try {
+            const { data } = await coursesService.newCart(courseData._id)
+            cart.addOneCourseToCart(courseData)
+        } catch (error) {
+            console.error("No se ha podido agregar al carrito", error)
+        }
     }
-  }
 
+    // const sortedCourses = courses
+    //     .slice()
+    //     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
 
-  // const sortedCourses = courses
-  //     .slice()
-  //     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    useEffect(() => {
+        getCourses()
+            .then(({ data }) => setCourses(data))
+            .catch((error) => console.error(error))
+    }, [])
 
-  useEffect(() => {
-    getCourses()
-      .then(({ data }) => setCourses(data))
-      .catch((error) => console.error(error));
-  }, []);
+    if (!courses) {
+        return <h1>Loading...</h1>
+    }
 
-  if (!courses) {
-    return <h1>Loading...</h1>;
-  }
+    return (
+        <Container className="my-5">
+            <Row sm={1} md={2} lg={3} xl={3} xxl={4} className="g-5">
+                {courses.length > 0 &&
+                    courses.map((course) => (
+                        <Col key={course._id}>
+                            <Card className="" style={{ width: "18rem" }}>
+                                <Card.Img
+                                    style={{
+                                        height: "10rem",
+                                        objectFit: "cover",
+                                    }}
+                                    src={robotcourse}
+                                />
+                                <Card.Body>
+                                    <Link
+                                        to={`/${course._id}`}
+                                        style={{ textDecoration: "none" }}
+                                    >
+                                        <div
+                                            className="text-wrap"
+                                            style={{ height: "5rem" }}
+                                        >
+                                            <Card.Title className="text-reset link-offset-2 link-underline link-underline-opacity-0">
+                                                {course.title}
+                                            </Card.Title>
+                                        </div>
 
+                                        <div
+                                            className="text-wrap"
+                                            style={{ height: "8rem" }}
+                                        >
+                                            <Card.Text>
+                                                {course.description}
+                                            </Card.Text>
+                                        </div>
+                                    </Link>
 
-
-  return (
-    <Container className="my-5">
-      <Row sm={1} md={2} lg={3} xl={3} xxl={4} className="g-5">
-        {courses.length > 0 &&
-          courses.map((course) => (
-            <Col key={course._id}>
-              <Card className="" style={{ width: "18rem" }}>
-                <Card.Img
-                  style={{ height: "10rem", objectFit: "cover" }}
-                  src={robotcourse}
-                />
-                <Card.Body>
-                  <Link
-                    to={`/${course._id}`}
-                    style={{ textDecoration: "none" }}>
-                    <div className="text-wrap" style={{ height: "5rem" }}>
-                      <Card.Title className="text-reset link-offset-2 link-underline link-underline-opacity-0">
-                        {course.title}
-                      </Card.Title>
-                    </div>
-
-                    <div className="text-wrap" style={{ height: "8rem" }}>
-                      <Card.Text>{course.description}</Card.Text>
-                    </div>
-                  </Link>
-
-                  <div className="d-flex justify-content-between">
-                    <Button className="btndelete">
-                      <DeleteIcon />
-                    </Button>
-                    <Link to={`/profile/editcourse/${course._id}`} style={{ textDecoration: "none" }}>
-                      <Button className="btneditar" >
-                        Editar
-                        <i className="edit bi bi-pencil-fill"></i>
-                      </Button>
-                    </Link>
-                  </div>
-                </Card.Body>
-                <Card.Footer>
-                  <div className="d-flex justify-content-between">
-                    <div>
-                      {" "}
-                      <i className="bi bi-clock"></i> {course.duration}hrs {" "}
-                    </div>
-                    <p className="fs-4 text" style={{ color: "#1ECAB8" }}>
-                      {formatCurrency(course.price)}
-                    </p>
-                  </div>
-                </Card.Footer>
-              </Card>
-            </Col>
-          ))}
-      </Row>
-    </Container>
-  );
+                                    <div className="d-flex justify-content-between">
+                                        <Button className="btndelete">
+                                            <DeleteIcon />
+                                        </Button>
+                                        <Link
+                                            to={`/profile/editcourse/${course._id}`}
+                                            style={{ textDecoration: "none" }}
+                                        >
+                                            <Button className="btneditar">
+                                                Editar
+                                                <i className="edit bi bi-pencil-fill"></i>
+                                            </Button>
+                                        </Link>
+                                    </div>
+                                </Card.Body>
+                                <Card.Footer>
+                                    <div className="d-flex justify-content-between">
+                                        <div>
+                                            {" "}
+                                            <i className="bi bi-clock"></i>{" "}
+                                            {course.duration}hrs{" "}
+                                        </div>
+                                        <p
+                                            className="fs-4 text"
+                                            style={{ color: "#1ECAB8" }}
+                                        >
+                                            {formatCurrency(course.price)}
+                                        </p>
+                                    </div>
+                                </Card.Footer>
+                            </Card>
+                        </Col>
+                    ))}
+            </Row>
+        </Container>
+    )
 }
 
-export default CardUsuario;
+export default CardUsuario

@@ -9,9 +9,9 @@ const Home = () => {
             <Section />
             {/*<PhotoSlider />*/}
             <Botones />
-           {/*<CardsControl/>*/}
-        
-         <Cards/>
+            {/*<CardsControl/>*/}
+
+            <Cards />
         </div>
     )
 }

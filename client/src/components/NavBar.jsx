@@ -7,18 +7,19 @@ import Button from "react-bootstrap/Button"
 import Container from "react-bootstrap/Container"
 import Form from "react-bootstrap/Form"
 import Navbar from "react-bootstrap/Navbar"
-import { Link } from "react-router-dom"
+import { Link, redirect, useNavigate } from "react-router-dom"
 import { AuthContext } from "../context/auth.context"
+import { CartContext } from "../context/cart.context"
+import coursesService, { getCart } from "../services/courses.service"
 import Logo from "./Cards/ImagesCards/Logo.png"
 import "./Navegacion.css"
-import coursesService, { getCart } from "../services/courses.service"
-import { CartContext } from "../context/cart.context"
 
 function NavBar() {
     const { user, logout } = useContext(AuthContext)
     const [isOpen, setIsOpen] = useState(false)
-    const [coursesInCart, setCoursesInCart] = useState([]);
-    const cart = useContext(CartContext);
+    const [coursesInCart, setCoursesInCart] = useState([])
+    const cart = useContext(CartContext)
+    const navigate = useNavigate()
 
     const handleMouseEnter = () => {
         setIsOpen(true)
@@ -30,8 +31,8 @@ function NavBar() {
 
     const handleDelCourseFromCart = async (courseId) => {
         try {
-            const { data } = await coursesService.deleteCourseCart(courseId);
-            cart.deleteCourseFromCart(courseId);
+            await coursesService.deleteCourseCart(courseId)
+            cart.deleteCourseFromCart(courseId)
         } catch (error) {
             console.error("No se ha podido eliminar al carrito", error)
         }
@@ -39,13 +40,18 @@ function NavBar() {
 
     useEffect(() => {
         setCoursesInCart(cart.cartCourses)
-    }, [cart.cartCourses]);
+    }, [cart.cartCourses])
 
     useEffect(() => {
         getCart()
             .then(({ data }) => setCoursesInCart(data))
-            .catch((error) => console.error(error));
-    }, []);
+            .catch((error) => console.error(error))
+    }, [])
+
+    const handleLogout = () => {
+        logout()
+        navigate("/login")
+    }
 
     return (
         <Navbar expand="lg" className="" style={{ backgroundColor: "#042751" }}>
@@ -53,7 +59,11 @@ function NavBar() {
                 <Navbar.Brand className="ms-3" href="/">
                     <img src={Logo} className="mx-2" height="50" />
                 </Navbar.Brand>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav" className="" style={{ backgroundColor: "#45B8AC" }} />
+                <Navbar.Toggle
+                    aria-controls="responsive-navbar-nav"
+                    className=""
+                    style={{ backgroundColor: "#45B8AC" }}
+                />
                 <Navbar.Collapse className="" id="responsive-navbar-nav">
                     <NavDropdownMenu
                         title="Categorías"
@@ -127,22 +137,30 @@ function NavBar() {
                         </div>
 
                         <Dropdown.Menu onMouseLeave={handleMouseLeave}>
-                            {
-                                coursesInCart.map(course => (
-                                    <div key={course._id} className="d-flex justify-content-between align-items-center">
-                                        <Dropdown.Item key={course._id} href={`/${course._id}`}>
-                                            {course.title}
-                                        </Dropdown.Item>
-                                        <Button onClick={() => handleDelCourseFromCart(course._id)} className="bg-danger ">
-                                            <FontAwesomeIcon icon={faTrashCan} />
-                                        </Button>
-                                    </div>
-                                ))
-                            }
+                            {coursesInCart.map((course) => (
+                                <div
+                                    key={course._id}
+                                    className="d-flex justify-content-between align-items-center"
+                                >
+                                    <Dropdown.Item
+                                        key={course._id}
+                                        href={`/${course._id}`}
+                                    >
+                                        {course.title}
+                                    </Dropdown.Item>
+                                    <Button
+                                        onClick={() =>
+                                            handleDelCourseFromCart(course._id)
+                                        }
+                                        className="bg-danger "
+                                    >
+                                        <FontAwesomeIcon icon={faTrashCan} />
+                                    </Button>
+                                </div>
+                            ))}
                             <Dropdown.Item className="bg-info" href="/cart">
                                 Ir al carrito
                             </Dropdown.Item>
-
                         </Dropdown.Menu>
                     </Dropdown>
 
@@ -163,7 +181,7 @@ function NavBar() {
                                 <Button
                                     className="me-2"
                                     variant="outline-danger"
-                                    onClick={logout}
+                                    onClick={handleLogout}
                                 >
                                     Cierra sesión
                                 </Button>
