@@ -2,7 +2,7 @@ import React from 'react'
 import { useContext, useEffect, useState } from 'react'
 import { Row, Col, Card } from 'react-bootstrap'
 import { AuthContext } from '../../context/auth.context'
-import { getCourses } from '../../services/courses.service'
+import { deleteCourse, getCourses } from '../../services/courses.service'
 import ProfileNav from './ProfileNav'
 import { Link } from 'react-router-dom'
 import CardUsuario from '../Cards/CardUsuario'
@@ -28,7 +28,17 @@ const CreatedCourses = () => {
     }
         , [user])
 
+    const deleteCourse = async (course_id) => {
+        const response = await fetch(`http://localhost:5005/api/${course_id}`, {
+            method: 'DELETE',
+        });
 
+        if (response.ok) {
+            console.log(`Curso con ID ${course_id} eliminado correctamente.`);
+        } else {
+            console.error(`Error al eliminar el curso con ID ${course_id}.`);
+        }
+    }
     return (
         <>
             <button onClick={() => window.scrollTo(0, 0)} style={{ position: 'fixed', bottom: '20px', right: '20px' }}>
@@ -72,7 +82,7 @@ const CreatedCourses = () => {
                                                 </Link>
 
                                                 <div className="d-flex justify-content-between">
-                                                    <Button className="btndelete">
+                                                    <Button className="btndelete" onClick={() => deleteCourse(course._id)} >
                                                         <DeleteIcon />
                                                     </Button>
                                                     <Link to={`/profile/editcourse/${course._id}`} style={{ textDecoration: "none" }}>

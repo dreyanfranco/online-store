@@ -8,7 +8,7 @@ import { Container } from "react-bootstrap";
 import DeleteIcon from "./DeleteIcon";
 import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { getCourses, getCoursesPurchase } from "../../services/courses.service";
+import { deleteCourse, getCourses, getCoursesPurchase } from "../../services/courses.service";
 import { formatCurrency } from "../../utilities/formatCurrency";
 import { CartContext } from "../../context/cart.context"
 import coursesService from "../../services/courses.service";
@@ -83,7 +83,7 @@ function CardUsuario() {
                   </Link>
 
                   <div className="d-flex justify-content-between">
-                    <Button className="btndelete">
+                    <Button className="btndelete" onClick={() => deleteCourse(course._id)} >
                       <DeleteIcon />
                     </Button>
                     <Link to={`/profile/editcourse/${course._id}`} style={{ textDecoration: "none" }}>
