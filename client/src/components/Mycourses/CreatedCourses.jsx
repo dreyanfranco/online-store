@@ -1,18 +1,11 @@
-import React from 'react'
-import { useContext, useEffect, useState } from 'react'
-import { Row, Col, Card } from 'react-bootstrap'
-import { AuthContext } from '../../context/auth.context'
-import { deleteCourse, getCourses } from '../../services/courses.service'
-import ProfileNav from './ProfileNav'
-import { Link } from 'react-router-dom'
-import CardUsuario from '../Cards/CardUsuario'
-import robotcourse from '../Cards/ImagesCards/robotcourse.jpg'
-import { Button } from 'react-bootstrap'
-import DeleteIcon from '../Cards/DeleteIcon'
-import { formatCurrency } from '../../utilities/formatCurrency'
-import { Container } from 'react-bootstrap'
-
-
+import { useContext, useEffect, useState } from "react"
+import { Button, Card, Col, Container, Row } from "react-bootstrap"
+import { Link } from "react-router-dom"
+import { AuthContext } from "../../context/auth.context"
+import { getCourses } from "../../services/courses.service"
+import { formatCurrency } from "../../utilities/formatCurrency"
+import DeleteIcon from "../Cards/DeleteIcon"
+import robotcourse from "../Cards/ImagesCards/robotcourse.jpg"
 
 const CreatedCourses = () => {
     const { user } = useContext(AuthContext)
@@ -22,62 +15,79 @@ const CreatedCourses = () => {
         const fetchCourses = async () => {
             const owner = user?._id
             const { data } = await getCourses()
-            setCourses(data.filter(course => course.owner === owner))
+            setCourses(data.filter((course) => course.owner === owner))
         }
         fetchCourses()
-    }
-        , [user])
+    }, [user])
 
-    const deleteCourse = async (course_id) => {
-        const response = await fetch(`http://localhost:5005/api/${course_id}`, {
-            method: 'DELETE',
-        });
-
-        if (response.ok) {
-            console.log(`Curso con ID ${course_id} eliminado correctamente.`);
-        } else {
-            console.error(`Error al eliminar el curso con ID ${course_id}.`);
-        }
+    if (response.ok) {
+        console.log(`Curso con ID ${course_id} eliminado correctamente.`);
+    } else {
+        console.error(`Error al eliminar el curso con ID ${course_id}.`);
     }
+
     return (
         <>
-            <button onClick={() => window.scrollTo(0, 0)} style={{ position: 'fixed', bottom: '20px', right: '20px' }}>
+            <button
+                onClick={() => window.scrollTo(0, 0)}
+                style={{ position: "fixed", bottom: "20px", right: "20px" }}
+            >
                 Volver arriba
             </button>
 
-            <div>
-                <h1 className='text-white text-center'>Bienvenido {user?.username}</h1>
-            </div>
-
-
-            <ProfileNav />
-
-
-            <Row className='text-white'>
+            <Row className="text-white">
                 <Col>
-                    <h2 className='text-center'>Cursos creados por mi</h2>
+                    <h2 className="text-center">Cursos creados por mi</h2>
                     <Container className="my-5">
-                        <Row sm={1} md={2} lg={3} xl={3} xxl={4} className="g-5">
+                        <Row
+                            sm={1}
+                            md={2}
+                            lg={3}
+                            xl={3}
+                            xxl={4}
+                            className="g-5"
+                        >
                             {courses.length > 0 &&
                                 courses.map((course) => (
                                     <Col key={course.owner}>
-                                        <Card className="" style={{ width: "18rem" }}>
+                                        <Card
+                                            className=""
+                                            style={{ width: "18rem" }}
+                                        >
                                             <Card.Img
-                                                style={{ height: "10rem", objectFit: "cover" }}
+                                                style={{
+                                                    height: "10rem",
+                                                    objectFit: "cover",
+                                                }}
                                                 src={robotcourse}
                                             />
                                             <Card.Body>
                                                 <Link
                                                     to={`/${course._id}`}
-                                                    style={{ textDecoration: "none" }}>
-                                                    <div className="text-wrap" style={{ height: "5rem" }}>
+                                                    style={{
+                                                        textDecoration: "none",
+                                                    }}
+                                                >
+                                                    <div
+                                                        className="text-wrap"
+                                                        style={{
+                                                            height: "5rem",
+                                                        }}
+                                                    >
                                                         <Card.Title className="text-reset link-offset-2 link-underline link-underline-opacity-0">
                                                             {course.title}
                                                         </Card.Title>
                                                     </div>
 
-                                                    <div className="text-wrap" style={{ height: "8rem" }}>
-                                                        <Card.Text>{course.description}</Card.Text>
+                                                    <div
+                                                        className="text-wrap"
+                                                        style={{
+                                                            height: "8rem",
+                                                        }}
+                                                    >
+                                                        <Card.Text>
+                                                            {course.description}
+                                                        </Card.Text>
                                                     </div>
                                                 </Link>
 
@@ -85,8 +95,14 @@ const CreatedCourses = () => {
                                                     <Button className="btndelete" onClick={() => deleteCourse(course._id)} >
                                                         <DeleteIcon />
                                                     </Button>
-                                                    <Link to={`/profile/editcourse/${course._id}`} style={{ textDecoration: "none" }}>
-                                                        <Button className="btneditar" >
+                                                    <Link
+                                                        to={`/profile/editcourse/${course._id}`}
+                                                        style={{
+                                                            textDecoration:
+                                                                "none",
+                                                        }}
+                                                    >
+                                                        <Button className="btneditar">
                                                             Editar
                                                             <i className="edit bi bi-pencil-fill"></i>
                                                         </Button>
@@ -97,10 +113,18 @@ const CreatedCourses = () => {
                                                 <div className="d-flex justify-content-between">
                                                     <div>
                                                         {" "}
-                                                        <i className="bi bi-clock"></i> {course.duration}hrs {" "}
+                                                        <i className="bi bi-clock"></i>{" "}
+                                                        {course.duration}hrs{" "}
                                                     </div>
-                                                    <p className="fs-4 text" style={{ color: "#1ECAB8" }}>
-                                                        {formatCurrency(course.price)}
+                                                    <p
+                                                        className="fs-4 text"
+                                                        style={{
+                                                            color: "#1ECAB8",
+                                                        }}
+                                                    >
+                                                        {formatCurrency(
+                                                            course.price
+                                                        )}
                                                     </p>
                                                 </div>
                                             </Card.Footer>
@@ -112,9 +136,7 @@ const CreatedCourses = () => {
                 </Col>
             </Row>
         </>
-
     )
 }
-
 
 export default CreatedCourses
