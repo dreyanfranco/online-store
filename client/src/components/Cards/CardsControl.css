@@ -1,19 +1,36 @@
 /*boton like*/
-.btnheart {
-    display: flex;
-    align-items: center;
+  .btnheart {
     justify-content: center;
-    border-radius: 10px;
     border: none;
     background-color: transparent;
-    position: relative;
+    display: flex;
+  align-items: center;
   }
   
-  .btnheart:hover > .iconn {
-    transform: scale(1.3);
-    cursor: pointer;
+  .iconheart {
     transition: .2s linear;
   }
+  
+  .btnheart:hover{
+    background-color: transparent;
+  }
+  .btnheart:hover > .iconheart {
+    transform: scale(1.2);
+  }
+  
+    
+  .btnheart:hover::after {
+    visibility: visible;
+    opacity: 1;
+    top: 105%;
+  } 
+  
+ 
+    
+  
+ 
+ 
+  
 
   /*boton compra*/
   .btncompra {
