@@ -17,8 +17,13 @@ function Cards() {
     useContext(WishlistContext)
   const { user } = useContext(AuthContext)
 
+  // const handleToggleButtonCart = () => {
+  //     setIsInCart(!isInCart)
+  // }
+
   const toggleWishlistStatus = (courseId) => {
-    if (wishlist.includes(courseId)) {
+    const isWishlisted = wishlist.some((course) => course._id === courseId)
+    if (isWishlisted) {
       removeFromWishlist(courseId)
     } else {
       addToWishlist(courseId)
@@ -58,12 +63,12 @@ function Cards() {
   }
 
   return (
-    <Container className="my-5">
-      <Row sm={1} md={2} lg={3} xl={3} xxl={4} className="g-5">
+    <Container className="my-5 ">
+      <Row sm={1} md={2} lg={3} xl={3} xxl={4} className="g-5 mx-auto">
         {courses.length > 0 &&
           courses.map((course) => (
             <Col key={course._id}>
-              <Card className="h-100" style={{ width: "18rem" }}>
+              <Card className="" style={{ width: "auto" }}>
                 <Card.Img
                   style={{
                     height: "10rem",
@@ -95,40 +100,23 @@ function Cards() {
                   </Link>
 
                   <div className="d-flex justify-content-between align-items-center my-3">
-                    {courses.includes(course._id) ?
-                      <Button
-                        onClick={() =>
-                          handleDelCourseFromCart(course._id)
-                        }
-                        className="btncompra bg-danger"
-                      ><span className="IconContainer bg-transparent">
-                          <i
-                            className="bi bi-cart2"
-                            height="1em"
-                          ></i>
-                        </span>
-                        <p className="add">
-                          Eliminar del carrito
-                        </p>
-                      </Button>
-                      :
-                      <Button
-                        onClick={() =>
-                          handleAddCourseToCart(course)
-                        }
-                        className="btncompra"
-                      >
-                        <span className="IconContainer">
-                          <i
-                            className="bi bi-cart2"
-                            height="1em"
-                          ></i>
-                        </span>
-                        <p className="add">
-                          Añadir al carrito
-                        </p>
-                      </Button>
-                    }
+                    <Button
+                      onClick={() =>
+                        handleAddCourseToCart(course)
+                      }
+                      className="btncompra"
+                    >
+                      <span className="IconContainer">
+                        <i
+                          className="bi bi-cart2"
+                          height="1em"
+                        ></i>
+                      </span>
+                      <p className="add">
+                        Añadir al carrito
+                      </p>
+                    </Button>
+
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill={
@@ -162,7 +150,7 @@ function Cards() {
                   <div className="d-flex justify-content-between">
                     <div>
                       {" "}
-                      <i className="bi bi-clock"></i> {(course.duration)}
+                      <i className="bi bi-clock"></i> 7.5
                       hrs{" "}
                     </div>
                     <span

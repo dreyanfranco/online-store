@@ -1,30 +1,20 @@
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
-import robotcourse from "../../components/Cards/ImagesCards/robotcourse.jpg";
-import "./CardsControl.css";
-import { Container } from "react-bootstrap";
-import DeleteIcon from "./DeleteIcon";
-import { useEffect, useState, useContext } from "react";
-import { Link } from "react-router-dom";
-import { getCourses, getCoursesPurchase } from "../../services/courses.service";
-import { formatCurrency } from "../../utilities/formatCurrency";
-import { CartContext } from "../../context/cart.context"
-import coursesService from "../../services/courses.service";
+import { useContext, useEffect, useState } from "react"
+import { Container } from "react-bootstrap"
+import Button from "react-bootstrap/Button"
+import Card from "react-bootstrap/Card"
+import Col from "react-bootstrap/Col"
+import Row from "react-bootstrap/Row"
+import { Link } from "react-router-dom"
+import robotcourse from "../../components/Cards/ImagesCards/robotcourse.jpg"
+import coursesService, {
+  getCoursesPurchase,
+} from "../../services/courses.service"
+import { formatCurrency } from "../../utilities/formatCurrency"
+import "./CardsControl.css"
+import { default as DeleteIcon } from "./DeleteIcon"
 
 function CardUsuario() {
-
-  const [courses, setCourses] = useState([]);
-  // const [isInCart, setIsInCart] = useState(false);
-
-  // const handleToggleButtonCart = () => {
-  //     setIsInCart(!isInCart)
-  // }
-
-  if (!courses) {
-    return <h1>Loading...</h1>
-  }
+  const [courses, setCourses] = useState([])
 
   const handleDelCourseFromCart = async (courseId) => {
     try {
@@ -34,18 +24,14 @@ function CardUsuario() {
     }
   }
 
-  // const sortedCourses = courses
-  //     .slice()
-  //     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-
   useEffect(() => {
     getCoursesPurchase()
       .then(({ data }) => setCourses(data))
-      .catch((error) => console.error(error));
-  }, []);
+      .catch((error) => console.error(error))
+  }, [])
 
   if (!courses) {
-    return <h1>Loading...</h1>;
+    return <h1>Loading...</h1>
   }
 
   return (
@@ -102,7 +88,8 @@ function CardUsuario() {
           ))}
       </Row>
     </Container>
-  );
+  )
 }
 
-export default CardUsuario;
+
+export default CardUsuario

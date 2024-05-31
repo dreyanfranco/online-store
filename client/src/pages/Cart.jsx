@@ -11,7 +11,6 @@ const stripePromise = loadStripe("pk_test_51PJC6AJeIz2JibtC32QxNpQqNVtPQ06sAJOfL
 
 const Cart = () => {
     const [coursesInCart, setCoursesInCart] = useState([]);
-    const [disabledValue, setDisabledValue] = useState(true);
     const cart = useContext(CartContext);
 
     function handleTotalCoast() {
