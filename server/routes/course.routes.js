@@ -227,4 +227,22 @@ router.post("/user/purchase", isAuthenticated, async (req, res) => {
     }
 })
 
+// Obtener todos los cursos comprados
+router.get("/user/purchase", isAuthenticated, async (req, res) => {
+    try {
+        const userId = req.payload._id
+        const user = await User.findById(userId).populate("purchases")
+        if (!user) {
+            return res.status(404).json({ message: "User not found" })
+        }
+        if (!user.purchases || user.purchases.length === 0) {
+            return res.status(404).json({ message: "User's purchase is empty" })
+        }
+        return res.status(200).json(user.purchases)
+    } catch (err) {
+        return res.status(500).json({ message: err.message })
+    }
+})
+
+
 module.exports = router

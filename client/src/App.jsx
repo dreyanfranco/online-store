@@ -10,6 +10,7 @@ import EditCourse from "./forms/EditCourse"
 import Cart from "./pages/Cart"
 import DeleteCourse from "./forms/DeleteCourse"
 import CreatedCourses from "./components/Mycourses/CreatedCourses"
+import Course from "./pages/Course"
 
 function App() {
     return (
@@ -86,7 +87,15 @@ function App() {
                     </Layout>
                 }
             />
-           
+
+            <Route
+                path="/:course_id"
+                element={
+                    <Layout>
+                        <Course />
+                    </Layout>
+                }
+            />
         </Routes>
     )
 }

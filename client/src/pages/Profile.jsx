@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useContext, useState, useEffect } from 'react'
-import { getCourses } from '../services/courses.service'
+import { getCourses, getCoursesPurchase } from '../services/courses.service'
 import CardUsuario from '../components/Cards/CardUsuario';
 import { Row, Col, Container } from 'react-bootstrap'; // Asegúrate de importar Row y Col
 import ProfileCard from '../components/Cards/ProfileCard'
@@ -36,8 +36,9 @@ const Profile = () => {
 
     return (
         <>
+
             <button onClick={() => window.scrollTo(0, 0)} style={{ position: 'fixed', bottom: '20px', right: '20px' }}>
-                Volver arriba
+                <i class="bi bi-arrow-up-circle"></i>
             </button>
 
             <div>
