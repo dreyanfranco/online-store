@@ -12,14 +12,10 @@ import { getCourses, getCoursesPurchase } from "../../services/courses.service";
 import { formatCurrency } from "../../utilities/formatCurrency";
 import { CartContext } from "../../context/cart.context"
 import coursesService from "../../services/courses.service";
-import CartProvider from "../../context/cart.context";
-
-
 
 function CardUsuario() {
 
   const [courses, setCourses] = useState([]);
-  const cart = useContext(CartContext);
   // const [isInCart, setIsInCart] = useState(false);
 
   // const handleToggleButtonCart = () => {
@@ -30,15 +26,13 @@ function CardUsuario() {
     return <h1>Loading...</h1>
   }
 
-  const handleAddCourseToCart = async (courseData) => {
+  const handleDelCourseFromCart = async (courseId) => {
     try {
-      const { data } = await coursesService.newCart(courseData._id);
-      cart.addOneCourseToCart(courseData);
+      await coursesService.deleteCoursePurchase(courseId);
     } catch (error) {
-      console.error("No se ha podido agregar al carrito", error)
+      console.error("No se ha podido eliminar al carrito", error)
     }
   }
-
 
   // const sortedCourses = courses
   //     .slice()
@@ -53,8 +47,6 @@ function CardUsuario() {
   if (!courses) {
     return <h1>Loading...</h1>;
   }
-
-
 
   return (
     <Container className="my-5">
@@ -83,7 +75,7 @@ function CardUsuario() {
                   </Link>
 
                   <div className="d-flex justify-content-between">
-                    <Button className="btndelete">
+                    <Button onClick={() => handleDelCourseFromCart(course._id)} className="btndelete">
                       <DeleteIcon />
                     </Button>
                     <Link to={`/profile/editcourse/${course._id}`} style={{ textDecoration: "none" }}>

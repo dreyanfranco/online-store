@@ -129,9 +129,10 @@ function NavBar() {
                         <Dropdown.Menu onMouseLeave={handleMouseLeave}>
                             {
                                 coursesInCart.map(course => (
-                                    <div key={course._id} className="d-flex justify-content-between align-items-center">
-                                        <Dropdown.Item key={course._id} href={`/${course._id}`}>
-                                            {course.title}
+                                    <div key={course._id} className="d-flex justify-content-between align-items-center px-1">
+                                        <Dropdown.Item key={course._id} href={`/${course._id}`} className="d-flex gap-2 px-0">
+                                            <img className="col-2 rounded" src="/src/components/Cards/ImagesCards/robotcourse.jpg" alt={course.title} />
+                                            <span className="col-5 text-truncate">{course.title}</span>
                                         </Dropdown.Item>
                                         <Button onClick={() => handleDelCourseFromCart(course._id)} className="bg-danger ">
                                             <FontAwesomeIcon icon={faTrashCan} />

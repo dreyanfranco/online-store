@@ -17,10 +17,6 @@ function Cards() {
     useContext(WishlistContext)
   const { user } = useContext(AuthContext)
 
-  // const handleToggleButtonCart = () => {
-  //     setIsInCart(!isInCart)
-  // }
-
   const toggleWishlistStatus = (courseId) => {
     if (wishlist.includes(courseId)) {
       removeFromWishlist(courseId)
@@ -35,6 +31,15 @@ function Cards() {
       cart.addOneCourseToCart(courseData)
     } catch (error) {
       console.error("No se ha podido agregar al carrito", error)
+    }
+  }
+
+  const handleDelCourseFromCart = async (courseId) => {
+    try {
+      const { data } = await coursesService.deleteCourseCart(courseId);
+      cart.deleteCourseFromCart(courseId);
+    } catch (error) {
+      console.error("No se ha podido eliminar al carrito", error)
     }
   }
 
@@ -90,22 +95,40 @@ function Cards() {
                   </Link>
 
                   <div className="d-flex justify-content-between align-items-center my-3">
-                    <Button
-                      onClick={() =>
-                        handleAddCourseToCart(course)
-                      }
-                      className="btncompra"
-                    >
-                      <span className="IconContainer">
-                        <i
-                          className="bi bi-cart2"
-                          height="1em"
-                        ></i>
-                      </span>
-                      <p className="add">
-                        Añadir al carrito
-                      </p>
-                    </Button>
+                    {courses.includes(course._id) ?
+                      <Button
+                        onClick={() =>
+                          handleDelCourseFromCart(course._id)
+                        }
+                        className="btncompra bg-danger"
+                      ><span className="IconContainer bg-transparent">
+                          <i
+                            className="bi bi-cart2"
+                            height="1em"
+                          ></i>
+                        </span>
+                        <p className="add">
+                          Eliminar del carrito
+                        </p>
+                      </Button>
+                      :
+                      <Button
+                        onClick={() =>
+                          handleAddCourseToCart(course)
+                        }
+                        className="btncompra"
+                      >
+                        <span className="IconContainer">
+                          <i
+                            className="bi bi-cart2"
+                            height="1em"
+                          ></i>
+                        </span>
+                        <p className="add">
+                          Añadir al carrito
+                        </p>
+                      </Button>
+                    }
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill={
