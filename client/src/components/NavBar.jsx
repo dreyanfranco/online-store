@@ -140,7 +140,7 @@ function NavBar() {
                         </DropdownSubmenu>
                     </NavDropdownMenu>
 
-                    <Dropdown show={isMenuOpen}>
+                    <Dropdown className="d-flex flex-grow-1" show={isMenuOpen}>
                         <Form className="d-flex flex-grow-1">
                             <Form.Control
                                 onSubmit={handleSearchCourse}
@@ -163,7 +163,7 @@ function NavBar() {
                                     ))
                                 }
                             </Dropdown.Menu>
-                            <Button type="submit" onClick={handleSearchCourse} href={`/search/${searchValue}`} variant="outline-light" className="me-4">
+                            <Button type="submit" onClick={handleSearchCourse} href={`/search/${searchValue}`} variant="outline-light" className="btnbuscar me-4">
                                 Buscar
                             </Button>
                         </Form>
