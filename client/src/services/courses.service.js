@@ -16,6 +16,10 @@ export const getCourses = () => {
     return axiosInstance.get("/")
 }
 
+export const getCourse = (course_id) => {
+    return axiosInstance.get(`/${course_id}`)
+}
+
 export const newCourse = (courseData) => {
     return axiosInstance.post("/", courseData)
 }
@@ -63,6 +67,7 @@ export const getCoursesPurchase = () => {
 
 const coursesService = {
     getCourses,
+    getCourse,
     newCourse,
     updatedCourse,
     getCart,
