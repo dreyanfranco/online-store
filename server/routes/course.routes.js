@@ -262,6 +262,7 @@ router.delete("/:course_id/purchase", isAuthenticated, async (req, res) => {
     }
 })
 
+// Enviar pago a stripe
 router.post("/user/checkout", isAuthenticated, async (req, res) => {
     const userId = req.payload._id
     const { id, amount } = req.body;
@@ -287,6 +288,20 @@ router.post("/user/checkout", isAuthenticated, async (req, res) => {
         return res.send({ message: "Pago realizado correctamente" });
     } catch (error) {
         return res.json({ message: error });
+    }
+})
+
+// 
+router.get("/search/:course", isAuthenticated, async (req, res) => {
+    const courseSearched = req.params.course;
+    try {
+        const courses = await Course.find({ title: { courseSearched } })
+        if (!courses) {
+            return res.status(404).json({ message: "Course not found" })
+        }
+        return res.status(200).json(courses)
+    } catch (err) {
+        res.status(500).json({ message: err.message })
     }
 })
 

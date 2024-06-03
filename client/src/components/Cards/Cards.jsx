@@ -136,7 +136,6 @@ function Cards() {
                             Añadir al carrito
                           </p>
                         </Button>
-
                     }
 
                     <svg
