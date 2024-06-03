@@ -143,7 +143,11 @@ function Cards() {
                       xmlns="http://www.w3.org/2000/svg"
                       fill={
                         user &&
-                          wishlist.includes(course._id)
+                          wishlist.some(
+                            (userWishlist) =>
+                              userWishlist._id ===
+                              course._id
+                          )
                           ? "red"
                           : "none"
                       }
@@ -188,7 +192,7 @@ function Cards() {
             </Col>
           ))}
       </Row>
-    </Container >
+    </Container>
   )
 }
 
