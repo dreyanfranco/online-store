@@ -30,31 +30,17 @@ export default function CartProvider({ children }) {
     }
 
     function addOneCourseToCart(courseData) {
-        const quantity = getCourseQuantity(courseData._id);
+        setCartCourses(prevCartCourses => {
+            const filteredCourses = prevCartCourses.filter(course => course._id !== courseData._id);
 
-        if (quantity === 0) {
-            setCartCourses(
-                [
-                    ...cartCourses,
-                    {
-                        _id: courseData._id,
-                        title: courseData.title,
-                        quantity: 1
-                    }
-                ]
-            );
-            
-        } else {
-            setCartCourses(
-                cartCourses.map(
-                    course =>
-                        course._id === courseData._id
-                            ?
-                            { ...course, quantity: course.quantity + 1 }
-                            : course
-                )
-            )
-        }
+            return [
+                ...filteredCourses,
+                {
+                    _id: courseData._id,
+                    title: courseData.title,
+                }
+            ];
+        });
     }
 
     function removeOneCourseFromCart(id) {

@@ -53,8 +53,15 @@ export const deleteCourseFromWishlist = (course_id) => {
 }
 
 export const addCoursePurchase = (courseIds) => {
-    console.log(courseIds)
     return axiosInstance.post("/user/purchase", { courseIds })
+}
+
+export const deleteCoursePurchase = (courseId) => {
+    return axiosInstance.delete(`${courseId}/purchase`, { courseId })
+}
+
+export const addCoursePurchaseToStripe = (stripeData) => {
+    return axiosInstance.post("/user/checkout", stripeData)
 }
 
 export const getCoursesPurchase = () => {
@@ -69,7 +76,10 @@ const coursesService = {
     newCart,
     deleteCourseCart,
     deleteCourse,
-    getCoursesPurchase
+    getCoursesPurchase,
+    addCoursePurchase,
+    addCoursePurchaseToStripe,
+    deleteCoursePurchase,
 }
 
 export default coursesService
