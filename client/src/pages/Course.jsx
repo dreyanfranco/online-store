@@ -22,12 +22,13 @@ const Course = () => {
   const cart = useContext(CartContext);
 
   const toggleWishlistStatus = (courseId) => {
-    if (wishlist.includes(courseId)) {
-      removeFromWishlist(courseId);
+    const isWishlisted = wishlist.some((course) => course._id === courseId)
+    if (isWishlisted) {
+      removeFromWishlist(courseId)
     } else {
-      addToWishlist(courseId);
+      addToWishlist(courseId)
     }
-  };
+  }
 
   const handleAddCourseToCart = async (courseData) => {
     try {
@@ -74,7 +75,7 @@ const Course = () => {
               className="text-white rounded d-flex justify-content-center align-items-center py-2"
               style={{ border: "2px solid #45B8AC " }}>
               {" "}
-              <i className="bi bi-clock text-white me-2"></i> 7.5 hrs{" "}
+              <i className="bi bi-clock text-white me-2"></i>{course.duration}hrs{" "}
             </div>
             <div
               className="text-white  rounded d-flex justify-content-evenly align-items-center py-2"
@@ -83,7 +84,14 @@ const Course = () => {
 
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                fill={user && wishlist.includes(course._id) ? "red" : "none"}
+                fill={user && wishlist.some(
+                  (userWishlist) =>
+                    userWishlist._id ===
+                    course._id
+                )
+                  ? "red"
+                  : "none"
+                }
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
