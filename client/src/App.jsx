@@ -13,6 +13,7 @@ import Login from "./pages/Login"
 import Profile from "./pages/Profile"
 import Register from "./pages/Register"
 import Wishlist from "./pages/Wishlist"
+import Search from "./pages/Search"
 
 function App() {
     return (
@@ -82,6 +83,15 @@ function App() {
                 element={
                     <Layout>
                         <Course />
+                    </Layout>
+                }
+            />
+
+            <Route
+                path="/search/:course"
+                element={
+                    <Layout>
+                        <Search />
                     </Layout>
                 }
             />

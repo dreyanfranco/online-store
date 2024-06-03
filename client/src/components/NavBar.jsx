@@ -10,7 +10,7 @@ import Navbar from "react-bootstrap/Navbar"
 import { Link, useNavigate } from "react-router-dom"
 import { AuthContext } from "../context/auth.context"
 import { CartContext } from "../context/cart.context"
-import coursesService, { getCart } from "../services/courses.service"
+import coursesService, { getCart, getCourses } from "../services/courses.service"
 import Logo from "./Cards/ImagesCards/Logo.png"
 import "./Navegacion.css"
 
@@ -18,6 +18,7 @@ function NavBar() {
     const { user, logout } = useContext(AuthContext)
     const [isOpen, setIsOpen] = useState(false)
     const [coursesInCart, setCoursesInCart] = useState([])
+    const [courses, setCourses] = useState([])
     const cart = useContext(CartContext)
     const navigate = useNavigate()
 
@@ -48,9 +49,36 @@ function NavBar() {
             .catch((error) => console.error(error))
     }, [])
 
+    useEffect(() => {
+        getCourses()
+            .then(({ data }) => setCourses(data))
+            .catch((error) => console.error(error))
+    }, [])
+
     const handleLogout = () => {
         logout()
         navigate("/login")
+    }
+
+    const [searchValue, setSearchValue] = useState("");
+    const handleSearchCourse = async () => {
+        try {
+            const { data } = await coursesService.getSearchedCourse(searchValue);
+        } catch (error) {
+            console.error("No se ha podido encontrar el curso solicitado", error)
+        }
+    }
+
+    const filteredCourses = courses.filter(course => course.title.toLowerCase().includes(searchValue.toLowerCase()));
+
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const handleSearchMenu = () => {
+        if(searchValue === ""){
+            setIsMenuOpen(false);
+        }
+        else{
+            setIsMenuOpen(true);
+        }
     }
 
     return (
@@ -112,17 +140,34 @@ function NavBar() {
                         </DropdownSubmenu>
                     </NavDropdownMenu>
 
-                    <Form className="d-flex flex-grow-1">
-                        <Form.Control
-                            type="search"
-                            placeholder="Buscar"
-                            className="me-3"
-                            aria-label="Search"
-                        />
-                        <Button variant="outline-light" className="me-4">
-                            Buscar
-                        </Button>
-                    </Form>
+                    <Dropdown show={isMenuOpen}>
+                        <Form className="d-flex flex-grow-1">
+                            <Form.Control
+                                onSubmit={handleSearchCourse}
+                                onClick={() => handleSearchMenu()}
+                                type="search"
+                                placeholder="Buscar"
+                                className="me-3"
+                                aria-label="Search"
+                                onChange={(e) => setSearchValue(e.target.value)}
+                            />
+                            <Dropdown.Menu >
+                                {
+                                    filteredCourses.map(course => (
+                                        <div key={course._id} className="d-flex justify-content-between align-items-center px-1">
+                                            <Dropdown.Item key={course._id} href={`/${course._id}`} className="d-flex gap-2 px-0">
+                                                <img className="col-2 rounded" src="/src/components/Cards/ImagesCards/robotcourse.jpg" alt={course.title} />
+                                                <span className="col-9 text-truncate">{course.title}</span>
+                                            </Dropdown.Item>
+                                        </div>
+                                    ))
+                                }
+                            </Dropdown.Menu>
+                            <Button type="submit" onClick={handleSearchCourse} href={`/search/${searchValue}`} variant="outline-light" className="me-4">
+                                Buscar
+                            </Button>
+                        </Form>
+                    </Dropdown>
 
                     <Dropdown show={isOpen} onMouseEnter={handleMouseEnter}>
                         <div>
@@ -137,13 +182,13 @@ function NavBar() {
                             </button>
                         </div>
 
-                        <Dropdown.Menu onMouseLeave={handleMouseLeave}>
+                        <Dropdown.Menu onMouseLeave={handleMouseLeave} align={"end"}>
                             {
                                 coursesInCart.map(course => (
                                     <div key={course._id} className="d-flex justify-content-between align-items-center px-1">
                                         <Dropdown.Item key={course._id} href={`/${course._id}`} className="d-flex gap-2 px-0">
                                             <img className="col-2 rounded" src="/src/components/Cards/ImagesCards/robotcourse.jpg" alt={course.title} />
-                                            <span className="col-5 text-truncate">{course.title}</span>
+                                            <span className="col-9 text-truncate">{course.title}</span>
                                         </Dropdown.Item>
                                         <Button onClick={() => handleDelCourseFromCart(course._id)} className="bg-danger ">
                                             <FontAwesomeIcon icon={faTrashCan} />
