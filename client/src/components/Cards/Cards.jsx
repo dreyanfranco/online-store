@@ -15,11 +15,7 @@ function Cards() {
   const cart = useContext(CartContext)
   const { wishlist, addToWishlist, removeFromWishlist } =
     useContext(WishlistContext)
-  const { user } = useContext(AuthContext)
-
-  // const handleToggleButtonCart = () => {
-  //     setIsInCart(!isInCart)
-  // }
+  const { user } = useContext(AuthContext);
 
   const toggleWishlistStatus = (courseId) => {
     const isWishlisted = wishlist.some((course) => course._id === courseId)
@@ -28,6 +24,11 @@ function Cards() {
     } else {
       addToWishlist(courseId)
     }
+  }
+
+  const handleToggleButtonCart = (courseId) => {
+    const isnInCart = cart.cartCourses.some(courses => courses._id === courseId)
+    return isnInCart;
   }
 
   const handleAddCourseToCart = async (courseData) => {
@@ -41,7 +42,7 @@ function Cards() {
 
   const handleDelCourseFromCart = async (courseId) => {
     try {
-      const { data } = await coursesService.deleteCourseCart(courseId);
+      await coursesService.deleteCourseCart(courseId);
       cart.deleteCourseFromCart(courseId);
     } catch (error) {
       console.error("No se ha podido eliminar al carrito", error)
@@ -100,28 +101,53 @@ function Cards() {
                   </Link>
 
                   <div className="d-flex justify-content-between align-items-center my-3">
-                    <Button
-                      onClick={() =>
-                        handleAddCourseToCart(course)
-                      }
-                      className="btncompra"
-                    >
-                      <span className="IconContainer">
-                        <i
-                          className="bi bi-cart2"
-                          height="1em"
-                        ></i>
-                      </span>
-                      <p className="add">
-                        Añadir al carrito
-                      </p>
-                    </Button>
+                    {
+                      handleToggleButtonCart(course._id) ?
+                        < Button
+                          onClick={() =>
+                            handleDelCourseFromCart(course._id)
+                          }
+                          className="btncompra bg-danger"
+                        >
+                          <span className="IconContainer">
+                            <i
+                              className="bi bi-cart2"
+                              height="1em"
+                            ></i>
+                          </span>
+                          <p className="add">
+                            Eliminar del carrito
+                          </p>
+                        </Button>
+                        :
+                        < Button
+                          onClick={() =>
+                            handleAddCourseToCart(course)
+                          }
+                          className="btncompra"
+                        >
+                          <span className="IconContainer">
+                            <i
+                              className="bi bi-cart2"
+                              height="1em"
+                            ></i>
+                          </span>
+                          <p className="add">
+                            Añadir al carrito
+                          </p>
+                        </Button>
+
+                    }
 
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill={
                         user &&
-                          wishlist.includes(course._id)
+                          wishlist.some(
+                            (userWishlist) =>
+                              userWishlist._id ===
+                              course._id
+                          )
                           ? "red"
                           : "none"
                       }
