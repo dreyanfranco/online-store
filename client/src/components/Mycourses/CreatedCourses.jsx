@@ -6,6 +6,8 @@ import { getCourses } from "../../services/courses.service"
 import { formatCurrency } from "../../utilities/formatCurrency"
 import DeleteIcon from "../Cards/DeleteIcon"
 import robotcourse from "../Cards/ImagesCards/robotcourse.jpg"
+import coursesService from "../../services/courses.service"
+import DeleteCourseButton from "../../forms/DeleteCourse"
 
 const CreatedCourses = () => {
     const { user } = useContext(AuthContext)
@@ -20,11 +22,19 @@ const CreatedCourses = () => {
         fetchCourses()
     }, [user])
 
-    if (response.ok) {
-        console.log(`Curso con ID ${course_id} eliminado correctamente.`);
-    } else {
-        console.error(`Error al eliminar el curso con ID ${course_id}.`);
-    }
+    const deleteCourse = async (course_id) => {
+        try {
+            const response = await coursesService.deleteCourse(course_id);
+            if (response.ok) {
+                console.log(`Curso con ID ${course_id} eliminado correctamente.`);
+            } else {
+                console.error(`Error al eliminar el curso con ID ${course_id}.`);
+            }
+        } catch (error) {
+            console.error(`Error al eliminar el curso con ID ${course_id}.`, error);
+        }
+    };
+
 
     return (
         <>
@@ -92,7 +102,8 @@ const CreatedCourses = () => {
                                                 </Link>
 
                                                 <div className="d-flex justify-content-between">
-                                                    <Button className="btndelete" onClick={() => deleteCourse(course._id)} >
+                                                    <Button className="btndelete" onClick={() =>
+                                                        deleteCourse}>
                                                         <DeleteIcon />
                                                     </Button>
                                                     <Link
