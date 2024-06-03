@@ -13,7 +13,7 @@ import { formatCurrency } from "../../utilities/formatCurrency"
 import "./CardsControl.css"
 import { default as DeleteIcon } from "./DeleteIcon"
 
-function CardUsuario() {
+const CardUsuario = () => {
   const [courses, setCourses] = useState([])
 
   const handleDelCourseFromCart = async (courseId) => {
@@ -88,7 +88,7 @@ function CardUsuario() {
           ))}
       </Row>
     </Container>
-  )
+  );
 }
 
 

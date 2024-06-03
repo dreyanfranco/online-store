@@ -26,6 +26,7 @@ router.get("/", async (req, res) => {
 router.get("/:course_id", async (req, res) => {
     try {
         const course = await Course.findById(req.params.course_id)
+
         if (!course) {
             return res.status(404).json({ message: "Course not found" })
         }
@@ -50,15 +51,15 @@ router.post("/", isAuthenticated, async (req, res) => {
 })
 
 // Eliminar un curso
-router.delete("/:course_id", async (req, res) => {
+router.delete("/:course_id", isAuthenticated, async (req, res) => {
     try {
-        const course = await Course.findById(req.params.id)
+        const course = await Course.findById(req.params.course_id)
         if (!course) {
             return res.status(404).json({ message: "Course not found" })
         }
 
-        await course.remove()
-        res.json({ message: "Course deleted" })
+        const deletedCourse = await Course.findByIdAndDelete(req.params.course_id)
+        return res.status(200).json(deletedCourse)
     } catch (err) {
         return res.status(500).json({ message: err.message })
     }
@@ -200,13 +201,13 @@ router.delete("/:course_id/cart", isAuthenticated, async (req, res) => {
 router.post("/user/purchase", isAuthenticated, async (req, res) => {
     const userId = req.payload._id
     const courseIds = req.body.courseIds
-    
+
     try {
         const courses = await Course.find({ _id: { $in: courseIds } })
         if (courses.length !== courseIds.length) {
             return res
-            .status(404)
-            .json({ message: "One or more courses not found" })
+                .status(404)
+                .json({ message: "One or more courses not found" })
         }
 
         const user = await User.findByIdAndUpdate(
@@ -214,11 +215,11 @@ router.post("/user/purchase", isAuthenticated, async (req, res) => {
             { $addToSet: { purchases: { $each: courseIds } } },
             { new: true }
         ).populate("purchases")
-        
+
         if (!user) {
             return res.status(404).json({ message: "User not found" })
         }
-        
+
         return res.status(200).json(user.purchases)
     } catch (err) {
         return res.status(500).json({ message: err.message })
@@ -261,9 +262,10 @@ router.delete("/:course_id/purchase", isAuthenticated, async (req, res) => {
     }
 })
 
+// Enviar pago a stripe
 router.post("/user/checkout", isAuthenticated, async (req, res) => {
     const userId = req.payload._id
-    const {id, amount} = req.body;
+    const { id, amount } = req.body;
     try {
 
         const payment = await stripe.paymentIntents.create({
@@ -277,8 +279,8 @@ router.post("/user/checkout", isAuthenticated, async (req, res) => {
                 allow_redirects: 'never'
             }
         })
-        
-        const user = await User.findByIdAndUpdate(userId, {cart: []}, {new: true})
+
+        const user = await User.findByIdAndUpdate(userId, { cart: [] }, { new: true })
         if (!user) {
             return res.status(404).json({ message: "User not found" })
         }
@@ -286,6 +288,20 @@ router.post("/user/checkout", isAuthenticated, async (req, res) => {
         return res.send({ message: "Pago realizado correctamente" });
     } catch (error) {
         return res.json({ message: error });
+    }
+})
+
+// 
+router.get("/search/:course", isAuthenticated, async (req, res) => {
+    const courseSearched = req.params.course;
+    try {
+        const courses = await Course.find({ title: { courseSearched } })
+        if (!courses) {
+            return res.status(404).json({ message: "Course not found" })
+        }
+        return res.status(200).json(courses)
+    } catch (err) {
+        res.status(500).json({ message: err.message })
     }
 })
 

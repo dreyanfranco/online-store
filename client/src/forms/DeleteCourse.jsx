@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { deleteCourse } from '../services/courses.service';
-const DeleteCourse = ({ courseId }) => {
+const DeleteCourseButton = ({ courseId }) => {
     const [status, setStatus] = useState('idle');
 
     const handleDeleteCourse = async () => {
@@ -28,4 +28,4 @@ const DeleteCourse = ({ courseId }) => {
     }
 };
 
-export default DeleteCourse;
+export default DeleteCourseButton;

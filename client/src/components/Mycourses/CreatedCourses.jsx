@@ -6,6 +6,9 @@ import { getCourses } from "../../services/courses.service"
 import { formatCurrency } from "../../utilities/formatCurrency"
 import DeleteIcon from "../Cards/DeleteIcon"
 import robotcourse from "../Cards/ImagesCards/robotcourse.jpg"
+import coursesService from "../../services/courses.service"
+import Swal from 'sweetalert2'
+
 
 const CreatedCourses = () => {
     const { user } = useContext(AuthContext)
@@ -19,6 +22,47 @@ const CreatedCourses = () => {
         }
         fetchCourses()
     }, [user])
+
+    const deleteCourseButton = async (course_id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const deleteCourse = async () => {
+                    try {
+                        const response = await coursesService.deleteCourse(course_id);
+                        setCourses(courses.filter((course) => course._id !== course_id));
+                        console.log(`Curso con ID ${course_id} eliminado con éxito.`, response);
+                    } catch (error) {
+                        console.error(`Error al eliminar el curso con ID ${course_id}.`, error);
+                    }
+                };
+                deleteCourse();
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                });
+            };
+        }
+        );
+        // try {
+        //     const response = await coursesService.deleteCourse(course_id);
+        //     setCourses(courses.filter((course) => course._id !== course_id));
+        //     console.log(`Curso con ID ${course_id} eliminado con éxito.`, response);
+        //     window.alert('Curso eliminado con éxito.');
+        // } catch (error) {
+        //     console.error(`Error al eliminar el curso con ID ${course_id}.`, error);
+        // }
+    };
+
+
 
     return (
         <>
@@ -86,7 +130,7 @@ const CreatedCourses = () => {
                                                 </Link>
 
                                                 <div className="d-flex justify-content-between">
-                                                    <Button className="btndelete">
+                                                    <Button className="btndelete" onClick={() => deleteCourseButton(course._id)}>
                                                         <DeleteIcon />
                                                     </Button>
                                                     <Link
