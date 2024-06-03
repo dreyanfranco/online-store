@@ -1,17 +1,17 @@
-import Botones from "../components/Botones/Botones"
+import { useState } from "react"
 import Cards from "../components/Cards/Cards"
-import CardsControl from "../components/Cards/CardsControl"
+import Filters from "../components/Filters/Filters"
 import Section from "../components/Section/Section"
 
 const Home = () => {
+    const [filter, setFilter] = useState("")
     return (
         <div>
             <Section />
             {/*<PhotoSlider />*/}
-            <Botones />
+            <Filters setFilter={setFilter} />
             {/*<CardsControl/>*/}
-
-            <Cards />
+            <Cards filter={filter} />
         </div>
     )
 }

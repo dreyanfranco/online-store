@@ -10,7 +10,8 @@ import { formatCurrency } from "../../utilities/formatCurrency"
 import "./Cards.css"
 import "./CardsControl.css"
 
-function Cards() {
+// eslint-disable-next-line react/prop-types
+function Cards({ filter }) {
     const [courses, setCourses] = useState([])
     const cart = useContext(CartContext)
     const { wishlist, addToWishlist, removeFromWishlist } =
@@ -48,25 +49,35 @@ function Cards() {
         }
     }
 
-    // const sortedCourses = courses
-    //     .slice()
-    //     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-
     useEffect(() => {
         getCourses()
             .then(({ data }) => setCourses(data))
             .catch((error) => console.error(error))
     }, [])
 
-    if (!courses) {
+    const filteredCourses = courses.slice().sort((a, b) => {
+        if (filter === "recent") {
+            return new Date(b.createdAt) - new Date(a.createdAt)
+            // } else if (filter === "starRating") {
+            //     return b.starRating - a.starRating
+        } else if (filter === "priceLowToHigh") {
+            return a.price - b.price
+        } else if (filter === "priceHighToLow") {
+            return b.price - a.price
+        } else {
+            return 0
+        }
+    })
+
+    if (!filteredCourses) {
         return <h1>Loading...</h1>
     }
 
     return (
         <Container className="my-5 ">
             <Row sm={1} md={2} lg={3} xl={3} xxl={4} className="g-5 mx-auto">
-                {courses.length > 0 &&
-                    courses.map((course) => (
+                {filteredCourses.length > 0 &&
+                    filteredCourses.map((course) => (
                         <Col key={course._id}>
                             <Card className="" style={{ width: "auto" }}>
                                 <Card.Img
