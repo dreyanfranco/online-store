@@ -18,6 +18,7 @@ export const getCourses = () => {
 
 export const getCourse = (course_id) => {
     return axiosInstance.get(`/${course_id}`)
+
 }
 
 export const newCourse = (courseData) => {

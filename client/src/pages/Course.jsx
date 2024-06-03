@@ -2,20 +2,24 @@ import React from "react";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import ReactPlayer from "react-player";
 import { useContext, useEffect, useState } from "react";
 import { WishlistContext } from "../context/wishlist.context";
-import coursesService, { getCourses } from "../services/courses.service";
+import coursesService, { getCourse } from "../services/courses.service";
 import { formatCurrency } from "../utilities/formatCurrency";
 import { AuthContext } from "../context/auth.context";
+import { CartContext } from "../context/cart.context";
+
 
 const Course = () => {
-    const [courses, setCourses] = useState([]);
-    const { wishlist, addToWishlist, removeFromWishlist } =
-        useContext(WishlistContext);
-   const { user } = useContext(AuthContext);
+  const { course_id } = useParams();
+  const [course, setCourse] = useState(null);
+  const { wishlist, addToWishlist, removeFromWishlist } =
+    useContext(WishlistContext);
+  const { user } = useContext(AuthContext);
+  const cart = useContext(CartContext);
 
   const toggleWishlistStatus = (courseId) => {
     if (wishlist.includes(courseId)) {
@@ -27,28 +31,29 @@ const Course = () => {
 
   const handleAddCourseToCart = async (courseData) => {
     try {
-      await coursesService.newCart(courseData._id);
-      cart.addOneCourseToCart(courseData);
+      await coursesService.newCart(courseData._id)
+      cart.addOneCourseToCart(courseData)
     } catch (error) {
-      console.error("No se ha podido agregar al carrito", error);
+      console.error("No se ha podido agregar al carrito", error)
     }
-  };
+  }
 
   useEffect(() => {
-    getCourses()
-      .then(({ data }) => setCourses(data))
+    getCourse(course_id)
+      .then(({ data }) => {
+        setCourse(data);
+      })
       .catch((error) => console.error(error));
-  }, []);
+  }, [course_id]);
 
-  if (!courses) {
+  if (!course) {
     return <h1>Loading...</h1>;
   }
 
   return (
     <>
-          <Container>
-          {courses.length > 0 &&
-          courses.map((course) => (
+      <Container>
+
         <Row key={course._id} className="my-5 d-flex justify-content-between">
           <Col sm={12} xl={6} className="">
             <ReactPlayer
@@ -106,7 +111,6 @@ const Course = () => {
             </div>
           </Col>
         </Row>
-    ))}
 
         <Row className="my-5 d-flex justify-content-between">
           <Col xl={6} className="text-white">

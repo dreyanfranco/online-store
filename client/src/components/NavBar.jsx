@@ -137,7 +137,7 @@ function NavBar() {
                             </button>
                         </div>
 
-                        <Dropdown.Menu onMouseLeave={handleMouseLeave}>
+                        <Dropdown.Menu onMouseLeave={handleMouseLeave} align={"end"}>
                             {
                                 coursesInCart.map(course => (
                                     <div key={course._id} className="d-flex justify-content-between align-items-center px-1">
