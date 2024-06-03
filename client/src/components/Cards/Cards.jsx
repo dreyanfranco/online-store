@@ -55,19 +55,16 @@ function Cards({ filter }) {
             .catch((error) => console.error(error))
     }, [])
 
-    const filteredCourses = courses.slice().sort((a, b) => {
-        if (filter === "recent") {
-            return new Date(b.createdAt) - new Date(a.createdAt)
-            // } else if (filter === "starRating") {
-            //     return b.starRating - a.starRating
-        } else if (filter === "priceLowToHigh") {
-            return a.price - b.price
-        } else if (filter === "priceHighToLow") {
-            return b.price - a.price
-        } else {
-            return 0
-        }
-    })
+    const sortCriteria = {
+        recent: (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+        priceLowToHigh: (a, b) => a.price - b.price,
+        priceHighToLow: (a, b) => b.price - a.price,
+        // starRating: (a, b) => b.starRating - a.starRating,
+    }
+
+    const filteredCourses = courses
+        .slice()
+        .sort(sortCriteria[filter] || (() => 0))
 
     if (!filteredCourses) {
         return <h1>Loading...</h1>
