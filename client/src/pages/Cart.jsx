@@ -39,7 +39,7 @@ const Cart = () => {
                 {coursesInCart.length > 0 ?
                     coursesInCart.map(course => {
                         return (
-                            <CardCarrito className="my-4 p-3"
+                            <CardCarrito className=""
                                 key={course._id}
                                 course={course}
                             />

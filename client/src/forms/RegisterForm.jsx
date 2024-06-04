@@ -65,7 +65,7 @@ const RegisterForm = () => {
             </Form.Group>
             {loginError && <div className="text-danger my-2">{loginError}</div>}
             <div className="text-center mt-4">
-                <Button className="w-100" type="submit" >
+                <Button className="w-100" type="submit" style={{background:"#45B8AC", color:"#0A2648"}}>
                     Registro
                 </Button>
             </div>
