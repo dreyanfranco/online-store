@@ -64,12 +64,12 @@ const CardUsuario = () => {
                     <Button onClick={() => handleDelCourseFromCart(course._id)} className="btndelete">
                       <DeleteIcon />
                     </Button>
-                    <Link to={`/profile/editcourse/${course._id}`} style={{ textDecoration: "none" }}>
+                    {/* <Link to={`/profile/editcourse/${course._id}`} style={{ textDecoration: "none" }}>
                       <Button className="btneditar" >
                         Editar
                         <i className="edit bi bi-pencil-fill"></i>
                       </Button>
-                    </Link>
+                    </Link> */}
                   </div>
                 </Card.Body>
                 <Card.Footer>
