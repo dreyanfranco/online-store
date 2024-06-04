@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import coursesService, { addCoursePurchase, getCart } from "../services/courses.service";
-import { Button, Card, Col, Container } from "react-bootstrap";
+import { Button, Card, Col, Row, Container } from "react-bootstrap";
 import { CartContext } from "../context/cart.context";
 import Swal from "sweetalert2";
 import CardCarrito from "../components/Cards/CardCarrito";
@@ -34,24 +34,30 @@ const Cart = () => {
     }, []);
 
     return (
-        <Container className="d-flex justify-content-between">
-            <Col className="col-md-5">
+        <Container>
+            <Row className="d-flex flex-wrap justify-content-center">
                 {coursesInCart.length > 0 ?
                     coursesInCart.map(course => {
                         return (
-                            <CardCarrito className="my-4 p-3"
-                                key={course._id}
-                                course={course}
-                            />
+                            <Col key={course._id} xs={12} md={6} lg={4} className="d-flex justify-content-center">
+                                <CardCarrito className="my-4 p-3"
+                                    key={course._id}
+                                    course={course}
+                                />
+                            </Col>
                         )
                     })
                     :
                     <h2 className="text-white">El carrito esta vacío</h2>
                 }
-            </Col>
-            <Elements stripe={stripePromise}>
-                <CheckoutForm totalCoast={handleTotalCoast()} />
-            </Elements>
+            </Row>
+            <Row className="d-flex justify-content-end">
+                <Col className="col-md-5 my-5">
+                    <Elements stripe={stripePromise}>
+                        <CheckoutForm totalCoast={handleTotalCoast()} />
+                    </Elements>
+                </Col>
+            </Row>
 
         </Container>
     )
