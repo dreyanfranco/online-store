@@ -18,11 +18,14 @@ export const getCourses = () => {
 
 export const getCourse = (course_id) => {
     return axiosInstance.get(`/${course_id}`)
-
 }
 
 export const newCourse = (courseData) => {
-    return axiosInstance.post("/", courseData)
+    return axiosInstance.post("/", courseData, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+    })
 }
 
 export const updatedCourse = (course_id, courseData) => {
@@ -90,7 +93,7 @@ const coursesService = {
     addCoursePurchase,
     addCoursePurchaseToStripe,
     deleteCoursePurchase,
-    getSearchedCourse
+    getSearchedCourse,
 }
 
 export default coursesService
