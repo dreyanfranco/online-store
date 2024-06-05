@@ -85,7 +85,7 @@ const CourseForm = () => {
                     name="description"
                     value={course.description}
                     onChange={handleChange}
-                    placeholder="Descripción"
+                    placeholder="Resumen del curso max 145 caracteres"
                     maxLength={145}
                 />
             </Form.Group>
