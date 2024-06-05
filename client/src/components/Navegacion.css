@@ -5,29 +5,13 @@
 } */
 
 
-  
-  .dropdown-submenu > .dropdown-menu {
-    top: 0;
-    left: 100%;
-    margin-top: -6px;
-    margin-left: -1px;
-    display: none;
- 
-  }
-
-  .dropdown-submenu:hover > .dropdown-menu {
-    display: block;
-  }
-  
-
-  
-  .dropdown-menu .dropdown-submenu .dropdown-item:hover {
-    color: #45B8AC; 
-    background-color: #0A2648;
-  }
-  
+   
   .dropdown-toggle:after {
     display: none;
+}
+
+.dropdown-menu{
+  width: 25rem;
 }
 
 /*BOTON BUSCAR*/
@@ -105,3 +89,7 @@
   background-color: #45B8AC!important;
   color:#0A2648 !important
  }
+
+ /* .dropdown-menu[data-bs-popper]{
+  right: 25px;
+} */
