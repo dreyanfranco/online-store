@@ -158,6 +158,7 @@ const CourseForm = () => {
                 <Form.Control
                     type="file"
                     name="image"
+                    accept="image/*"
                     onChange={handleChange}
                 />
             </Form.Group>
