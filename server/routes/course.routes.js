@@ -291,19 +291,4 @@ router.post("/user/checkout", isAuthenticated, async (req, res) => {
     }
 })
 
-// 
-router.get("/search/:course", isAuthenticated, async (req, res) => {
-    const courseSearched = req.params.course;
-    try {
-        const courses = await Course.find({ title: { courseSearched } })
-        if (!courses) {
-            return res.status(404).json({ message: "Course not found" })
-        }
-        return res.status(200).json(courses)
-    } catch (err) {
-        res.status(500).json({ message: err.message })
-    }
-})
-
-
 module.exports = router

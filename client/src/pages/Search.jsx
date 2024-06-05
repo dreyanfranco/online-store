@@ -1,28 +1,34 @@
 import { useEffect, useState } from "react"
-import Cards from "../components/Cards/Cards"
-import { getCourses, getSearchedCourse } from "../services/courses.service"
+import { getCourses } from "../services/courses.service"
 import { useParams } from "react-router-dom";
+import CardsControl from "../components/Cards/CardsControl";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilter } from "@fortawesome/free-solid-svg-icons";
+import { Button } from "react-bootstrap";
 
 const Search = () => {
     const [courses, setCourses] = useState([])
     const { course } = useParams();
     useEffect(() => {
         getCourses(course)
-        .then(({ data }) => setCourses(data))
-        .catch((error) => console.error(error))
+            .then(({ data }) => setCourses(data))
+            .catch((error) => console.error(error))
     }, [])
-    console.log(course);
+
     const filteredCourses = courses.filter(course2 => course2.title.toLowerCase().includes(course));
     return (
-        <div>
-            {
-                filteredCourses.map(course => (
-                    <div key={course._id} className="d-flex justify-content-between align-items-center px-1">
-                        <img className="col-2 rounded" src="/src/components/Cards/ImagesCards/robotcourse.jpg" alt={course.title} />
-                        <span className="col-9 text-truncate">{course.title}</span>
-                    </div>
-                ))
-            }
+        <div className="d-flex flex-column p-3">
+            <h2 className="mb-4 text-center">Cursos que contienen la palabra "{course}":</h2>
+                <div className="d-flex flex-wrap justify-content-center gap-5">
+                    {
+                        filteredCourses.map(course => (
+                            <CardsControl
+                                key={course._id}
+                                course={course}
+                            />
+                        ))
+                    }
+                </div>
         </div>
     )
 }

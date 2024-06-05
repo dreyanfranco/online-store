@@ -63,23 +63,14 @@ function NavBar() {
     const [searchValue, setSearchValue] = useState("");
     const handleSearchCourse = async () => {
         try {
-            const { data } = await coursesService.getSearchedCourse(searchValue);
+            await coursesService.getSearchedCourse(searchValue);
+            window.location.href = `/search/${searchValue}`
         } catch (error) {
             console.error("No se ha podido encontrar el curso solicitado", error)
         }
     }
 
     const filteredCourses = courses.filter(course => course.title.toLowerCase().includes(searchValue.toLowerCase()));
-
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const handleSearchMenu = () => {
-        if(searchValue === ""){
-            setIsMenuOpen(false);
-        }
-        else{
-            setIsMenuOpen(true);
-        }
-    }
 
     return (
         <Navbar expand="lg" className="" style={{ backgroundColor: "#042751" }}>
@@ -140,11 +131,10 @@ function NavBar() {
                         </DropdownSubmenu>
                     </NavDropdownMenu>
 
-                    <Dropdown className="d-flex flex-grow-1" show={isMenuOpen}>
+                    <Dropdown className="d-flex flex-grow-1" show={searchValue === "" ? false : true}>
                         <Form className="d-flex flex-grow-1">
                             <Form.Control
                                 onSubmit={handleSearchCourse}
-                                onClick={() => handleSearchMenu()}
                                 type="search"
                                 placeholder="Buscar"
                                 className="me-3"
