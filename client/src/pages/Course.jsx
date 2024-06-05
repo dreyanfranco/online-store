@@ -131,28 +131,7 @@ const Course = () => {
                     <i
                       className="bi bi-check2 "
                       style={{ color: "#45B8AC" }}></i>{" "}
-                    Lorem ipsum dolor sit amet.{" "}
-                  </li>
-                  <li className="mb-2">
-                    {" "}
-                    <i
-                      className="bi bi-check2 "
-                      style={{ color: "#45B8AC" }}></i>{" "}
-                    Lorem ipsum dolor sit amet.{" "}
-                  </li>
-                  <li className="mb-2">
-                    {" "}
-                    <i
-                      className="bi bi-check2 "
-                      style={{ color: "#45B8AC" }}></i>{" "}
-                    Lorem ipsum dolor sit amet.{" "}
-                  </li>
-                  <li className="mb-2">
-                    {" "}
-                    <i
-                      className="bi bi-check2 "
-                      style={{ color: "#45B8AC" }}></i>{" "}
-                    Lorem ipsum dolor sit amet.{" "}
+                    {course.category}{" "}
                   </li>
                 </ul>
               </Col>
@@ -163,7 +142,7 @@ const Course = () => {
                     <i
                       className="bi bi-check2 "
                       style={{ color: "#45B8AC" }}></i>{" "}
-                    Lorem ipsum dolor sit amet.{" "}
+                    {course.language}{" "}
                   </li>
                   <li className="mb-2">
                     {" "}
@@ -193,12 +172,7 @@ const Course = () => {
           <Col xl={5} className="text-white">
             <h2 style={{ color: "#45B8AC" }}>Sobre el curso</h2>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-              quis metus bibendum, vehicula purus sit amet, imperdiet eros.
-              Nulla quis semper velit, non viverra nisl.Lorem ipsum dolor sit
-              amet, consectetur adipiscing elit. Curabitur quis metus bibendum,
-              vehicula purus sit amet, imperdiet eros. Nulla quis semper velit,
-              non viverra nisl.
+              {course.description}
             </p>
           </Col>
         </Row>

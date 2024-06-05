@@ -164,7 +164,7 @@ function NavBar() {
                     </Dropdown>
 
                     <Dropdown>
-                        <Dropdown.Toggle style={{backgroundColor: "#042751", border:"none"}}>
+                        <Dropdown.Toggle style={{ backgroundColor: "#042751", border: "none" }}>
                             <button
                                 id="carrito"
                                 className="btncarrito  icon__shop position-relative"

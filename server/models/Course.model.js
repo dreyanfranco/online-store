@@ -29,7 +29,7 @@ const courseSchema = new mongoose.Schema(
             required: true,
         },
 
-        image: {
+        imageUrl: {
             type: String,
         },
         owner: {
