@@ -105,7 +105,7 @@ const CourseForm = () => {
                     onChange={handleChange}
                 />
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button style={{background:"#45B8AC", color:"#0A2648"}} type="submit">
                 Crear curso
             </Button>
 
