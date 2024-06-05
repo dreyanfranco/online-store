@@ -3,6 +3,7 @@ import Container from "react-bootstrap/Container"
 import Image from "react-bootstrap/Image"
 import Row from "react-bootstrap/Row"
 import robot from "../../components/Section/robot.png"
+import robotlogoportatil from "../../components/Section/robotlogoportatil.png"
 import "./section.css"
 
 const Section = () => {
@@ -32,7 +33,7 @@ const Section = () => {
                     </blockquote>
                 </Col>
                 <Col>
-                    <Image src={robot} fluid />
+                    <Image src={robotlogoportatil} fluid />
                 </Col>
             </Row>
         </Container>
