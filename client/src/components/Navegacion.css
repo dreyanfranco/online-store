@@ -76,10 +76,10 @@
 
 /*USER*/
 .user{
-  border-radius: 4px;
+  border-radius: 5px;
   border: 1px solid  #45B8AC;
-  padding: 0.4rem 1.1rem;
-   font-size: 1.2rem;
+  padding: 0.45rem 1rem;
+  font-size: 1rem;
 }
 
 /*BOTON ENTRAR Y REGISTRATE*/
