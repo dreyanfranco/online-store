@@ -85,7 +85,7 @@ function NavBar() {
                     style={{ backgroundColor: "#45B8AC" }}
                 />
                 <Navbar.Collapse className="" id="responsive-navbar-nav" >
-                    <NavDropdownMenu
+                    {/* <NavDropdownMenu
                         title="Categorías"
                         id="collasible-nav-dropdown "
                         className="btncategorias text-white me-4 "
@@ -132,7 +132,7 @@ function NavBar() {
                                 C++{" "}
                             </NavDropdown.Item>
                         </DropdownSubmenu>
-                    </NavDropdownMenu>
+                    </NavDropdownMenu> */}
 
                     <Dropdown className="d-flex flex-grow-1">
                         <Form className="d-flex flex-grow-1">
@@ -164,10 +164,12 @@ function NavBar() {
                     </Dropdown>
 
                     <Dropdown>
-                        <Dropdown.Toggle style={{backgroundColor: "#042751", border:"none"}}>
+                        <Dropdown.Toggle style={{ backgroundColor: "#042751", border: "none" }}>
+                       
                             <button
                                 id="carrito"
                                 className="btncarrito  icon__shop position-relative"
+                               
                             >
                                 <FontAwesomeIcon icon={faCartShopping} />
                                 <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -177,22 +179,25 @@ function NavBar() {
                         </Dropdown.Toggle>
 
 
-                        <Dropdown.Menu className="sm-6"
-                            align={{ lg: 'end' }}
-                            id="dropdown-menu-align-responsive-1"
-
-
+                        <Dropdown.Menu  className="sm-6 d-flex justify-content-between flex-column "
+                             align={{ lg: 'end' }}
+                             id="dropdown-menu-align-responsive-1"
+                        
                         >
                             {
                                 coursesInCart.map(course => (
-                                    <div key={course._id} className="d-flex justify-content-between align-items-center px-1">
-                                        <Dropdown.Item key={course._id} href={`/${course._id}`} className="d-flex gap-2 px-0">
-                                            <img className="col-2 rounded" src="/src/components/Cards/ImagesCards/robotcourse.jpg" alt={course.title} />
-                                            <span className="col-9 text-truncate">{course.title}</span>
-                                        </Dropdown.Item>
-                                        <Button onClick={() => handleDelCourseFromCart(course._id)} className="bg-danger">
+                                    <div key={course._id}  className="  align-items-center px-1" >
+                                        
+                                        <Dropdown.Item  key={course._id} href={`/${course._id}`} className="d-flex gap-2 px-0 ">
+                                            <img  className="col-2   rounded" src="/src/components/Cards/ImagesCards/robotcourse.jpg" alt={course.title} />
+                                            <span className="col-sm-8 col-md-7 col-xl-8 text-truncate">{course.title}</span>
+                                            <div className="col-2  ">
+                                            <Button onClick={() => handleDelCourseFromCart(course._id)} className="bg-danger">
                                             <FontAwesomeIcon icon={faTrashCan} />
-                                        </Button>
+                                                </Button>
+                                            </div>
+                                        </Dropdown.Item>
+                                       
                                     </div>
                                 ))
                             }
