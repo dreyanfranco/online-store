@@ -7,6 +7,7 @@ const CourseForm = () => {
     const [course, setCourse] = useState({
         title: "",
         description: "",
+        descriptionLarga: "",
         price: "",
         duration: "",
         language: [],
@@ -79,12 +80,24 @@ const CourseForm = () => {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formGridDescription">
-                <Form.Label>Descripción</Form.Label>
+                <Form.Label>Breve resumen</Form.Label>
                 <Form.Control
                     name="description"
                     value={course.description}
                     onChange={handleChange}
                     placeholder="Descripción"
+                    maxLength={145}
+                />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formGridDescription">
+                <Form.Label>Descripción</Form.Label>
+                <Form.Control
+                    name="descriptionLarga"
+                    value={course.descriptionLarga}
+                    onChange={handleChange}
+                    placeholder="Descripción Extendida"
+                    maxLength={400}
                 />
             </Form.Group>
 

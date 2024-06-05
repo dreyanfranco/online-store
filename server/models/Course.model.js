@@ -11,6 +11,13 @@ const courseSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+
+        descriptionLarga: {
+            type: String,
+            required: true,
+        },
+
+
         category: {
             type: String,
             enum: ["FrontEnd", "BackEnd", "FullStack"],

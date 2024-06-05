@@ -17,19 +17,11 @@ import "./Navegacion.css"
 
 function NavBar() {
     const { user, logout } = useContext(AuthContext)
-    const [isOpen, setIsOpen] = useState(false)
     const [coursesInCart, setCoursesInCart] = useState([])
     const [courses, setCourses] = useState([])
     const cart = useContext(CartContext)
     const navigate = useNavigate()
 
-    const handleMouseEnter = () => {
-        setIsOpen(true)
-    }
-
-    const handleMouseLeave = () => {
-        setIsOpen(false)
-    }
 
     const handleDelCourseFromCart = async (courseId) => {
         try {
@@ -86,54 +78,7 @@ function NavBar() {
                     style={{ backgroundColor: "#45B8AC" }}
                 />
                 <Navbar.Collapse className="" id="responsive-navbar-nav" >
-                    {/* <NavDropdownMenu
-                        title="Categorías"
-                        id="collasible-nav-dropdown "
-                        className="btncategorias text-white me-4 "
 
-                    >
-                        <DropdownSubmenu
-                            href="#"
-                            title="Desarrolo Web"
-                            className="dropdown-submenu "
-
-                        >
-                            <NavDropdown.Item href="#" className="">
-                                {" "}
-                                JavaScript{" "}
-                            </NavDropdown.Item>
-                            <NavDropdown.Item href="#">
-                                React JS
-                            </NavDropdown.Item>
-                            <NavDropdown.Item href="#">
-                                {" "}
-                                Angular
-                            </NavDropdown.Item>
-                            <NavDropdown.Item href="#"> CSS </NavDropdown.Item>
-                        </DropdownSubmenu>
-                        <DropdownSubmenu
-                            href="#action/3.7"
-                            title="Lenguajes de programación"
-                            className="dropdown-submenu"
-
-                        >
-                            <NavDropdown.Item href="#action/3.2">
-                                {" "}
-                                Python{" "}
-                            </NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">
-                                Java
-                            </NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.4">
-                                {" "}
-                                C#{" "}
-                            </NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.4">
-                                {" "}
-                                C++{" "}
-                            </NavDropdown.Item>
-                        </DropdownSubmenu>
-                    </NavDropdownMenu> */}
 
                     <Dropdown className="d-flex flex-grow-1" show={searchValue === "" ? false : true}>
                         <Form className="d-flex flex-grow-1">
@@ -165,11 +110,11 @@ function NavBar() {
 
                     <Dropdown>
                         <Dropdown.Toggle style={{ backgroundColor: "#042751", border: "none" }}>
-                       
+
                             <button
                                 id="carrito"
                                 className="btncarrito  icon__shop position-relative"
-                               
+
                             >
                                 <FontAwesomeIcon icon={faCartShopping} />
                                 <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -179,25 +124,25 @@ function NavBar() {
                         </Dropdown.Toggle>
 
 
-                        <Dropdown.Menu  className="sm-6 d-flex justify-content-between flex-column "
-                             align={{ lg: 'end' }}
-                             id="dropdown-menu-align-responsive-1"
-                        
+                        <Dropdown.Menu className="sm-6 d-flex justify-content-between flex-column "
+                            align={{ lg: 'end' }}
+                            id="dropdown-menu-align-responsive-1"
+
                         >
                             {
                                 coursesInCart.map(course => (
-                                    <div key={course._id}  className="  align-items-center px-1" >
-                                        
-                                        <Dropdown.Item  key={course._id} href={`/${course._id}`} className="d-flex gap-2 px-0 ">
-                                            <img  className="col-2   rounded" src="/src/components/Cards/ImagesCards/robotcourse.jpg" alt={course.title} />
+                                    <div key={course._id} className="  align-items-center px-1" >
+
+                                        <Dropdown.Item key={course._id} href={`/${course._id}`} className="d-flex gap-2 px-0 ">
+                                            <img className="col-2   rounded" src="/src/components/Cards/ImagesCards/robotcourse.jpg" alt={course.title} />
                                             <span className="col-sm-8 col-md-7 col-xl-8 text-truncate">{course.title}</span>
                                             <div className="col-2  ">
-                                            <Button onClick={() => handleDelCourseFromCart(course._id)} className="bg-danger">
-                                            <FontAwesomeIcon icon={faTrashCan} />
+                                                <Button onClick={() => handleDelCourseFromCart(course._id)} className="bg-danger">
+                                                    <FontAwesomeIcon icon={faTrashCan} />
                                                 </Button>
                                             </div>
                                         </Dropdown.Item>
-                                       
+
                                     </div>
                                 ))
                             }
@@ -217,13 +162,13 @@ function NavBar() {
                                         color: "white",
                                     }}
                                 >
-                                    <span className="user me-4">
+                                    <span className="user me-4 d-flex">
                                         <i class="bi bi-person-fill me-2" style={{ color: "#45B8AC" }}></i>
                                         {user.username}
                                     </span>
                                 </Link>
                                 <Button
-                                    className="me-2"
+                                    className=" min-w-150 "
                                     variant="outline-danger"
                                     onClick={handleLogout}
                                 >
