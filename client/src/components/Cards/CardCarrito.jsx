@@ -25,25 +25,31 @@ function CardCarrito({ course }) {
 
   return (
     <Container className="my-5">
-      <Row sm={1} md={2} lg={3} xl={3} xxl={4} className="g-5">
+      <Row sm={1} md={2} lg={3} xl={3} xxl={4} className="g-5 mx-auto">
         <Col >
           <Card className="" style={{ width: "18rem" }}>
             <Card.Img style={{ height: "10rem", objectFit: "cover" }} src={robotcourse} />
             <Card.Body>
-              <Card.Title>
-                <a
-                  href={`/${course._id}`}
-                  className="text-reset link-offset-2 link-underline link-underline-opacity-0">
+              <div
+                className="text-wrap"
+                style={{ height: "5rem" }}
+              >
+                <Card.Title className="text-reset link-offset-2 link-underline link-underline-opacity-0">
                   {course.title}
-                </a>
-              </Card.Title>
+                </Card.Title>
+              </div>
 
-              <Card.Text>
-                {course.description}
-              </Card.Text>
+              <div
+                className="text-wrap"
+                style={{ height: "8rem" }}
+              >
+                <Card.Text>
+                  {course.description}
+                </Card.Text>
+              </div>
 
               <div className="d-flex justify-content-between">
-                <Button onClick={()=>handleDelCourseFromCart(course._id)} className="btndelete">
+                <Button onClick={() => handleDelCourseFromCart(course._id)} className="btndelete">
                   <DeleteIcon />
                 </Button>
               </div>

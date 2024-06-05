@@ -1,10 +1,18 @@
 const express = require("express")
 const router = express.Router()
 const Course = require("../models/Course.model")
-const mongoose = require("mongoose")
 const { isAuthenticated } = require("../middleware/jwt.middleware")
 const User = require("../models/User.model")
-const Stripe = require("stripe");
+const Stripe = require("stripe")
+const cloudinary = require("cloudinary")
+const multer = require("multer")
+const storage = multer.memoryStorage()
+const upload = multer({
+    storage: storage,
+    limits: {
+        fileSize: 5 * 1024 * 1024, // 5MB
+    },
+})
 
 //Status 200: OK
 //Status 201: Created
@@ -37,18 +45,32 @@ router.get("/:course_id", async (req, res) => {
 })
 
 // Crear un nuevo curso
-router.post("/", isAuthenticated, async (req, res) => {
-    const course = {
-        ...req.body,
-        owner: req.payload._id,
-    }
+router.post("/", isAuthenticated, upload.single("image"), async (req, res) => {
     try {
+        const imageFile = req.file
+        let imageUrl = ""
+
+        if (imageFile) {
+            imageUrl = await uploadImage(imageFile)
+        }
+        const course = {
+            ...req.body,
+            owner: req.payload._id,
+            imageUrl: imageUrl,
+        }
         const newCourse = await Course.create(course)
         return res.status(201).json(newCourse)
     } catch (err) {
         res.status(500).json({ message: err.message })
     }
 })
+
+async function uploadImage(imageFile) {
+    const b64 = Buffer.from(imageFile.buffer).toString("base64")
+    let dataURI = `data:${imageFile.mimetype};base64,${b64}`
+    const res = await cloudinary.v2.uploader.upload(dataURI)
+    return res.url
+}
 
 // Eliminar un curso
 router.delete("/:course_id", isAuthenticated, async (req, res) => {
@@ -58,7 +80,9 @@ router.delete("/:course_id", isAuthenticated, async (req, res) => {
             return res.status(404).json({ message: "Course not found" })
         }
 
-        const deletedCourse = await Course.findByIdAndDelete(req.params.course_id)
+        const deletedCourse = await Course.findByIdAndDelete(
+            req.params.course_id
+        )
         return res.status(200).json(deletedCourse)
     } catch (err) {
         return res.status(500).json({ message: err.message })
@@ -226,7 +250,9 @@ router.post("/user/purchase", isAuthenticated, async (req, res) => {
     }
 })
 
-const stripe = new Stripe("sk_test_51PJC6AJeIz2JibtCoa9wZvfU78VI3qixZqFTHzJ99T01bDulInHGOVLHkFvM149xeWypzS0r4mVbEwegu1kJCCEN00F8yZTss0");
+const stripe = new Stripe(
+    "sk_test_51PJC6AJeIz2JibtCoa9wZvfU78VI3qixZqFTHzJ99T01bDulInHGOVLHkFvM149xeWypzS0r4mVbEwegu1kJCCEN00F8yZTss0"
+)
 // Obtener todos los cursos comprados
 router.get("/user/purchase", isAuthenticated, async (req, res) => {
     try {
@@ -256,7 +282,9 @@ router.delete("/:course_id/purchase", isAuthenticated, async (req, res) => {
             return res.status(404).json({ message: "User not found" })
         }
 
-        return res.status(200).json({ message: "Course removed from purchases" })
+        return res
+            .status(200)
+            .json({ message: "Course removed from purchases" })
     } catch (err) {
         return res.status(500).json({ message: err.message })
     }
@@ -265,9 +293,8 @@ router.delete("/:course_id/purchase", isAuthenticated, async (req, res) => {
 // Enviar pago a stripe
 router.post("/user/checkout", isAuthenticated, async (req, res) => {
     const userId = req.payload._id
-    const { id, amount } = req.body;
+    const { id, amount } = req.body
     try {
-
         const payment = await stripe.paymentIntents.create({
             amount,
             currency: "EUR",
@@ -276,18 +303,22 @@ router.post("/user/checkout", isAuthenticated, async (req, res) => {
             confirm: true,
             automatic_payment_methods: {
                 enabled: true,
-                allow_redirects: 'never'
-            }
+                allow_redirects: "never",
+            },
         })
 
-        const user = await User.findByIdAndUpdate(userId, { cart: [] }, { new: true })
+        const user = await User.findByIdAndUpdate(
+            userId,
+            { cart: [] },
+            { new: true }
+        )
         if (!user) {
             return res.status(404).json({ message: "User not found" })
         }
 
-        return res.send({ message: "Pago realizado correctamente" });
+        return res.send({ message: "Pago realizado correctamente" })
     } catch (error) {
-        return res.json({ message: error });
+        return res.json({ message: error })
     }
 })
 

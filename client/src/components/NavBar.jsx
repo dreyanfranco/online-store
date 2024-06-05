@@ -14,6 +14,7 @@ import coursesService, { getCart, getCourses } from "../services/courses.service
 import Logo from "./Cards/ImagesCards/Logo.png"
 import "./Navegacion.css"
 
+
 function NavBar() {
     const { user, logout } = useContext(AuthContext)
     const [isOpen, setIsOpen] = useState(false)
@@ -84,16 +85,18 @@ function NavBar() {
                     className=""
                     style={{ backgroundColor: "#45B8AC" }}
                 />
-                <Navbar.Collapse className="" id="responsive-navbar-nav">
-                    <NavDropdownMenu
+                <Navbar.Collapse className="" id="responsive-navbar-nav" >
+                    {/* <NavDropdownMenu
                         title="Categorías"
                         id="collasible-nav-dropdown "
-                        className="text-white me-4 "
+                        className="btncategorias text-white me-4 "
+
                     >
                         <DropdownSubmenu
                             href="#"
                             title="Desarrolo Web"
                             className="dropdown-submenu "
+
                         >
                             <NavDropdown.Item href="#" className="">
                                 {" "}
@@ -112,6 +115,7 @@ function NavBar() {
                             href="#action/3.7"
                             title="Lenguajes de programación"
                             className="dropdown-submenu"
+
                         >
                             <NavDropdown.Item href="#action/3.2">
                                 {" "}
@@ -129,7 +133,7 @@ function NavBar() {
                                 C++{" "}
                             </NavDropdown.Item>
                         </DropdownSubmenu>
-                    </NavDropdownMenu>
+                    </NavDropdownMenu> */}
 
                     <Dropdown className="d-flex flex-grow-1" show={searchValue === "" ? false : true}>
                         <Form className="d-flex flex-grow-1">
@@ -159,40 +163,51 @@ function NavBar() {
                         </Form>
                     </Dropdown>
 
-                    <Dropdown show={isOpen} onMouseEnter={handleMouseEnter}>
-                        <div>
+                    <Dropdown>
+                        <Dropdown.Toggle style={{ backgroundColor: "#042751", border: "none" }}>
+                       
                             <button
                                 id="carrito"
-                                className="btn d-block  btn-outline-light rounded-5 icon__shop me-4 position-relative "
+                                className="btncarrito  icon__shop position-relative"
+                               
                             >
                                 <FontAwesomeIcon icon={faCartShopping} />
                                 <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                     {coursesInCart.length}
                                 </span>
                             </button>
-                        </div>
+                        </Dropdown.Toggle>
 
-                        <Dropdown.Menu onMouseLeave={handleMouseLeave} align={"end"}>
+
+                        <Dropdown.Menu  className="sm-6 d-flex justify-content-between flex-column "
+                             align={{ lg: 'end' }}
+                             id="dropdown-menu-align-responsive-1"
+                        
+                        >
                             {
                                 coursesInCart.map(course => (
-                                    <div key={course._id} className="d-flex justify-content-between align-items-center px-1">
-                                        <Dropdown.Item key={course._id} href={`/${course._id}`} className="d-flex gap-2 px-0">
-                                            <img className="col-2 rounded" src="/src/components/Cards/ImagesCards/robotcourse.jpg" alt={course.title} />
-                                            <span className="col-9 text-truncate">{course.title}</span>
-                                        </Dropdown.Item>
-                                        <Button onClick={() => handleDelCourseFromCart(course._id)} className="bg-danger ">
+                                    <div key={course._id}  className="  align-items-center px-1" >
+                                        
+                                        <Dropdown.Item  key={course._id} href={`/${course._id}`} className="d-flex gap-2 px-0 ">
+                                            <img  className="col-2   rounded" src="/src/components/Cards/ImagesCards/robotcourse.jpg" alt={course.title} />
+                                            <span className="col-sm-8 col-md-7 col-xl-8 text-truncate">{course.title}</span>
+                                            <div className="col-2  ">
+                                            <Button onClick={() => handleDelCourseFromCart(course._id)} className="bg-danger">
                                             <FontAwesomeIcon icon={faTrashCan} />
-                                        </Button>
+                                                </Button>
+                                            </div>
+                                        </Dropdown.Item>
+                                       
                                     </div>
                                 ))
                             }
-                            <Dropdown.Item className="bg-info" href="/cart">
+                            <Dropdown.Item className="" href="/cart" style={{ background: "#45B8AC" }}>
                                 Ir al carrito
                             </Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
 
-                    <div className="mx-lg-3 mt-3 mt-lg-0">
+                    <div className="mx-lg-3 mt-3 mt-lg-0 d-flex align-items-center">
                         {user ? (
                             <>
                                 <Link
@@ -202,7 +217,8 @@ function NavBar() {
                                         color: "white",
                                     }}
                                 >
-                                    <span className="me-5">
+                                    <span className="user me-4">
+                                        <i class="bi bi-person-fill me-2" style={{ color: "#45B8AC" }}></i>
                                         {user.username}
                                     </span>
                                 </Link>
@@ -211,6 +227,7 @@ function NavBar() {
                                     variant="outline-danger"
                                     onClick={handleLogout}
                                 >
+                                    <i class="bi bi-person-fill-x me-3"></i>
                                     Cierra sesión
                                 </Button>
                             </>
@@ -218,15 +235,15 @@ function NavBar() {
                             <>
                                 <Link to="/login">
                                     <Button
-                                        className="me-2 "
+                                        className="btnsesion me-2 "
                                         variant="outline-light"
                                     >
                                         Entrar
                                     </Button>
                                 </Link>
                                 <Link to="/register">
-                                    <Button variant="outline-light">
-                                        Registrate
+                                    <Button className="btnsesion" variant="outline-light">
+                                        Registrarse
                                     </Button>
                                 </Link>
                             </>
