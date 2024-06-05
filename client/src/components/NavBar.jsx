@@ -74,10 +74,10 @@ function NavBar() {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const handleSearchMenu = () => {
-        if(searchValue === ""){
+        if (searchValue === "") {
             setIsMenuOpen(false);
         }
-        else{
+        else {
             setIsMenuOpen(true);
         }
     }
@@ -99,13 +99,13 @@ function NavBar() {
                         title="Categorías"
                         id="collasible-nav-dropdown "
                         className="btncategorias text-white me-4 "
-                        
+
                     >
                         <DropdownSubmenu
                             href="#"
                             title="Desarrolo Web"
                             className="dropdown-submenu "
-                            
+
                         >
                             <NavDropdown.Item href="#" className="">
                                 {" "}
@@ -124,7 +124,7 @@ function NavBar() {
                             href="#action/3.7"
                             title="Lenguajes de programación"
                             className="dropdown-submenu"
-                          
+
                         >
                             <NavDropdown.Item href="#action/3.2">
                                 {" "}
@@ -187,10 +187,10 @@ function NavBar() {
                         </div>
 
                         <Dropdown.Menu onMouseLeave={handleMouseLeave} className="sm-6"
-                         align={{ lg: 'end' }}     
-          id="dropdown-menu-align-responsive-1"
-                         
-                        
+                            align={{ lg: 'end' }}
+                            id="dropdown-menu-align-responsive-1"
+
+
                         >
                             {
                                 coursesInCart.map(course => (
@@ -222,7 +222,7 @@ function NavBar() {
                                     }}
                                 >
                                     <span className="user me-5">
-                                    <i class="bi bi-person-fill me-2" style={{color:"#45B8AC"}}></i>
+                                        <i class="bi bi-person-fill me-2" style={{ color: "#45B8AC" }}></i>
                                         {user.username}
                                     </span>
                                 </Link>
@@ -240,7 +240,7 @@ function NavBar() {
                                 <Link to="/login">
                                     <Button
                                         className="btnsesion me-2 "
-                                        variant="outline-light" 
+                                        variant="outline-light"
                                     >
                                         Entrar
                                     </Button>

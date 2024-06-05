@@ -1,113 +1,115 @@
 /*boton like*/
-  .btnheart {
-    justify-content: center;
-    border: none;
-    background-color: transparent;
-    display: flex;
+.btnheart {
+  justify-content: center;
+  border: none;
+  background-color: transparent;
+  display: flex;
   align-items: center;
-  }
-  
-  .iconheart {
-    transition: .2s linear;
-  }
-  
-  .btnheart:hover{
-    background-color: transparent;
-  }
-  .btnheart:hover > .iconheart {
-    transform: scale(1.2);
-  }
-  
-    
-  .btnheart:hover::after {
-    visibility: visible;
-    opacity: 1;
-    top: 105%;
-  } 
-  
- 
-    
-  
- 
- 
-  
-
-  /*boton compra*/
-  .btncompra {
-    width: 11rem;
-    height: 3rem;
-    border-radius: 12px;
-    border: none;
-    background-color: #45B8AC;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition-duration: .5s;
-    overflow: hidden;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.103);
-    position: relative;
-  }
-  
-  .IconContainer {
-    position: absolute;
-    left: -50px;
-    width: 30px;
-    height: 30px;
-    background-color: transparent;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    z-index: 2;
-    transition-duration: .5s;
-  }
-  
-  .icon {
-    border-radius: 1px;
-  }
-  
-  .add {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgb(17, 17, 17);
-    z-index: 1;
-    transition-duration: .5s;
-    font-size: 1.04em;
-    font-weight: 600;
-  }
-  
-  .btncompra:hover .IconContainer {
-    transform: translateX(58px);
-    border-radius: 40px;
-    transition-duration: .5s;
-    background-color: #45B8AC;
-    color: black;
-  }
-  
-  .btncompra:hover .add {
-    transform: translate(19px,0px);
-    transition-duration: .5s;
-  }
-
-  .btncompra:hover{
-    background-color: #45B8AC;
 }
-  
-  .btncompra:active {
-    transform: scale(0.95);
-    transition-duration: .5s;
-    background-color: #45B8AC !important;
-  }
-  
+
+.iconheart {
+  transition: .2s linear;
+}
+
+.btnheart:hover {
+  background-color: transparent;
+}
+
+.btnheart:hover>.iconheart {
+  transform: scale(1.2);
+}
+
+
+.btnheart:hover::after {
+  visibility: visible;
+  opacity: 1;
+  top: 105%;
+}
+
+
+
+
+
+
+
+
+/*boton compra*/
+.btncompra {
+  width: 11rem;
+  height: 3rem;
+  border-radius: 12px;
+  border: none;
+  background-color: #45B8AC;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition-duration: .5s;
+  overflow: hidden;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.103);
+  position: relative;
+}
+
+.IconContainer {
+  position: absolute;
+  left: -50px;
+  width: 30px;
+  height: 30px;
+  font-size: 1.5rem;
+  background-color: transparent;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 2;
+  transition-duration: .5s;
+}
+
+.icon {
+  border-radius: 1px;
+}
+
+.add {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(17, 17, 17);
+  z-index: 1;
+  transition-duration: .5s;
+  font-size: 1.04em;
+  font-weight: 600;
+}
+
+.btncompra:hover .IconContainer {
+  transform: translateX(58px);
+  border-radius: 40px;
+  transition-duration: .5s;
+  background-color: #45B8AC;
+  color: black;
+}
+
+.btncompra:hover .add {
+  transform: translate(19px, 0px);
+  transition-duration: .5s;
+}
+
+.btncompra:hover {
+  background-color: #45B8AC;
+}
+
+.btncompra:active {
+  transform: scale(0.95);
+  transition-duration: .5s;
+  background-color: #45B8AC !important;
+}
+
 
 
 /*tarjeta*/
-   .card:hover{
-    box-shadow: 0px 0px 17px 2px #45B8AC;
-    border-color:#45B8AC;
+.card:hover {
+  box-shadow: 0px 0px 17px 2px #45B8AC;
+  border-color: #45B8AC;
 }
 
 /*Boton eliminar*/
@@ -115,7 +117,7 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color:#45B8AC;
+  background-color: #45B8AC;
   border: none;
   font-weight: 600;
   display: flex;
@@ -157,14 +159,17 @@
   transition-duration: 0.3s ease;
   transform: translateY(60%);
 }
+
 .bin-top {
   transform-origin: bottom right;
 }
+
 .btndelete:hover .bin-top {
   width: 50px;
   transition-duration: 0.3s ease;
   transform: translateY(60%) rotate(160deg);
 }
+
 .btndelete::before {
   position: absolute;
   top: -25px;
@@ -196,7 +201,7 @@
   border: none;
   padding: 0px 20px;
   background-color: #45B8AC;
-  color:  #0A2648;
+  color: #0A2648;
   font-weight: 500;
   cursor: pointer;
   border-radius: 10px;
@@ -215,8 +220,8 @@
 .btneditar:hover {
   color: transparent;
   background-color: #45B8AC;
- }
- 
+}
+
 
 .btneditar:hover .edit {
   right: 43%;
@@ -228,7 +233,7 @@
 }
 
 .btneditar:active {
-  transform: translate(3px , 3px);
+  transform: translate(3px, 3px);
   transition-duration: .3s;
   box-shadow: 2px 2px 0px #45B8AC;
   color: transparent !important;
