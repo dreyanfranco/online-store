@@ -123,14 +123,14 @@ function Cards({ filter }) {
                                                     )
                                                 }
                                                 className="btncompra bg-danger"
+
                                             >
-                                                <span className="IconContainer">
+                                                <span className="IconContainer bg-danger" >
                                                     <i
-                                                        className="bi bi-cart2"
-                                                        height="1em"
+                                                        className="bi bi-cart-x"
                                                     ></i>
                                                 </span>
-                                                <p className="add">
+                                                <p className="add p-3">
                                                     Eliminar del carrito
                                                 </p>
                                             </Button>
@@ -159,11 +159,11 @@ function Cards({ filter }) {
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill={
                                                 user &&
-                                                wishlist.some(
-                                                    (userWishlist) =>
-                                                        userWishlist._id ===
-                                                        course._id
-                                                )
+                                                    wishlist.some(
+                                                        (userWishlist) =>
+                                                            userWishlist._id ===
+                                                            course._id
+                                                    )
                                                     ? "red"
                                                     : "none"
                                             }
@@ -192,7 +192,7 @@ function Cards({ filter }) {
                                     <div className="d-flex justify-content-between">
                                         <div>
                                             {" "}
-                                            <i className="bi bi-clock"></i> 7.5
+                                            <i className="bi bi-clock"></i> {course.duration}
                                             hrs{" "}
                                         </div>
                                         <span
