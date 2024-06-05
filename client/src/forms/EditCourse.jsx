@@ -12,6 +12,7 @@ function EditCourse() {
         {
             title: '',
             description: '',
+            descriptionLarga: '',
             price: 0,
             duration: 0,
             category: '',
@@ -74,8 +75,18 @@ function EditCourse() {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formGridDescription">
+                <Form.Label>Breve resumen</Form.Label>
+                <Form.Control name="description" value={course.description} onChange={handleChange} placeholder="Resumen max 145 caracteres" maxLength={145} />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formGridDescription">
                 <Form.Label>Descripción</Form.Label>
-                <Form.Control name="description" value={course.description} onChange={handleChange} placeholder="Descripción" />
+                <Form.Control
+                    name="descriptionLarga"
+                    value={course.descriptionLarga}
+                    onChange={handleChange}
+                    placeholder="Descripción Extendida"
+                    maxLength={400}
+                />
             </Form.Group>
 
             <Row className="mb-3">

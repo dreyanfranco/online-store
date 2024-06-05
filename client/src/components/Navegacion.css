@@ -5,35 +5,39 @@
 } */
 
 
-  
-  .dropdown-submenu > .dropdown-menu {
-    top: 0;
-    left: 100%;
-    margin-top: -6px;
-    margin-left: -1px;
-    display: none;
- 
-  }
 
-  .dropdown-submenu:hover > .dropdown-menu {
-    display: block;
-  }
-  
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  display: none;
 
-  
-  .dropdown-menu .dropdown-submenu .dropdown-item:hover {
-    color: #45B8AC; 
-    background-color: #0A2648;
-  }
-  
-  .dropdown-toggle:after {
-    display: none;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+
+
+
+.dropdown-menu .dropdown-submenu .dropdown-item:hover {
+  color: #45B8AC;
+  background-color: #0A2648;
+}
+
+.dropdown-toggle:after {
+  display: none;
+}
+
+.dropdown-menu {
+  width: 25rem;
 }
 
 /*BOTON BUSCAR*/
 .btnbuscar {
   border-radius: 50px;
-  border: 1px solid  #45B8AC;
+  border: 1px solid #45B8AC;
   padding: 0.7rem 1.4rem;
   font-size: 1.1rem;
   color: #ede5ff;
@@ -43,23 +47,23 @@
 
 .btnbuscar:hover {
   box-shadow: 0px 0px 17px 2px #45B8AC;
-  border-color:#45B8AC;
+  border-color: #45B8AC;
   color: #f7f5ff;
-  background-color:#0A2648;
+  background-color: #0A2648;
 }
 
 .btnbuscar:active {
   box-shadow: 0px 0px 17px -7px #45B8AC;
-  border-color:#45B8AC;
+  border-color: #45B8AC;
   transform: scale(0.95);
-  background-color: #45B8AC!important;
-  color:#0A2648 !important
- }
+  background-color: #45B8AC !important;
+  color: #0A2648 !important
+}
 
 /*BOTON CARRITO*/
 .btncarrito {
   border-radius: 100px;
-  border: 1px solid  #45B8AC;
+  border: 1px solid #45B8AC;
   padding: 0.7rem 1.4rem;
   font-size: 1.1rem;
   color: #ede5ff;
@@ -69,15 +73,15 @@
 
 .btncarrito:hover {
   box-shadow: 0px 0px 17px 2px #45B8AC;
-  border-color:#45B8AC;
+  border-color: #45B8AC;
   color: #f7f5ff;
-  background-color:#0A2648;
+  background-color: #0A2648;
 }
 
 /*USER*/
-.user{
+.user {
   border-radius: 5px;
-  border: 1px solid  #45B8AC;
+  border: 1px solid #45B8AC;
   padding: 0.45rem 1rem;
   font-size: 1rem;
 }
@@ -85,9 +89,9 @@
 /*BOTON ENTRAR Y REGISTRATE*/
 .btnsesion {
   border-radius: 5px;
-  border: 1px solid  #45B8AC;
+  border: 1px solid #45B8AC;
   padding: 0.4rem 1rem;
-  font-size:1rem;
+  font-size: 1rem;
   color: #ede5ff;
   transition: 0.2s;
   background-color: #0A2648;
@@ -95,13 +99,13 @@
 
 .btnsesion:hover {
   color: #0A2648;
-  background-color:#45B8AC;
+  background-color: #45B8AC;
 }
 
 .btnsesion:active {
   box-shadow: 0px 0px 17px -7px #45B8AC;
-  border-color:#45B8AC;
+  border-color: #45B8AC;
   transform: scale(0.95);
-  background-color: #45B8AC!important;
-  color:#0A2648 !important
- }
+  background-color: #45B8AC !important;
+  color: #0A2648 !important
+}

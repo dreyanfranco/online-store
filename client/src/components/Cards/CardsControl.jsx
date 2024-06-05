@@ -53,7 +53,7 @@ function CardsControl() {
                                 <div className="d-flex justify-content-between">
                                     <div>
                                         {" "}
-                                        <i className="bi bi-clock"></i> 7.5 hrs{" "}
+                                        <i className="bi bi-clock"></i> {course.duration}{" "}
                                     </div>
                                     <p
                                         className="fs-4 text"

@@ -172,7 +172,7 @@ const Course = () => {
           <Col xl={5} className="text-white">
             <h2 style={{ color: "#45B8AC" }}>Sobre el curso</h2>
             <p>
-              {course.description}
+              {course.descriptionLarga}
             </p>
           </Col>
         </Row>
