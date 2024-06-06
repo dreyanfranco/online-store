@@ -109,7 +109,7 @@ const CourseForm = () => {
     }
 
     return (
-        <Form onSubmit={handleSubmit} className="text-white">
+        <Form onSubmit={handleSubmit} className="text-white px-5">
             <Form.Group className="mb-3" controlId="formGridTitle">
                 <Form.Label>Título</Form.Label>
                 <Form.Control

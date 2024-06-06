@@ -62,10 +62,10 @@ const CreatedCourses = () => {
                 onClick={() => window.scrollTo(0, 0)}
                 style={{ position: "fixed", bottom: "20px", right: "20px" }}
             >
-                Volver arriba
+                <i className="bi bi-arrow-up-circle"></i>
             </button>
 
-            <Row className="text-white">
+            <Row className="text-white me-0">
                 <Col>
                     <h2 className="text-center">Cursos creados por mi</h2>
                     <Container className="my-5">
@@ -75,11 +75,11 @@ const CreatedCourses = () => {
                             lg={3}
                             xl={3}
                             xxl={4}
-                            className="g-5"
+                            className="g-5 d-flex justify-content-center"
                         >
                             {courses.length > 0 &&
                                 courses.map((course) => (
-                                    <Col key={course.owner}>
+                                    <Col className="d-flex justify-content-center" key={course.owner}>
                                         <Card
                                             className=""
                                             style={{ width: "18rem" }}

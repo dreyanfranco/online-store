@@ -207,6 +207,12 @@ function Cards({ filter }) {
                             </Card>
                         </Col>
                     ))}
+                    <button
+                onClick={() => window.scrollTo(0, 0)}
+                style={{ position: "fixed", bottom: "20px", right: "20px", width: "80px" }}
+            >
+                <i className="bi bi-arrow-up-circle"></i>
+            </button>
             </Row>
         </Container>
     )

@@ -60,10 +60,10 @@ const CardUsuario = () => {
 
   return (
     <Container className="my-5">
-      <Row sm={1} md={2} lg={3} xl={3} xxl={4} className="g-5">
+      <Row sm={1} md={2} lg={3} xl={3} xxl={4} className="g-5 d-flex justify-content-center">
         {courses.length > 0 &&
           courses.map((course) => (
-            <Col key={course._id}>
+            <Col className="d-flex justify-content-center" key={course._id}>
               <Card className="" style={{ width: "18rem" }}>
                 <Card.Img
                   style={{ height: "10rem", objectFit: "cover" }}

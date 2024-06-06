@@ -46,7 +46,7 @@ const Profile = () => {
                     Bienvenid@ {user?.username}
                 </h1>
             </div>
-            <Row className="text-white">
+            <Row className="text-white me-0">
                 <Col xxl={12}>
                     <h2 className="text-center">Todos mis cursos</h2>
                     <CardUsuario />

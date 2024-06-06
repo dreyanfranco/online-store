@@ -29,10 +29,16 @@ const Wishlist = () => {
                 </>
             ) : (
                 <>
-                    <h1>Lista de deseos</h1>
+                    <button
+                        onClick={() => window.scrollTo(0, 0)}
+                        style={{ position: "fixed", bottom: "20px", right: "20px" }}
+                    >
+                        <i className="bi bi-arrow-up-circle"></i>
+                    </button>
+                    <h1 className="text-center">Lista de deseos</h1>
                     <Row className="gap-4">
                         {wishlist.map((course) => (
-                            <Col key={course._id}>
+                            <Col className="d-flex justify-content-center" key={course._id}>
                                 <Card className="" style={{ width: "18rem" }}>
                                     <Card.Img
                                         style={{
