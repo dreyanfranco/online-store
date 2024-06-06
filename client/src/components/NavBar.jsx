@@ -14,7 +14,6 @@ import coursesService, { getCart, getCourses } from "../services/courses.service
 import Logo from "./Cards/ImagesCards/Logo.png"
 import "./Navegacion.css"
 
-
 function NavBar() {
     const { user, logout } = useContext(AuthContext)
     const [coursesInCart, setCoursesInCart] = useState([])
@@ -124,25 +123,22 @@ function NavBar() {
                         </Dropdown.Toggle>
 
 
-                        <Dropdown.Menu className="sm-6 d-flex justify-content-between flex-column "
+                        <Dropdown.Menu className="sm-6"
                             align={{ lg: 'end' }}
                             id="dropdown-menu-align-responsive-1"
 
                         >
                             {
                                 coursesInCart.map(course => (
-                                    <div key={course._id} className="  align-items-center px-1" >
+                                    <div key={course._id} className="d-flex align-items-center px-1" >
 
                                         <Dropdown.Item key={course._id} href={`/${course._id}`} className="d-flex gap-2 px-0 ">
-                                            <img className="col-2   rounded" src="/src/components/Cards/ImagesCards/robotcourse.jpg" alt={course.title} />
-                                            <span className="col-sm-8 col-md-7 col-xl-8 text-truncate">{course.title}</span>
-                                            <div className="col-2  ">
-                                                <Button onClick={() => handleDelCourseFromCart(course._id)} className="bg-danger">
-                                                    <FontAwesomeIcon icon={faTrashCan} />
-                                                </Button>
-                                            </div>
+                                            <img className="col-2 rounded" src="/src/components/Cards/ImagesCards/robotcourse.jpg" alt={course.title} />
+                                            <span className="col-sm-8 col-md-7 col-xl-8 text-wrap">{course.title}</span>
                                         </Dropdown.Item>
-
+                                        <Button onClick={() => handleDelCourseFromCart(course._id)} className="bg-danger">
+                                            <FontAwesomeIcon icon={faTrashCan} />
+                                        </Button>
                                     </div>
                                 ))
                             }

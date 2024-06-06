@@ -30,7 +30,7 @@ const Wishlist = () => {
             ) : (
                 <>
                     <h1>Lista de deseos</h1>
-                    <Row>
+                    <Row className="gap-4">
                         {wishlist.map((course) => (
                             <Col key={course._id}>
                                 <Card className="" style={{ width: "18rem" }}>

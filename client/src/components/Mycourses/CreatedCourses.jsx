@@ -25,13 +25,14 @@ const CreatedCourses = () => {
 
     const deleteCourseButton = async (course_id) => {
         Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
+            title: "¿Estás seguro de que quieres eliminar este curso?",
+            text: "No se podrán deshacer estos cambios",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
+            cancelButtonText: "Cancelar",
+            confirmButtonText: "!Si, eliminar!"
         }).then((result) => {
             if (result.isConfirmed) {
                 const deleteCourse = async () => {
@@ -45,21 +46,12 @@ const CreatedCourses = () => {
                 };
                 deleteCourse();
                 Swal.fire({
-                    title: "Deleted!",
-                    text: "Your file has been deleted.",
+                    title: "!Eliminado!",
+                    text: "Tu curso fue eliminado con exito.",
                     icon: "success"
                 });
             };
-        }
-        );
-        // try {
-        //     const response = await coursesService.deleteCourse(course_id);
-        //     setCourses(courses.filter((course) => course._id !== course_id));
-        //     console.log(`Curso con ID ${course_id} eliminado con éxito.`, response);
-        //     window.alert('Curso eliminado con éxito.');
-        // } catch (error) {
-        //     console.error(`Error al eliminar el curso con ID ${course_id}.`, error);
-        // }
+        });
     };
 
 

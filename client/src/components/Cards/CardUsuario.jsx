@@ -12,17 +12,41 @@ import coursesService, {
 import { formatCurrency } from "../../utilities/formatCurrency"
 import "./CardsControl.css"
 import { default as DeleteIcon } from "./DeleteIcon"
+import Swal from "sweetalert2"
 
 const CardUsuario = () => {
   const [courses, setCourses] = useState([])
 
-  const handleDelCourseFromCart = async (courseId) => {
-    try {
-      await coursesService.deleteCoursePurchase(courseId);
-    } catch (error) {
-      console.error("No se ha podido eliminar al carrito", error)
-    }
-  }
+  const deleteCoursePurchaseButton = async (course_id) => {
+    Swal.fire({
+        title: "¿Estás seguro de que quieres eliminar este curso comprado?",
+        text: "No se podrán deshacer estos cambios",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        cancelButtonText: "Cancelar",
+        confirmButtonText: "!Si, eliminar!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const deleteCourse = async () => {
+                try {
+                    const response = await coursesService.deleteCoursePurchase(course_id);
+                    setCourses(courses.filter((course) => course._id !== course_id));
+                    console.log(`Curso con ID ${course_id} eliminado con éxito.`, response);
+                } catch (error) {
+                    console.error(`Error al eliminar el curso con ID ${course_id}.`, error);
+                }
+            };
+            deleteCourse();
+            Swal.fire({
+                title: "!Eliminado!",
+                text: "Tu curso fue eliminado con exito.",
+                icon: "success"
+            });
+        };
+    });
+};
 
   useEffect(() => {
     getCoursesPurchase()
@@ -61,7 +85,7 @@ const CardUsuario = () => {
                   </Link>
 
                   <div className="d-flex justify-content-between">
-                    <Button onClick={() => handleDelCourseFromCart(course._id)} className="btndelete">
+                    <Button onClick={() => deleteCoursePurchaseButton(course._id)} className="btndelete">
                       <DeleteIcon />
                     </Button>
                     {/* <Link to={`/profile/editcourse/${course._id}`} style={{ textDecoration: "none" }}>

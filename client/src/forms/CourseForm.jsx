@@ -2,6 +2,7 @@ import { Button, Col, Form, Row } from "react-bootstrap"
 import coursesService from "../services/courses.service"
 
 import { useState } from "react"
+import Swal from "sweetalert2"
 
 const CourseForm = () => {
     const [course, setCourse] = useState({
@@ -18,6 +19,21 @@ const CourseForm = () => {
     const [selectedFile, setSelectedFile] = useState(null)
 
     const handleChange = (event) => {
+        const { name, value } = event.target;
+
+        if (name === "price" && value.length > 3) {
+            return; // Limita a 3 dígitos
+        }
+        
+        if (name === "duration" && value.length > 3) {
+            return; // Limita a 3 dígitos
+        }
+
+        setCourse({
+            ...course,
+            [name]: value
+        });
+
         if (event.target.type === "checkbox") {
             if (event.target.checked) {
                 setCourse({
@@ -42,6 +58,30 @@ const CourseForm = () => {
         }
     }
 
+    const createCourseButton = () => {
+        Swal.fire({
+            title: "¿Estás seguro de que quieres crear este curso?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            cancelButtonText: "Cancelar",
+            confirmButtonText: "!Si, crear!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: "Curso creado con exito",
+                    icon: "success"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/profile/createdCourses";
+                    }
+                })
+            };
+        })
+    };
+
+
     const handleSubmit = async (event) => {
         event.preventDefault()
         setIsLoading(true)
@@ -50,6 +90,7 @@ const CourseForm = () => {
             const formData = new FormData()
             formData.append("title", course.title)
             formData.append("description", course.description)
+            formData.append("descriptionLarga", course.descriptionLarga)
             formData.append("price", course.price)
             formData.append("duration", course.duration)
             formData.append("category", course.category)
@@ -76,6 +117,7 @@ const CourseForm = () => {
                     value={course.title}
                     onChange={handleChange}
                     placeholder="Título"
+                    maxLength={60}
                 />
             </Form.Group>
 
@@ -110,6 +152,7 @@ const CourseForm = () => {
                         value={course.price}
                         onChange={handleChange}
                         placeholder="Precio"
+                        max={999}
                     />
                 </Form.Group>
 
@@ -121,6 +164,7 @@ const CourseForm = () => {
                         value={course.duration}
                         onChange={handleChange}
                         placeholder="Duración"
+                        maxLength={3}
                     />
                 </Form.Group>
             </Row>
@@ -175,7 +219,7 @@ const CourseForm = () => {
                     onChange={handleChange}
                 />
             </Form.Group>
-            <Button variant="primary" type="submit" disabled={isLoading}>
+            <Button variant="primary" type="submit" onClick={createCourseButton} style={{background:"#45B8AC", color:"#0A2648"}} disabled={isLoading}>
                 {isLoading ? "Un momento, por favor..." : "Crear curso"}
             </Button>
         </Form>
