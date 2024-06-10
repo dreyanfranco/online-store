@@ -49,7 +49,7 @@ function Cards({ filter }) {
 
     const handleDelCourseFromCart = async (courseId) => {
         try {
-            const { data } = await coursesService.deleteCourseCart(courseId)
+            await coursesService.deleteCourseCart(courseId)
             cart.deleteCourseFromCart(courseId)
         } catch (error) {
             console.error("No se ha podido eliminar al carrito", error)
@@ -74,7 +74,7 @@ function Cards({ filter }) {
         .sort(sortCriteria[filter] || (() => 0))
 
     if (!filteredCourses) {
-        return <h1>Loading...</h1>
+        return <h1 className="text-center p-5">Loading...</h1>
     }
 
     return (
@@ -207,12 +207,12 @@ function Cards({ filter }) {
                             </Card>
                         </Col>
                     ))}
-                    <button
-                onClick={() => window.scrollTo(0, 0)}
-                style={{ position: "fixed", bottom: "20px", right: "20px", width: "80px" }}
-            >
-                <i className="bi bi-arrow-up-circle"></i>
-            </button>
+                <button
+                    onClick={() => window.scrollTo(0, 0)}
+                    style={{ position: "fixed", bottom: "20px", right: "20px", width: "80px" }}
+                >
+                    <i className="bi bi-arrow-up-circle"></i>
+                </button>
             </Row>
         </Container>
     )

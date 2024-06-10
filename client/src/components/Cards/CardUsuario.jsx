@@ -19,34 +19,34 @@ const CardUsuario = () => {
 
   const deleteCoursePurchaseButton = async (course_id) => {
     Swal.fire({
-        title: "¿Estás seguro de que quieres eliminar este curso comprado?",
-        text: "No se podrán deshacer estos cambios",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        cancelButtonText: "Cancelar",
-        confirmButtonText: "!Si, eliminar!"
+      title: "¿Estás seguro de que quieres eliminar este curso comprado?",
+      text: "No se podrán deshacer estos cambios",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      cancelButtonText: "Cancelar",
+      confirmButtonText: "!Si, eliminar!"
     }).then((result) => {
-        if (result.isConfirmed) {
-            const deleteCourse = async () => {
-                try {
-                    const response = await coursesService.deleteCoursePurchase(course_id);
-                    setCourses(courses.filter((course) => course._id !== course_id));
-                    console.log(`Curso con ID ${course_id} eliminado con éxito.`, response);
-                } catch (error) {
-                    console.error(`Error al eliminar el curso con ID ${course_id}.`, error);
-                }
-            };
-            deleteCourse();
-            Swal.fire({
-                title: "!Eliminado!",
-                text: "Tu curso fue eliminado con exito.",
-                icon: "success"
-            });
+      if (result.isConfirmed) {
+        const deleteCourse = async () => {
+          try {
+            const response = await coursesService.deleteCoursePurchase(course_id);
+            setCourses(courses.filter((course) => course._id !== course_id));
+            console.log(`Curso con ID ${course_id} eliminado con éxito.`, response);
+          } catch (error) {
+            console.error(`Error al eliminar el curso con ID ${course_id}.`, error);
+          }
         };
+        deleteCourse();
+        Swal.fire({
+          title: "!Eliminado!",
+          text: "Tu curso fue eliminado con exito.",
+          icon: "success"
+        });
+      };
     });
-};
+  };
 
   useEffect(() => {
     getCoursesPurchase()
@@ -55,7 +55,7 @@ const CardUsuario = () => {
   }, [])
 
   if (!courses) {
-    return <h1>Loading...</h1>
+    return <h1 className="text-center p-5">Loading...</h1>
   }
 
   return (

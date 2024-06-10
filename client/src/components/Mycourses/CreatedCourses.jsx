@@ -54,6 +54,11 @@ const CreatedCourses = () => {
         });
     };
 
+    if (courses.length === 0) {
+        return <h1 className="text-center p-5">Todavía no se ha creado ningun curso.
+            <Link to={"/profile/newcourse"}> <br />¡Crea tu primer curso!</Link></h1>;
+    }
+
 
 
     return (

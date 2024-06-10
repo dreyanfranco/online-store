@@ -26,12 +26,11 @@ const Footer = () => {
           </p>
 
           <div className="">
-            <a href="" className="me-4 text-reset bi bi-facebook"></a>
-            <a href="" className="me-4 text-reset bi bi-twitter"></a>
-            <a href="" className="me-4 text-reset bi bi-instagram"></a>
-            <a href="" className="me-4 text-reset bi bi-linkedin"></a>
-            <a href="" className="me-4 text-reset bi bi-google"></a>
-            <a href="" className="me-4 text-reset text-reset"></a>
+            <a href="https://www.facebook.com/UNIVERSAE/" target="blank" className="me-4 text-reset bi bi-facebook"></a>
+            <a href="https://twitter.com/_Universae" target="blank" className="me-4 text-reset bi bi-twitter"></a>
+            <a href="https://www.instagram.com/_universae/?hl=es" target="blank" className="me-4 text-reset bi bi-instagram"></a>
+            <a href="https://www.linkedin.com/school/universae" target="blank" className="me-4 text-reset bi bi-linkedin"></a>
+            <a href="https://universae.com" target="blank" className="me-4 text-reset bi bi-google"></a>
           </div>
         </Col>
 
@@ -72,8 +71,8 @@ const Footer = () => {
 
         <div className="text-center p-1">
           © 2024 Copyright:
-          <a className="text-reset fw-bold" href="https://mdbootstrap.com/">
-            Empresa.com
+          <a className="text-reset fw-bold" target="blank" href="https://universae.com/">
+            Universae
           </a>
         </div>
       </Row>

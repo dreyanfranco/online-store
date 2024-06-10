@@ -30,12 +30,28 @@ const Course = () => {
     }
   }
 
+  const handleToggleButtonCart = (courseId) => {
+    const isnInCart = cart.cartCourses.some(
+      (courses) => courses._id === courseId
+    )
+    return isnInCart
+  }
+
   const handleAddCourseToCart = async (courseData) => {
     try {
       await coursesService.newCart(courseData._id)
       cart.addOneCourseToCart(courseData)
     } catch (error) {
       console.error("No se ha podido agregar al carrito", error)
+    }
+  }
+
+  const handleDelCourseFromCart = async (courseId) => {
+    try {
+      await coursesService.deleteCourseCart(courseId)
+      cart.deleteCourseFromCart(courseId)
+    } catch (error) {
+      console.error("No se ha podido eliminar al carrito", error)
     }
   }
 
@@ -48,7 +64,7 @@ const Course = () => {
   }, [course_id]);
 
   if (!course) {
-    return <h1>Loading...</h1>;
+    return <h1 className="text-center p-5">Ingrese algún curso para empezar la búsqueda</h1>;
   }
 
   return (
@@ -67,10 +83,10 @@ const Course = () => {
               muted={true}></ReactPlayer>
           </Col>
           <Col md={12} xl={5} className="">
-            <h1 className="text-center" style={{ color: "#45B8AC" }}>
+            <h1 className="" style={{ color: "#45B8AC" }}>
               {course.title}
             </h1>
-            <p className="text-white text-center">{course.description}</p>
+            <p style={{ wordWrap: "break-word" }} className="text-white ">{course.description}</p>
             <div
               className="text-white rounded d-flex justify-content-center align-items-center py-2"
               style={{ border: "2px solid #45B8AC " }}>
@@ -108,14 +124,45 @@ const Course = () => {
                 />
               </svg>
 
-              <Button
-                onClick={() => handleAddCourseToCart(course)}
-                className="btncompra">
-                <span className="IconContainer">
-                  <i className="bi bi-cart2" height="1em"></i>
-                </span>
-                <p className="add">Añadir al carrito</p>
-              </Button>
+              {handleToggleButtonCart(course._id) ? (
+                <Button
+                  onClick={() =>
+                    handleDelCourseFromCart(
+                      course._id
+                    )
+                  }
+                  className="btncompra bg-danger"
+
+                >
+                  <span className="IconContainer bg-danger" >
+                    <i
+                      className="bi bi-cart-x"
+                    ></i>
+                  </span>
+                  <p className="add p-3">
+                    Eliminar del carrito
+                  </p>
+                </Button>
+              ) : (
+                <Button
+                  onClick={() =>
+                    handleAddCourseToCart(
+                      course
+                    )
+                  }
+                  className="btncompra"
+                >
+                  <span className="IconContainer">
+                    <i
+                      className="bi bi-cart2"
+                      height="1em"
+                    ></i>
+                  </span>
+                  <p className="add">
+                    Añadir al carrito
+                  </p>
+                </Button>
+              )}
             </div>
           </Col>
         </Row>
@@ -137,43 +184,26 @@ const Course = () => {
               </Col>
               <Col lg={6}>
                 <ul className="list-unstyled">
-                  <li className="mb-2">
-                    {" "}
-                    <i
-                      className="bi bi-check2 "
-                      style={{ color: "#45B8AC" }}></i>{" "}
-                    {course.language}{" "}
-                  </li>
-                  <li className="mb-2">
-                    {" "}
-                    <i
-                      className="bi bi-check2 "
-                      style={{ color: "#45B8AC" }}></i>{" "}
-                    Lorem ipsum dolor sit amet.{" "}
-                  </li>
-                  <li className="mb-2">
-                    {" "}
-                    <i
-                      className="bi bi-check2 "
-                      style={{ color: "#45B8AC" }}></i>{" "}
-                    Lorem ipsum dolor sit amet.{" "}
-                  </li>
-                  <li className="mb-2">
-                    {" "}
-                    <i className="bi bi-check2 " style={{ color: "#45B8AC" }}>
+                  {course.language.map((lang, index) => (
+                    <li className="mb-2" key={index}>
                       {" "}
-                    </i>{" "}
-                    Lorem ipsum dolor sit amet.
-                  </li>
+                      <i
+                        className="bi bi-check2 "
+                        style={{ color: "#45B8AC" }}></i>{" "}
+                      {lang}{" "}
+                    </li>
+                  ))}
                 </ul>
               </Col>
             </Row>
           </Col>
           <Col xl={5} className="text-white">
-            <h2 style={{ color: "#45B8AC" }}>Sobre el curso</h2>
-            <p>
-              {course.descriptionLarga}
-            </p>
+            <h2 style={{ color: "#45B8AC", width: "60%" }}>Sobre el curso</h2>
+            <div className="text-wrap">
+              <p style={{ wordWrap: "break-word" }}>
+                {course.descriptionLarga}
+              </p>
+            </div>
           </Col>
         </Row>
       </Container>
