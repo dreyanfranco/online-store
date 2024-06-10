@@ -1,6 +1,7 @@
 const express = require("express")
 const cookieParser = require("cookie-parser")
 const cors = require("cors")
+const path = require("path")
 require("dotenv").config()
 require("./db/mongodb")
 const cloudinary = require("cloudinary").v2
