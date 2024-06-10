@@ -250,9 +250,7 @@ router.post("/user/purchase", isAuthenticated, async (req, res) => {
     }
 })
 
-const stripe = new Stripe(
-    "sk_test_51PJC6AJeIz2JibtCoa9wZvfU78VI3qixZqFTHzJ99T01bDulInHGOVLHkFvM149xeWypzS0r4mVbEwegu1kJCCEN00F8yZTss0"
-)
+const stripe = new Stripe(process.env.STRIPE_API_KEY)
 // Obtener todos los cursos comprados
 router.get("/user/purchase", isAuthenticated, async (req, res) => {
     try {
