@@ -2,9 +2,6 @@ import { useEffect, useState } from "react"
 import { getCourses } from "../services/courses.service"
 import { useParams } from "react-router-dom";
 import CardsControl from "../components/Cards/CardsControl";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFilter } from "@fortawesome/free-solid-svg-icons";
-import { Button } from "react-bootstrap";
 
 const Search = () => {
     const [courses, setCourses] = useState([])
