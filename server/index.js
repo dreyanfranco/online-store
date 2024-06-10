@@ -27,7 +27,7 @@ app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../client/dist/index.html"))
 })
 
-const PORT = process.env.PORT || 5005
+const PORT = 5005
 
 app.listen(PORT, () => {
     console.log(`Server listening on http://localhost:${PORT}`)
