@@ -104,11 +104,9 @@ function NavBar() {
                                         key={course._id}
                                         className="d-flex justify-content-between align-items-center px-1"
                                     >
-                                        <Dropdown.Item
-                                            key={course._id}
-                                            href={`/${course._id}`}
-                                            className="d-flex gap-2 px-0"
-                                        >
+                                        <Link key={course._id}
+                                            to={`/${course._id}`}
+                                            className="d-flex gap-2 px-0">
                                             <img
                                                 className="col-2 rounded"
                                                 src="/src/components/Cards/ImagesCards/robotcourse.jpg"
@@ -117,7 +115,7 @@ function NavBar() {
                                             <span className="col-9 text-truncate">
                                                 {course.title}
                                             </span>
-                                        </Dropdown.Item>
+                                        </Link>
                                     </div>
                                 ))}
                             </Dropdown.Menu>
