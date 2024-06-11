@@ -8,6 +8,7 @@ export const CartContext = createContext({
     removeOneCourseFromCart: () => { },
     deleteCourseFromCart: () => { },
     getTotalCoast: () => { },
+    deleteAllCart: () => { },
 })
 
 export default function CartProvider({ children }) {
@@ -65,6 +66,10 @@ export default function CartProvider({ children }) {
         setCartCourses(cartCourses => cartCourses.filter(currentCourse => currentCourse._id !== id));
     }
 
+    function deleteAllCart() {
+        setCartCourses([]);
+    }
+
     function getTotalCoast() {
         let totalCoast = 0;
         cartCourses.map((course) => {
@@ -81,6 +86,7 @@ export default function CartProvider({ children }) {
         removeOneCourseFromCart,
         deleteCourseFromCart,
         getTotalCoast,
+        deleteAllCart,
     }
 
     return (

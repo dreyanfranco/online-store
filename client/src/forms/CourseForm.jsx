@@ -3,6 +3,7 @@ import coursesService from "../services/courses.service"
 
 import { useState } from "react"
 import Swal from "sweetalert2"
+import { useNavigate } from "react-router-dom"
 
 const CourseForm = () => {
     const [course, setCourse] = useState({
@@ -17,6 +18,7 @@ const CourseForm = () => {
     })
     const [isLoading, setIsLoading] = useState(false)
     const [selectedFile, setSelectedFile] = useState(null)
+    const navigate = useNavigate()
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -74,7 +76,7 @@ const CourseForm = () => {
                     icon: "success"
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = "/profile/createdCourses";
+                        navigate("/profile/createdCourses");
                     }
                 })
             };

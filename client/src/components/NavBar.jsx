@@ -61,6 +61,12 @@ function NavBar() {
         course.title.toLowerCase().includes(searchValue.toLowerCase())
     )
 
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        navigate(`/search/${searchValue}`)
+        setSearchValue("")
+    }
+
     return (
         <Navbar expand="lg" className="" style={{ backgroundColor: "#042751" }}>
             <Container fluid className="">
@@ -78,7 +84,7 @@ function NavBar() {
                         className="d-flex flex-grow-1"
                         show={searchValue === "" ? false : true}
                     >
-                        <Form className="d-flex flex-grow-1">
+                        <Form onSubmit={handleSubmit} className="d-flex flex-grow-1">
                             <Form.Control
                                 type="search"
                                 placeholder="Buscar"
@@ -94,13 +100,16 @@ function NavBar() {
                                     >
                                         <Link key={course._id}
                                             to={`/${course._id}`}
-                                            className="d-flex gap-2 px-0">
-                                            <img
-                                                className="col-2 rounded"
-                                                src="/src/components/Cards/ImagesCards/robotcourse.jpg"
-                                                alt={course.title}
+                                            className="d-flex gap-2 px-0 my-1 text-decoration-none">
+                                            <Card.Img
+                                                style={{
+                                                    width: "4rem",
+                                                    borderRadius: "5px",
+                                                    objectFit: "cover",
+                                                }}
+                                                src={robotcourse}
                                             />
-                                            <span className="col-9 text-truncate">
+                                            <span className="col-7 text-truncate">
                                                 {course.title}
                                             </span>
                                         </Link>
@@ -111,7 +120,8 @@ function NavBar() {
                                 type="submit"
                                 to={`/search/${searchValue}`}
                                 variant="outline-light"
-                                className="btnbuscar me-4"
+                                className="btnbuscar me-4 text-decoration-none"
+                                onClick={()=> setSearchValue("")}
                             >
                                 Buscar
                             </Link>
@@ -177,9 +187,11 @@ function NavBar() {
                                 type="submit"
                                 to="/cart"
                                 variant="outline-light"
-                                style={{ background: "#45B8AC" }}
+                                style={{ background: "#45B8AC", width: "100%" }}
                             >
-                                Ir al carrito
+                                <Button variant="primary" type="submit" style={{ width: "100%", background: "#45B8AC", color: "#0A2648" }}>
+                                    Ir al carrito
+                                </Button>
                             </Link>
                         </Dropdown.Menu>
                     </Dropdown>

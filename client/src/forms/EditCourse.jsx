@@ -94,7 +94,7 @@ function EditCourse() {
                     icon: "success"
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = "/profile/createdCourses";
+                        navigate("/profile/createdCourses");
                     }
                 })
             };

@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { formatCurrency } from "../utilities/formatCurrency";
 import coursesService from "../services/courses.service";
 import { CartContext } from "../context/cart.context";
+import { useNavigate } from "react-router-dom";
 
 
 export default function CheckoutForm({ totalCoast }) {
@@ -11,6 +12,7 @@ export default function CheckoutForm({ totalCoast }) {
     const elements = useElements();
     const [isLoading, setIsLoading] = useState(false);
     const cart = useContext(CartContext);
+    const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -63,7 +65,8 @@ export default function CheckoutForm({ totalCoast }) {
                         confirmButtonText: 'Ok'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            window.location.href = "/profile";
+                            navigate("/profile");
+                            cart.deleteAllCart();
                         }
                     });
                 }

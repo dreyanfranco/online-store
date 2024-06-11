@@ -73,19 +73,21 @@ function CardsControl({ course }) {
                 <div className="d-flex justify-content-between align-items-center my-3">
                     {
                         handleToggleButtonCart(course._id) ?
-                            < Button
+                            <Button
                                 onClick={() =>
-                                    handleDelCourseFromCart(course._id)
+                                    handleDelCourseFromCart(
+                                        course._id
+                                    )
                                 }
                                 className="btncompra bg-danger"
+
                             >
-                                <span className="IconContainer">
+                                <span className="IconContainer bg-danger" >
                                     <i
-                                        className="bi bi-cart2"
-                                        height="1em"
+                                        className="bi bi-cart-x"
                                     ></i>
                                 </span>
-                                <p className="add">
+                                <p className="add p-3">
                                     Eliminar del carrito
                                 </p>
                             </Button>
