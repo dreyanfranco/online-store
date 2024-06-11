@@ -4,8 +4,8 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "node index.js",
         "dev": "nodemon",
+        "start": "node index.js",
         "build": "npm install"
     },
     "dependencies": {

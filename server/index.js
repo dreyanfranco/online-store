@@ -5,6 +5,8 @@ const path = require("path")
 require("dotenv").config()
 require("./db/mongodb")
 const cloudinary = require("cloudinary").v2
+const courseRoutes = require("./routes/course.routes")
+const authRoutes = require("./routes/auth.routes")
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -20,8 +22,10 @@ app.use(cors())
 
 app.use(express.static(path.join(__dirname, "../client/dist")))
 
-require("./routes")(app)
+// require("./routes")(app)
 require("./error-handling")(app)
+app.use("/api", courseRoutes)
+app.use("/api/auth", authRoutes)
 
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../client/dist/index.html"))
