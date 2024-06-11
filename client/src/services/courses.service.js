@@ -78,10 +78,6 @@ export const getCoursesPurchase = () => {
     return axiosInstance.get("/user/purchase")
 }
 
-export const getSearchedCourse = (course) => {
-    return axiosInstance.get(`/search/${course}`)
-}
-
 const coursesService = {
     getCourses,
     getCourse,
@@ -95,7 +91,6 @@ const coursesService = {
     addCoursePurchase,
     addCoursePurchaseToStripe,
     deleteCoursePurchase,
-    getSearchedCourse,
 }
 
 export default coursesService

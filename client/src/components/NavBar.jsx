@@ -56,7 +56,7 @@ function NavBar() {
     const handleSearchCourse = async () => {
         try {
             await coursesService.getSearchedCourse(searchValue);
-            window.location.href = `/search/${searchValue}`
+            navigate(`/search/${searchValue}`)
         } catch (error) {
             console.error("No se ha podido encontrar el curso solicitado", error)
         }
