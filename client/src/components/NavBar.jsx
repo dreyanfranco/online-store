@@ -173,13 +173,14 @@ function NavBar() {
                                     </Button>
                                 </div>
                             ))}
-                            <Dropdown.Item
-                                className=""
-                                href="/cart"
+                            <Link
+                                type="submit"
+                                to="/cart"
+                                variant="outline-light"
                                 style={{ background: "#45B8AC" }}
                             >
                                 Ir al carrito
-                            </Dropdown.Item>
+                            </Link>
                         </Dropdown.Menu>
                     </Dropdown>
 
