@@ -3,7 +3,6 @@ import { getCourses } from "../services/courses.service"
 import { useParams } from "react-router-dom";
 import CardsControl from "../components/Cards/CardsControl";
 
-
 const Search = () => {
     const [courses, setCourses] = useState([])
     const { course } = useParams();
