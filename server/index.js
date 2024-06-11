@@ -22,7 +22,7 @@ app.use(cors())
 
 app.use(express.static(path.join(__dirname, "../client/dist")))
 
-// require("./routes")(app)
+require("./routes")(app)
 require("./error-handling")(app)
 app.use("/api", courseRoutes)
 app.use("/api/auth", authRoutes)
