@@ -56,17 +56,6 @@ function NavBar() {
     }
 
     const [searchValue, setSearchValue] = useState("")
-    const handleSearchCourse = async () => {
-        try {
-            await coursesService.getSearchedCourse(searchValue)
-            navigate(`/search/${searchValue}`)
-        } catch (error) {
-            console.error(
-                "No se ha podido encontrar el curso solicitado",
-                error
-            )
-        }
-    }
 
     const filteredCourses = courses.filter((course) =>
         course.title.toLowerCase().includes(searchValue.toLowerCase())
@@ -91,7 +80,6 @@ function NavBar() {
                     >
                         <Form className="d-flex flex-grow-1">
                             <Form.Control
-                                onSubmit={handleSearchCourse}
                                 type="search"
                                 placeholder="Buscar"
                                 className="me-3"
@@ -119,15 +107,14 @@ function NavBar() {
                                     </div>
                                 ))}
                             </Dropdown.Menu>
-                            <Button
+                            <Link
                                 type="submit"
-                                onClick={handleSearchCourse}
-                                href={`/search/${searchValue}`}
+                                to={`/search/${searchValue}`}
                                 variant="outline-light"
                                 className="btnbuscar me-4"
                             >
                                 Buscar
-                            </Button>
+                            </Link>
                         </Form>
                     </Dropdown>
 
