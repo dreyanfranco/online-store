@@ -10,7 +10,10 @@ import Navbar from "react-bootstrap/Navbar"
 import { Link, useNavigate } from "react-router-dom"
 import { AuthContext } from "../context/auth.context"
 import { CartContext } from "../context/cart.context"
-import coursesService, { getCart, getCourses } from "../services/courses.service"
+import coursesService, {
+    getCart,
+    getCourses,
+} from "../services/courses.service"
 import Logo from "./Cards/ImagesCards/Logo.png"
 import "./Navegacion.css"
 
@@ -20,7 +23,6 @@ function NavBar() {
     const [courses, setCourses] = useState([])
     const cart = useContext(CartContext)
     const navigate = useNavigate()
-
 
     const handleDelCourseFromCart = async (courseId) => {
         try {
@@ -52,17 +54,22 @@ function NavBar() {
         navigate("/login")
     }
 
-    const [searchValue, setSearchValue] = useState("");
+    const [searchValue, setSearchValue] = useState("")
     const handleSearchCourse = async () => {
         try {
-            await coursesService.getSearchedCourse(searchValue);
+            await coursesService.getSearchedCourse(searchValue)
             navigate(`/search/${searchValue}`)
         } catch (error) {
-            console.error("No se ha podido encontrar el curso solicitado", error)
+            console.error(
+                "No se ha podido encontrar el curso solicitado",
+                error
+            )
         }
     }
 
-    const filteredCourses = courses.filter(course => course.title.toLowerCase().includes(searchValue.toLowerCase()));
+    const filteredCourses = courses.filter((course) =>
+        course.title.toLowerCase().includes(searchValue.toLowerCase())
+    )
 
     return (
         <Navbar expand="lg" className="" style={{ backgroundColor: "#042751" }}>
@@ -76,10 +83,11 @@ function NavBar() {
                     className=""
                     style={{ backgroundColor: "#45B8AC" }}
                 />
-                <Navbar.Collapse className="" id="responsive-navbar-nav" >
-
-
-                    <Dropdown className="d-flex flex-grow-1" show={searchValue === "" ? false : true}>
+                <Navbar.Collapse className="" id="responsive-navbar-nav">
+                    <Dropdown
+                        className="d-flex flex-grow-1"
+                        show={searchValue === "" ? false : true}
+                    >
                         <Form className="d-flex flex-grow-1">
                             <Form.Control
                                 onSubmit={handleSearchCourse}
@@ -89,31 +97,51 @@ function NavBar() {
                                 aria-label="Search"
                                 onChange={(e) => setSearchValue(e.target.value)}
                             />
-                            <Dropdown.Menu >
-                                {
-                                    filteredCourses.map(course => (
-                                        <div key={course._id} className="d-flex justify-content-between align-items-center px-1">
-                                            <Dropdown.Item key={course._id} href={`/${course._id}`} className="d-flex gap-2 px-0">
-                                                <img className="col-2 rounded" src="/src/components/Cards/ImagesCards/robotcourse.jpg" alt={course.title} />
-                                                <span className="col-9 text-truncate">{course.title}</span>
-                                            </Dropdown.Item>
-                                        </div>
-                                    ))
-                                }
+                            <Dropdown.Menu>
+                                {filteredCourses.map((course) => (
+                                    <div
+                                        key={course._id}
+                                        className="d-flex justify-content-between align-items-center px-1"
+                                    >
+                                        <Dropdown.Item
+                                            key={course._id}
+                                            href={`/${course._id}`}
+                                            className="d-flex gap-2 px-0"
+                                        >
+                                            <img
+                                                className="col-2 rounded"
+                                                src="/src/components/Cards/ImagesCards/robotcourse.jpg"
+                                                alt={course.title}
+                                            />
+                                            <span className="col-9 text-truncate">
+                                                {course.title}
+                                            </span>
+                                        </Dropdown.Item>
+                                    </div>
+                                ))}
                             </Dropdown.Menu>
-                            <Button type="submit" onClick={handleSearchCourse} href={`/search/${searchValue}`} variant="outline-light" className="btnbuscar me-4">
+                            <Button
+                                type="submit"
+                                onClick={handleSearchCourse}
+                                href={`/search/${searchValue}`}
+                                variant="outline-light"
+                                className="btnbuscar me-4"
+                            >
                                 Buscar
                             </Button>
                         </Form>
                     </Dropdown>
 
                     <Dropdown>
-                        <Dropdown.Toggle style={{ backgroundColor: "#042751", border: "none" }}>
-
+                        <Dropdown.Toggle
+                            style={{
+                                backgroundColor: "#042751",
+                                border: "none",
+                            }}
+                        >
                             <button
                                 id="carrito"
                                 className="btncarrito  icon__shop position-relative"
-
                             >
                                 <FontAwesomeIcon icon={faCartShopping} />
                                 <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -122,27 +150,45 @@ function NavBar() {
                             </button>
                         </Dropdown.Toggle>
 
-
-                        <Dropdown.Menu className="sm-6"
-                            align={{ lg: 'end' }}
+                        <Dropdown.Menu
+                            className="sm-6"
+                            align={{ lg: "end" }}
                             id="dropdown-menu-align-responsive-1"
-
                         >
-                            {
-                                coursesInCart.map(course => (
-                                    <div key={course._id} className="d-flex align-items-center px-1" >
-
-                                        <Dropdown.Item key={course._id} href={`/${course._id}`} className="d-flex gap-2 px-0 ">
-                                            <img className="col-2 rounded" src="/src/components/Cards/ImagesCards/robotcourse.jpg" alt={course.title} />
-                                            <span className="col-sm-8 col-md-7 col-xl-8 text-wrap">{course.title}</span>
-                                        </Dropdown.Item>
-                                        <Button onClick={() => handleDelCourseFromCart(course._id)} className="bg-danger">
-                                            <FontAwesomeIcon icon={faTrashCan} />
-                                        </Button>
-                                    </div>
-                                ))
-                            }
-                            <Dropdown.Item className="" href="/cart" style={{ background: "#45B8AC" }}>
+                            {coursesInCart.map((course) => (
+                                <div
+                                    key={course._id}
+                                    className="d-flex align-items-center px-1"
+                                >
+                                    <Dropdown.Item
+                                        key={course._id}
+                                        href={`/${course._id}`}
+                                        className="d-flex gap-2 px-0 "
+                                    >
+                                        <img
+                                            className="col-2 rounded"
+                                            src="/src/components/Cards/ImagesCards/robotcourse.jpg"
+                                            alt={course.title}
+                                        />
+                                        <span className="col-sm-8 col-md-7 col-xl-8 text-wrap">
+                                            {course.title}
+                                        </span>
+                                    </Dropdown.Item>
+                                    <Button
+                                        onClick={() =>
+                                            handleDelCourseFromCart(course._id)
+                                        }
+                                        className="bg-danger"
+                                    >
+                                        <FontAwesomeIcon icon={faTrashCan} />
+                                    </Button>
+                                </div>
+                            ))}
+                            <Dropdown.Item
+                                className=""
+                                href="/cart"
+                                style={{ background: "#45B8AC" }}
+                            >
                                 Ir al carrito
                             </Dropdown.Item>
                         </Dropdown.Menu>
@@ -159,7 +205,10 @@ function NavBar() {
                                     }}
                                 >
                                     <span className="user me-4 d-flex">
-                                        <i class="bi bi-person-fill me-2" style={{ color: "#45B8AC" }}></i>
+                                        <i
+                                            className="bi bi-person-fill me-2"
+                                            style={{ color: "#45B8AC" }}
+                                        ></i>
                                         {user.username}
                                     </span>
                                 </Link>
@@ -168,7 +217,7 @@ function NavBar() {
                                     variant="outline-danger"
                                     onClick={handleLogout}
                                 >
-                                    <i class="bi bi-person-fill-x me-3"></i>
+                                    <i className="bi bi-person-fill-x me-3"></i>
                                     Cierra sesión
                                 </Button>
                             </>
@@ -183,7 +232,10 @@ function NavBar() {
                                     </Button>
                                 </Link>
                                 <Link to="/register">
-                                    <Button className="btnsesion" variant="outline-light">
+                                    <Button
+                                        className="btnsesion"
+                                        variant="outline-light"
+                                    >
                                         Registrarse
                                     </Button>
                                 </Link>
