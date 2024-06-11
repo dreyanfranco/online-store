@@ -1,7 +1,7 @@
 import { faCartShopping, faTrashCan } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useContext, useEffect, useState } from "react"
-import { Dropdown, NavDropdown } from "react-bootstrap"
+import { Card, Dropdown, NavDropdown } from "react-bootstrap"
 import { DropdownSubmenu, NavDropdownMenu } from "react-bootstrap-submenu"
 import Button from "react-bootstrap/Button"
 import Container from "react-bootstrap/Container"
@@ -16,6 +16,7 @@ import coursesService, {
 } from "../services/courses.service"
 import Logo from "./Cards/ImagesCards/Logo.png"
 import "./Navegacion.css"
+import robotcourse from "../components/Cards/ImagesCards/robotcourse.jpg"
 
 function NavBar() {
     const { user, logout } = useContext(AuthContext)
@@ -165,10 +166,13 @@ function NavBar() {
                                         href={`/${course._id}`}
                                         className="d-flex gap-2 px-0 "
                                     >
-                                        <img
-                                            className="col-2 rounded"
-                                            src="/src/components/Cards/ImagesCards/robotcourse.jpg"
-                                            alt={course.title}
+                                        <Card.Img
+                                            style={{
+                                                width: "4rem",
+                                                borderRadius: "5px",
+                                                objectFit: "cover",
+                                            }}
+                                            src={robotcourse}
                                         />
                                         <span className="col-sm-8 col-md-7 col-xl-8 text-wrap">
                                             {course.title}
