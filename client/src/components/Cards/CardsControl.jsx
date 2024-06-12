@@ -11,6 +11,7 @@ import { CartContext } from "../../context/cart.context"
 import { WishlistContext } from "../../context/wishlist.context"
 import coursesService from "../../services/courses.service"
 import { formatCurrency } from "../../utilities/formatCurrency"
+import { Link } from "react-router-dom"
 
 function CardsControl({ course }) {
     const cart = useContext(CartContext)
@@ -58,12 +59,12 @@ function CardsControl({ course }) {
             />
             <Card.Body>
                 <Card.Title>
-                    <a
-                        href={`/${course._id}`}
+                    <Link
+                        to={`/${course._id}`}
                         className="text-reset link-offset-2 link-underline link-underline-opacity-0"
                     >
                         {course.title}
-                    </a>
+                    </Link>
                 </Card.Title>
 
                 <Card.Text>

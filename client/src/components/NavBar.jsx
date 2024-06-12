@@ -27,7 +27,7 @@ function NavBar() {
 
     const handleDelCourseFromCart = async (courseId) => {
         try {
-            const { data } = await coursesService.deleteCourseCart(courseId)
+            await coursesService.deleteCourseCart(courseId)
             cart.deleteCourseFromCart(courseId)
         } catch (error) {
             console.error("No se ha podido eliminar al carrito", error)
@@ -51,6 +51,7 @@ function NavBar() {
     }, [])
 
     const handleLogout = () => {
+        cart.deleteAllCart();
         logout()
         navigate("/login")
     }
@@ -100,7 +101,7 @@ function NavBar() {
                                     >
                                         <Link key={course._id}
                                             to={`/${course._id}`}
-                                            className="d-flex gap-2 px-0 my-1 text-decoration-none">
+                                            className="d-flex gap-2 px-0 my-1 text-decoration-none text-reset">
                                             <Card.Img
                                                 style={{
                                                     width: "4rem",
@@ -109,7 +110,7 @@ function NavBar() {
                                                 }}
                                                 src={robotcourse}
                                             />
-                                            <span className="col-7 text-truncate">
+                                            <span className="col-7 text-wrap">
                                                 {course.title}
                                             </span>
                                         </Link>
@@ -121,7 +122,7 @@ function NavBar() {
                                 to={`/search/${searchValue}`}
                                 variant="outline-light"
                                 className="btnbuscar me-4 text-decoration-none"
-                                onClick={()=> setSearchValue("")}
+                                onClick={() => setSearchValue("")}
                             >
                                 Buscar
                             </Link>
@@ -154,7 +155,7 @@ function NavBar() {
                             {coursesInCart.map((course) => (
                                 <div
                                     key={course._id}
-                                    className="d-flex align-items-center px-1"
+                                    className="d-flex justify-content-between align-items-center px-1"
                                 >
                                     <Link
                                         key={course._id}
@@ -251,22 +252,3 @@ function NavBar() {
 }
 
 export default NavBar
-
-{
-    /* <Nav className="ms-3">
-                        <Nav.Link
-                            href="#action2"
-                            className="text-wrap"
-                            style={{ fontSize: "14px" }}
-                        >
-                            Universae Business
-                        </Nav.Link>
-                        <Nav.Link
-                            href="#action3"
-                            className="text-wrap"
-                            style={{ fontSize: "14px" }}
-                        >
-                            Enseña en Universae
-                        </Nav.Link>
-                    </Nav>*/
-}

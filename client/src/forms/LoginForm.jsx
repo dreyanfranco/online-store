@@ -27,6 +27,7 @@ const LoginForm = () => {
             authenticateUser()
             // console.log("Loggeado correctamente")
             navigate("/")
+            window.location.reload();
         } catch (error) {
             setLoginError("Credenciales incorrectas")
             console.error("No se ha podido loggear", error)

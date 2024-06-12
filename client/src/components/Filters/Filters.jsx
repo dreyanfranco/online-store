@@ -14,17 +14,7 @@ const Filters = ({ setFilter }) => {
                     >
                         <i className="bi bi-bar-chart-fill me-2"></i>
                         Recientes
-                    </Button>{" "}
-                    {""}
-                    <Button className="button">
-                        <i className="bi bi-search me-2"></i>
-                        Más buscados
                     </Button>
-                    {""}
-                    {/* <Button className="button">
-                <i className="bi bi-coin me-2"></i>
-                Ordenar por:
-            </Button>{" "} */}
                 </div>
                 <Form.Select
                     aria-label="Default select example"
@@ -33,7 +23,6 @@ const Filters = ({ setFilter }) => {
                     size=""
                 >
                     <option value="">Ordenar por</option>
-                    <option value="starRating">Reseñas</option>
                     <option value="priceLowToHigh">
                         Precio de menor a mayor
                     </option>
