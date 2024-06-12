@@ -22,6 +22,7 @@ function CardCarrito({ course }) {
       console.error("No se ha podido eliminar al carrito", error)
     }
   }
+  console.log(course);
 
   return (
     <Container className="my-5">

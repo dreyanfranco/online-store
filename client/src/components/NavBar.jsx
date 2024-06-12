@@ -156,10 +156,10 @@ function NavBar() {
                                     key={course._id}
                                     className="d-flex align-items-center px-1"
                                 >
-                                    <Dropdown.Item
+                                    <Link
                                         key={course._id}
-                                        href={`/${course._id}`}
-                                        className="d-flex gap-2 px-0 "
+                                        to={`/${course._id}`}
+                                        className="d-flex gap-2 py-1 text-decoration-none text-reset"
                                     >
                                         <Card.Img
                                             style={{
@@ -172,7 +172,7 @@ function NavBar() {
                                         <span className="col-sm-8 col-md-7 col-xl-8 text-wrap">
                                             {course.title}
                                         </span>
-                                    </Dropdown.Item>
+                                    </Link>
                                     <Button
                                         onClick={() =>
                                             handleDelCourseFromCart(course._id)
