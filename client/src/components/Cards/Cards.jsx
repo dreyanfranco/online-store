@@ -10,6 +10,7 @@ import { formatCurrency } from "../../utilities/formatCurrency"
 import "./Cards.css"
 import "./CardsControl.css"
 
+
 // eslint-disable-next-line react/prop-types
 function Cards({ filter }) {
     const [courses, setCourses] = useState([])
@@ -89,7 +90,7 @@ function Cards({ filter }) {
                                         height: "10rem",
                                         objectFit: "cover",
                                     }}
-                                    src={robotcourse}
+                                    src={course.imageUrl ? course.imageUrl : robotcourse}
                                 />
                                 <Card.Body>
                                     <Link
